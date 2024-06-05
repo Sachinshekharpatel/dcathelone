@@ -7,11 +7,16 @@ import image4 from "./image4.avif";
 import image5 from "./image5.avif";
 import image6 from "./image6.avif";
 import imagebelow1 from "./imagebelow2.avif";
+import { useNavigate } from "react-router-dom";
 import imagebelow2 from "./imagebelow3.avif";
 import imagebelow3 from "./imagebelow4.avif";
 const ProductDetailPage = () => {
+  const navigate = useNavigate();
   return (
     <div>
+      <button onClick={() => navigate("/")} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+       Home
+      </button>
       <Header></Header>
       <div className="w-full flex ">
         <p className="font-light">AllSports <span className="font-bold  text-gray-600">/</span> { " "}</p>

@@ -11,11 +11,13 @@ import shoesimage from "./shoesimage.avif";
 import sportsacceimage from "./sportsacceimage.avif";
 import sportsequipimage from "./sportsequipimage.avif";
 import summarcollectionimage from "./summarcollectionimage.avif";
+import {useNavigate} from "react-router-dom"
 const images = [imageoneSlide, imageTwoSlide, imageThreeSlide];
 const HomePage = () => {
   const [transForm, setTransForm] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const timer = setTimeout(() => {
       setTransForm(!transForm);
@@ -38,8 +40,11 @@ const HomePage = () => {
 
   return (
     <div>
+      <button onClick={() => navigate("/productdetailpage")} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+      Single productdetailpage
+      </button>
       <Header></Header>
-     
+
       <div class="w-full flex flex-wrap bg-white items-center justify-center h-auto  py-3 grid-cols-2 md:grid-cols-8 gap-4">
         <div class="py-2 flex flex-wrap md:px-7 md:py-3 md:flex-nowrap justify-around">
           <a href="/" class="w-1/4 max-w-32">
@@ -197,10 +202,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="relative w-full overflow-hidden">
-        <div
-          ref={slideRef}
-          className="flex w-full m"
-        >
+        <div ref={slideRef} className="flex w-full m">
           {images.map((image, index) => (
             <img
               key={index}
