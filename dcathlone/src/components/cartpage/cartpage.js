@@ -7,7 +7,7 @@ const CartPage = () => {
     <div className="w-full" style={{ backgroundColor: "#F5F4F5" }}>
       <button
         onClick={() => navigate("/")}
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
       >
         home
       </button>
@@ -53,30 +53,32 @@ const CartPage = () => {
           </p>
         </div>
       </div>
-      <div className="block md:flex w-full mt-2">
-        <div className="block md:w-3/5 h-auto bg-white p-4">
+      <div className="block md:flex w-full mt-2 ">
+        <div className="m-2 block md:w-3/5 h-auto bg-white p-4">
           <div className="flex justify-between ">
-            <p className="font-semibold">Select Delivery Option</p>
+            <p className="font-bold">Select Delivery Option</p>
             <p className="">
               Pincode: <span className="font-semibold">486001</span>{" "}
-              <span className="text-blue-300 ml-2">Change</span>
+              <span className="text-[#3643BA] ml-1 cursor-pointer underline decoration-[#3643BA">
+                Change
+              </span>
             </p>
           </div>
-          <p class="text-sm text-gray-600 mb-4">
+          <p class="text-sm text-[#687787] mb-4">
             Choose home delivery or pickup from store
           </p>
           <div className="flex w-full mt-3 ">
-            <div className="w-1/2 border-2  hover:border-[2px] hover:border-dotted hover:border-blue-900  p-4">
+            <div className="w-1/2 border-[2px] border-dotted bg-[#E1E3F5] border-blue-900  p-4">
               <div className="flex ">
-                <div>
+                <div className="bg-gray-100 p-2">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="54"
-                    height="54"
+                    width="44"
+                    height="44"
                     stroke-width="1.5"
-                    class="text-blue-400"
+                    class="text-[#3643BA] mr-1"
                     alt=""
                   >
                     <path
@@ -91,13 +93,13 @@ const CartPage = () => {
                   <p class="text-sm text-gray-600">Get it by Monday </p>
                 </div>
               </div>
-              <p className="text-gray-400 font-thin mt-3">Delivery Address</p>
-              <p className="text-gray-400">Rewa, Madhyapradesh, 486001</p>
-              <button className="text-white border-r-emerald-100 mt-4 p-3 bg-blue-500">
+              <p className="text-gray-400 font-medium mt-3">Delivery Address</p>
+              <p className="text-[#000000] md:text-[12px]">Rewa, Madhyapradesh, 486001</p>
+              <button className="text-white text-[12px] md:text-[10px] border-r-emerald-100 mt-4 p-3 bg-[#3643BA]">
                 LOGIN TO ADD DELIVERY ADDRESS
               </button>
             </div>
-            <div className="w-1/2 ml-2 border-2  hover:border-[2px] hover:border-dotted hover:border-blue-900  p-4">
+            <div className="w-1/2 ml-2 border-[2px] border-gray-300  p-4">
               <div className="flex ">
                 <div class="w-10 h-10 bg-grey-50 flex items-center justify-center">
                   <svg
@@ -106,7 +108,7 @@ const CartPage = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="54"
                     height="54"
-                    className="text-blue-400"
+                    className="text-black-400 bg-[#F5F4F5] p-1"
                     alt=""
                   >
                     <path
@@ -120,19 +122,22 @@ const CartPage = () => {
                   <p class="text-sm text-gray-600">Pick after 3 pm on Monday</p>
                 </div>
               </div>
-              <p className="text-gray-400 font-thin mt-3">Store Address</p>
-              <p className="text-gray-400">
-                DSI BRIGADE ROAD:Eva Mall,No.60 Ashok Nagar, Victoria Layout
-                Rewa Madhyapradesh 486001
+              <p className="text-gray-400 font-medium mt-3 text-[12px] mb-1">
+                Store Address
               </p>
-              <div className="text-center align-middle">
-                <button className="text-black font-bold border border-grey-300 mt-4 p-3 bg-white">
+              <p className="text-gray-700 md:text-[14px]">
+                <span className="font-semibold text-[14px] md:text-[14px]">DSI BRIGADE ROAD :</span>Eva
+                Mall,No.60 Ashok Nagar, Victoria Layout Rewa Madhyapradesh
+                486001
+              </p>
+              <div className="text-center align-middle ">
+                <button className="text-black font-bold border-[3px] border-grey-300 mt-4 px-7 py-2  bg-white">
                   Change Pickup Point
                 </button>
               </div>
             </div>
           </div>
-          <div className="flex p-3">
+          <div className="flex p-3 border-r-2">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -155,82 +160,174 @@ const CartPage = () => {
             </p>
           </div>
           <p>
-            <span className="font-bold"> Item For Pickup*</span>
+            <span className="font-bold text-[#4E5D6B]"> Item For Pickup*</span>
           </p>
           <div className="border p-1 mt-1">
             <p>
-              <span className="font-bold"> Items in cart*</span>
+              <span className=" hidden md:block font-bold text-[#344450]">
+                {" "}
+                Items in cart*
+              </span>
             </p>
             {/* below this all the product are added one by one in dom */}
-            <div className="flex justify-evenly">
-              <img className="w-1/5" src={image1}></img>
-              <div className="ml-2">
-                <p className="font-bold">ARTENGO</p>
-                <p className="font-extralight">
-                  Men's Tennis Short-Sleeved T-Shirt Dry RN - Navy/White
-                </p>
-                <div className="flex">
-                  <button className="font-bold p-2 bg-slate-100" type="select">
-                    {" "}
-                    Size : S{" "}
-                  </button>
-                  <button
-                    className="font-bold ml-2 p-2 bg-slate-100"
-                    type="select"
-                  >
-                    {" "}
-                    Qty : 1{" "}
-                  </button>
-                </div>
-                <div class="flex mt-3">
-                  <h1 class="text-16 font-bold mr-3">₹ 999</h1>
-                  <span class=" relative text-16 mr-2 text-black  after:absolute after:h-[1px] after:w-full after:mt-[12px] after:left-0 after:bg-black">
-                    MRP : ₹ 1,299
+            <div className="">
+              <div className="flex justify-between border-b-[1px] px-1 py-2 mb-2">
+                <div className="flex align-middle text-center p-1">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 mt-[5px] text-center bg-[#3643BA]"
+                  ></input>
+                  <span className="font-semibold ml-1">
+                    1 / 1 items selected
                   </span>
                 </div>
-                <p className="font-light">Pickup after 3 pm, 08th Jun 2024</p>
-                <div className="flex">
+                <button
+                  type="button"
+                  className=" w-7 h-7 bg-white rounded-full cursor-pointer flex items-center justify-center border border-solid mt-2 "
+                >
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
                     fill="none"
-                    viewBox="0 0 13 14"
-                    class=" w-4 fill-orange-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    stroke-width="1.5"
+                    class="w-4 h-4 text-black "
                   >
                     <path
-                      fill-rule="evenodd"
-                      d="M9 .25H4V1.5h5V.25Zm1.92 2.197-.909.908a5.625 5.625 0 1 0 .884.884l.908-.908-.884-.884Zm-.631 7.49A4.375 4.375 0 1 1 2.71 5.564a4.375 4.375 0 0 1 7.578 4.375ZM7.125 4.625v3.75h-1.25v-3.75h1.25Z"
-                      clip-rule="evenodd"
-                    ></path>
-                    <path
-                      fill="#FF600A"
-                      d="M4 .25v-.1h-.1v.1H4Zm5 0h.1v-.1H9v.1ZM4 1.5h-.1v.1H4v-.1Zm5 0v.1h.1v-.1H9Zm1.011 1.855-.062.078.07.056.063-.063-.071-.071Zm.908-.908.07-.07-.07-.072-.07.071.07.07Zm-8.396 9.28-.071.07.07-.07Zm7.727.215.067.075-.067-.075Zm.645-7.703-.071-.071-.063.063.056.07.078-.062Zm.908-.908.07.07.071-.07-.07-.071-.071.07Zm-1.514 6.607.086.05-.086-.05Zm0-4.376.086-.05-.086.05ZM7.125 8.376v.1h.1v-.1h-.1Zm0-3.75h.1v-.1h-.1v.1Zm-1.25 3.75h-.1v.1h.1v-.1Zm0-3.75v-.1h-.1v.1h.1ZM4 .35h5v-.2H4v.2Zm.1 1.15V.25h-.2V1.5h.2ZM9 1.4H4v.2h5v-.2ZM8.9.25V1.5h.2V.25h-.2Zm1.182 3.176.908-.908-.142-.142-.908.908.142.142Zm-7.7.64a5.525 5.525 0 0 1 7.567-.633l.124-.156a5.725 5.725 0 0 0-7.84.656l.149.133Zm.211 7.59a5.525 5.525 0 0 1-.211-7.59l-.15-.133a5.725 5.725 0 0 0 .22 7.865l.141-.142Zm7.59.212a5.525 5.525 0 0 1-7.59-.212l-.141.142a5.725 5.725 0 0 0 7.865.219l-.134-.15Zm.634-7.567a5.525 5.525 0 0 1-.634 7.567l.134.149a5.725 5.725 0 0 0 .656-7.84l-.156.124Zm.915-1.041-.908.908.142.141.908-.908-.142-.141Zm-.884-.742.884.883.142-.141-.884-.884-.142.142ZM6.5 12.225a4.475 4.475 0 0 0 3.875-2.237l-.173-.1A4.275 4.275 0 0 1 6.5 12.024v.2ZM2.025 7.75A4.475 4.475 0 0 0 6.5 12.225v-.2A4.275 4.275 0 0 1 2.225 7.75h-.2ZM6.5 3.275A4.475 4.475 0 0 0 2.025 7.75h.2A4.275 4.275 0 0 1 6.5 3.475v-.2Zm3.875 2.238A4.475 4.475 0 0 0 6.5 3.275v.2c1.527 0 2.938.815 3.702 2.137l.173-.1Zm0 4.475c.8-1.385.8-3.09 0-4.475l-.173.1a4.275 4.275 0 0 1 0 4.274l.173.1Zm-3.15-1.613v-3.75h-.2v3.75h.2Zm-1.35.1h1.25v-.2h-1.25v.2Zm-.1-3.85v3.75h.2v-3.75h-.2Zm1.35-.1h-1.25v.2h1.25v-.2Z"
+                      d="M17.2 4.8V3.8C17.2 3.2 16.8 2.8 16.2 2.8H7.8C7.2 2.8 6.8 3.2 6.8 3.8V4.8M9.8 9.2V18.4M14.2 9.2V18.4M19.5 6.5L17.7 20.4C17.6 20.9 17.2 21.3 16.7 21.3H7.3C6.8 21.3 6.4 20.9 6.3 20.4L4.5 6.5H19.5Z"
+                      stroke="currentColor"
                     ></path>
                   </svg>
-                  <p>In 396 cart(s) now</p>
-                </div>
+                </button>
               </div>
-              <button
-                type="button"
-                className=" w-7 h-7 bg-white rounded-full cursor-pointer flex items-center justify-center border border-solid mt-2"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  stroke-width="1.5"
-                  class="w-4 h-4 text-black "
+              <div className="flex justify-evenly">
+                <img className="w-1/5" src={image1}></img>
+                <div className="ml-2">
+                  <p className="font-bold text-[14px]">ARTENGO</p>
+                  <p className="font-light text-[13px]">
+                    Men's Tennis Short-Sleeved T-Shirt Dry RN - Navy/White
+                  </p>
+                  <div className="flex">
+                    <button
+                      className=" flex font-bold p-2 border bg-slate-100"
+                      type="select"
+                      style={{
+                        borderRadius: "4px",
+                      }}
+                    >
+                      {" "}
+                      Size : S{" "}
+                      <svg
+                        class="fill-current mt-[9px] ml-2 w-2 stroke-[#101010] stroke-1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10.653"
+                        height="5.679"
+                        viewBox="0 0 10.653 5.679"
+                      >
+                        <defs></defs>
+                        <g transform="translate(10.653) rotate(90)">
+                          <g transform="translate(0 0)">
+                            <path
+                              class="a"
+                              d="M.362,33.772a.355.355,0,0,1-.25-.606l4.972-4.972a.355.355,0,0,1,.5.5L.612,33.667A.355.355,0,0,1,.362,33.772Z"
+                              transform="translate(-0.008 -23.119)"
+                            ></path>
+                            <path
+                              class="a"
+                              d="M5.334,5.689a.355.355,0,0,1-.25-.1L.112.612a.354.354,0,1,1,.5-.5L5.584,5.084a.355.355,0,0,1-.25.606Z"
+                              transform="translate(-0.008 -0.008)"
+                            ></path>
+                          </g>
+                        </g>
+                      </svg>
+                    </button>
+                    <button
+                      className="flex font-bold ml-2 p-2 border bg-slate-100"
+                      type="select"
+                      style={{
+                        borderRadius: "4px",
+                      }}
+                    >
+                      {" "}
+                      Qty : 1
+                      <svg
+                        class="fill-current mt-[9px] ml-2 w-2 stroke-[#101010] stroke-1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10.653"
+                        height="5.679"
+                        viewBox="0 0 10.653 5.679"
+                      >
+                        <defs></defs>
+                        <g transform="translate(10.653) rotate(90)">
+                          <g transform="translate(0 0)">
+                            <path
+                              class="a"
+                              d="M.362,33.772a.355.355,0,0,1-.25-.606l4.972-4.972a.355.355,0,0,1,.5.5L.612,33.667A.355.355,0,0,1,.362,33.772Z"
+                              transform="translate(-0.008 -23.119)"
+                            ></path>
+                            <path
+                              class="a"
+                              d="M5.334,5.689a.355.355,0,0,1-.25-.1L.112.612a.354.354,0,1,1,.5-.5L5.584,5.084a.355.355,0,0,1-.25.606Z"
+                              transform="translate(-0.008 -0.008)"
+                            ></path>
+                          </g>
+                        </g>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="flex mt-3">
+                    <h1 class="text-16 font-bold mr-3">₹ 999</h1>
+                    <span class=" relative text-16 mr-2 text-[#687787]  after:absolute after:h-[1px] after:w-full after:mt-[12px] after:left-0 after:bg-black">
+                      MRP : ₹ 1,299
+                    </span>
+                  </div>
+                  <p className="font-semibold text-[12px] mb-1 text-[#687787]">
+                    Pickup after 3 pm, 08th Jun 2024
+                  </p>
+                  <div className="flex">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 13 14"
+                      class=" w-4 fill-orange-400"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M9 .25H4V1.5h5V.25Zm1.92 2.197-.909.908a5.625 5.625 0 1 0 .884.884l.908-.908-.884-.884Zm-.631 7.49A4.375 4.375 0 1 1 2.71 5.564a4.375 4.375 0 0 1 7.578 4.375ZM7.125 4.625v3.75h-1.25v-3.75h1.25Z"
+                        clip-rule="evenodd"
+                      ></path>
+                      <path
+                        fill="#FF600A"
+                        d="M4 .25v-.1h-.1v.1H4Zm5 0h.1v-.1H9v.1ZM4 1.5h-.1v.1H4v-.1Zm5 0v.1h.1v-.1H9Zm1.011 1.855-.062.078.07.056.063-.063-.071-.071Zm.908-.908.07-.07-.07-.072-.07.071.07.07Zm-8.396 9.28-.071.07.07-.07Zm7.727.215.067.075-.067-.075Zm.645-7.703-.071-.071-.063.063.056.07.078-.062Zm.908-.908.07.07.071-.07-.07-.071-.071.07Zm-1.514 6.607.086.05-.086-.05Zm0-4.376.086-.05-.086.05ZM7.125 8.376v.1h.1v-.1h-.1Zm0-3.75h.1v-.1h-.1v.1Zm-1.25 3.75h-.1v.1h.1v-.1Zm0-3.75v-.1h-.1v.1h.1ZM4 .35h5v-.2H4v.2Zm.1 1.15V.25h-.2V1.5h.2ZM9 1.4H4v.2h5v-.2ZM8.9.25V1.5h.2V.25h-.2Zm1.182 3.176.908-.908-.142-.142-.908.908.142.142Zm-7.7.64a5.525 5.525 0 0 1 7.567-.633l.124-.156a5.725 5.725 0 0 0-7.84.656l.149.133Zm.211 7.59a5.525 5.525 0 0 1-.211-7.59l-.15-.133a5.725 5.725 0 0 0 .22 7.865l.141-.142Zm7.59.212a5.525 5.525 0 0 1-7.59-.212l-.141.142a5.725 5.725 0 0 0 7.865.219l-.134-.15Zm.634-7.567a5.525 5.525 0 0 1-.634 7.567l.134.149a5.725 5.725 0 0 0 .656-7.84l-.156.124Zm.915-1.041-.908.908.142.141.908-.908-.142-.141Zm-.884-.742.884.883.142-.141-.884-.884-.142.142ZM6.5 12.225a4.475 4.475 0 0 0 3.875-2.237l-.173-.1A4.275 4.275 0 0 1 6.5 12.024v.2ZM2.025 7.75A4.475 4.475 0 0 0 6.5 12.225v-.2A4.275 4.275 0 0 1 2.225 7.75h-.2ZM6.5 3.275A4.475 4.475 0 0 0 2.025 7.75h.2A4.275 4.275 0 0 1 6.5 3.475v-.2Zm3.875 2.238A4.475 4.475 0 0 0 6.5 3.275v.2c1.527 0 2.938.815 3.702 2.137l.173-.1Zm0 4.475c.8-1.385.8-3.09 0-4.475l-.173.1a4.275 4.275 0 0 1 0 4.274l.173.1Zm-3.15-1.613v-3.75h-.2v3.75h.2Zm-1.35.1h1.25v-.2h-1.25v.2Zm-.1-3.85v3.75h.2v-3.75h-.2Zm1.35-.1h-1.25v.2h1.25v-.2Z"
+                      ></path>
+                    </svg>
+                    <p>In 396 cart(s) now</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className=" w-7 h-7 bg-white rounded-full cursor-pointer flex items-center justify-center border border-solid mt-2"
                 >
-                  <path
-                    d="M17.2 4.8V3.8C17.2 3.2 16.8 2.8 16.2 2.8H7.8C7.2 2.8 6.8 3.2 6.8 3.8V4.8M9.8 9.2V18.4M14.2 9.2V18.4M19.5 6.5L17.7 20.4C17.6 20.9 17.2 21.3 16.7 21.3H7.3C6.8 21.3 6.4 20.9 6.3 20.4L4.5 6.5H19.5Z"
-                    stroke="currentColor"
-                  ></path>
-                </svg>
-              </button>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    stroke-width="1.5"
+                    class="w-4 h-4 text-black "
+                  >
+                    <path
+                      d="M17.2 4.8V3.8C17.2 3.2 16.8 2.8 16.2 2.8H7.8C7.2 2.8 6.8 3.2 6.8 3.8V4.8M9.8 9.2V18.4M14.2 9.2V18.4M19.5 6.5L17.7 20.4C17.6 20.9 17.2 21.3 16.7 21.3H7.3C6.8 21.3 6.4 20.9 6.3 20.4L4.5 6.5H19.5Z"
+                      stroke="currentColor"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
-          <div className="flex justify-between border mt-2 p-2">
+          <div className="md:flex justify-between border mt-2 p-2">
             <div class="flex items-center mb-3">
               <svg
                 viewBox="0 0 24 24"
@@ -248,14 +345,19 @@ const CartPage = () => {
                 ></path>
               </svg>
               <div>
-                <b className="uppercase semibold text-14">
+                <b className="uppercase semibold text-[13px]">
                   100% Secure transaction
                 </b>
-                <p className="mb-0 opacity-50 text-14">Secure SSL encryption</p>
+                <p className="mb-0 opacity-50 text-[13px]">
+                  Secure SSL encryption
+                </p>
               </div>
             </div>
             <div className="flex justify-between items-center">
-              <div className="flex items-center justify-center border h-[50px] w-[150px]">
+              <div
+                style={{ borderRadius: "5px" }}
+                className="flex items-center mr-[2px]  text-[13px] md:text-[10px] text-gray-900 justify-center border px-4 py-2"
+              >
                 <img
                   className=" w-2 mr-1 "
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/NewIcons/debit-card.8f0851e4cb51b90e.svg"
@@ -263,7 +365,10 @@ const CartPage = () => {
                 ></img>
                 CREDIT/DEBIT CARD
               </div>
-              <div className="flex items-center justify-center border h-[50px] w-[150px]">
+              <div
+                style={{ borderRadius: "5px" }}
+                className="flex items-center mr-[2px] text-[13px] md:text-[10px] text-gray-900 justify-center border px-4 py-2"
+              >
                 <img
                   className="  w-4  mr-1 "
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/NewIcons/net-banking.a383e6bc45490194.svg"
@@ -271,7 +376,10 @@ const CartPage = () => {
                 ></img>
                 NET BANKING
               </div>
-              <div className="flex border border-rounded-full items-center justify-center h-[50px] w-[60px]">
+              <div
+                style={{ borderRadius: "5px" }}
+                className="flex items-center text-[13px] md:text-[10px] text-gray-900   justify-center border px-[50px] py-2"
+              >
                 <img
                   className=" w-4 h-4 mr-1 "
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/NewIcons/upi.6a12497deafb65c5.svg"
@@ -283,29 +391,34 @@ const CartPage = () => {
           </div>
         </div>
         {/* 40%width 2 div */}
-        <div className="block md:w-2/5 p-2  bg-white border">
+        <div className="block md:w-2/5 p-4 m-1  bg-white ">
           <p>
             <span className="font-bold"> Order Summary*</span>
           </p>
           <div>
             <div className="flex justify-between mt-2">
-              <p className="font-extralight">Total Price (Inc Gst)</p>
-              <p className="font-extralight">₹ 1,299</p>
+              <p className="font-semibold text-[13px]">Total Price (Inc Gst)</p>
+              <p className="font-semibold text-[13px]">₹ 1,299</p>
             </div>
             <div className="flex justify-between mt-2">
-              <p className="font-extralight">Discount</p>
-              <p className="font-extralight">-₹ 300</p>
+              <p className="font-semibold text-[13px]">Discount</p>
+              <p className="font-semibold text-[13px]">-₹ 300</p>
             </div>
-            <div className="flex justify-between border-b-2 mt-2">
-              <p className="font-extralight">Convenience fee</p>
-              <p className="font-extralight">FREE</p>
+            <div className="flex justify-between border-b-[1px] mt-2 pb-2">
+              <p className="font-semibold text-[13px]">Convenience fee</p>
+              <p className="font-semibold text-[13px]">FREE</p>
             </div>
-            <div className="flex justify-between mt-2 ">
+            <div className="flex justify-between mt-2 pb-2 ">
               <p className="font-bold">Total </p>
               <p className="font-bold">₹ 999</p>
             </div>
-            <div className="bg-blue-100 justify-center p-3  align-middle font-semibold flex ">
+            <div className="bg-[#E1E3F5] justify-center p-3  align-middle font-bold text-[15px] flex ">
               You save ₹ 300 in this order
+            </div>
+            <div>
+              <button className="text-whit mt-4 p-3 text-white bg-[#3643BA] w-full hover:bg-blue-900">
+                PROCEED TO CHECKOUT
+              </button>
             </div>
             <div className="mt-3 p-3">
               <ul class="flex items-center p-0 m-0 md:items-stretch md:justify-between ">
@@ -324,7 +437,7 @@ const CartPage = () => {
                       stroke="currentColor"
                     ></path>
                   </svg>
-                  <p class="leading-4 text-12">Easy returns</p>
+                  <p class="leading-4 text-[13px]">Easy returns</p>
                 </li>
                 <li class="mr-2.5 py-4 px-2 h-32 text-center bg-white  w-1/3 list-none border-none shadow rounded-t-lg rounded-b-lg">
                   <svg
@@ -341,7 +454,7 @@ const CartPage = () => {
                       stroke="currentColor"
                     ></path>
                   </svg>
-                  <p class="leading-4 text-12">
+                  <p class="leading-4 text-[13px]">
                     Home Delivery at Your Doorstep
                   </p>
                 </li>
@@ -360,7 +473,7 @@ const CartPage = () => {
                       stroke="currentColor"
                     ></path>
                   </svg>
-                  <p class="leading-4 text-12">Minimum 2 years warranty</p>
+                  <p class="leading-4 text-[13px]">Minimum 2 years warranty</p>
                 </li>
               </ul>
             </div>
@@ -388,41 +501,8 @@ const CartPage = () => {
           </div>
         </div>
       </div>
-      <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Select Delivery Option</h2>
 
-        <div class="flex flex-wrap space-x-4">
-          <div class="bg-white p-4 border rounded w-full md:w-1/2 mb-4 md:mb-0">
-            <h3 class="text-lg font-bold mb-2">Home Delivery</h3>
-            <p class="text-sm text-gray-600 mb-2">Get it by 10th Jun 2024</p>
-            <p class="text-sm text-gray-600 mb-4">
-              Bengaluru, KARNATAKA, 560002
-            </p>
-            <button class="bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-              LOGIN TO ADD DELIVERY ADDRESS
-            </button>
-          </div>
-          <div class="bg-blue-100 p-4 border border-dotted border-blue-900 rounded w-full md:w-1/2">
-            <h3 class="text-lg font-bold mb-2">Pickup from Store</h3>
-            <p class="text-sm text-gray-600 mb-2">
-              Pickup after 2 pm, 09th Jun 2024
-            </p>
-            <p class="text-sm text-gray-600 mb-4">
-              DSI BRIGADE ROAD: Eva Mall, No.60 Ashok Nagar, Victoria Layout
-              Bangalore Karnataka 560025
-            </p>
-            <button class="bg-white text-blue-600 font-semibold py-2 px-4 border border-blue-600 rounded">
-              CHANGE PICKUP POINT
-            </button>
-          </div>
-        </div>
-        <div class="mt-4 p-4 bg-gray-100 rounded">
-          <p class="text-lg font-bold text-blue-600">
-            You save ₹ 760 in this order
-          </p>
-        </div>
-      </div>
-      <button className="text-white border-r-emerald-100 mt-4 p-3 bg-blue-500 sticky bottom-0 w-full hover:bg-blue-900">
+      <button className="text-white border-r-emerald-100 mt-4 p-3 bg-[#3643BA] sticky bottom-0 w-full hover:bg-blue-900">
         PROCEED TO CHECKOUT
       </button>
     </div>

@@ -41,10 +41,10 @@ const HomePage = () => {
 
   return (
     <div>
-      <button onClick={() => navigate("/productdetailpage")} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+      <button onClick={() => navigate("/productdetailpage")} class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
       Single productdetailpage
       </button>
-      <button onClick={() => navigate("/cartpage")} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+      <button onClick={() => navigate("/cartpage")} class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
        Cartpage 
       </button>
       <Header></Header>
