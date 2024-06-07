@@ -62,7 +62,7 @@ const CartPage = () => {
               <span className="text-blue-300 ml-2">Change</span>
             </p>
           </div>
-          <p className="text-gray-400 from-neutral-200">
+          <p class="text-sm text-gray-600 mb-4">
             Choose home delivery or pickup from store
           </p>
           <div className="flex w-full mt-3 ">
@@ -88,7 +88,7 @@ const CartPage = () => {
                 </div>
                 <div className="ml-2">
                   <p className="font-semibold">Home Delivery</p>
-                  <p className="font-thin">Get it By Monday</p>
+                  <p class="text-sm text-gray-600">Get it by Monday </p>
                 </div>
               </div>
               <p className="text-gray-400 font-thin mt-3">Delivery Address</p>
@@ -117,7 +117,7 @@ const CartPage = () => {
                 </div>
                 <div className="ml-2 ">
                   <p className="font-semibold">Pickup from Store</p>
-                  <p className="font-thin">Pick after 3 pm on Monday</p>
+                  <p class="text-sm text-gray-600">Pick after 3 pm on Monday</p>
                 </div>
               </div>
               <p className="text-gray-400 font-thin mt-3">Store Address</p>
@@ -273,7 +273,7 @@ const CartPage = () => {
               </div>
               <div className="flex border border-rounded-full items-center justify-center h-[50px] w-[60px]">
                 <img
-                  className=" w-4 h-4  mr-1 "
+                  className=" w-4 h-4 mr-1 "
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/NewIcons/upi.6a12497deafb65c5.svg"
                   alt="UPI"
                 ></img>
@@ -386,6 +386,40 @@ const CartPage = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="p-4">
+        <h2 class="text-xl font-semibold mb-2">Select Delivery Option</h2>
+
+        <div class="flex flex-wrap space-x-4">
+          <div class="bg-white p-4 border rounded w-full md:w-1/2 mb-4 md:mb-0">
+            <h3 class="text-lg font-bold mb-2">Home Delivery</h3>
+            <p class="text-sm text-gray-600 mb-2">Get it by 10th Jun 2024</p>
+            <p class="text-sm text-gray-600 mb-4">
+              Bengaluru, KARNATAKA, 560002
+            </p>
+            <button class="bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+              LOGIN TO ADD DELIVERY ADDRESS
+            </button>
+          </div>
+          <div class="bg-blue-100 p-4 border border-dotted border-blue-900 rounded w-full md:w-1/2">
+            <h3 class="text-lg font-bold mb-2">Pickup from Store</h3>
+            <p class="text-sm text-gray-600 mb-2">
+              Pickup after 2 pm, 09th Jun 2024
+            </p>
+            <p class="text-sm text-gray-600 mb-4">
+              DSI BRIGADE ROAD: Eva Mall, No.60 Ashok Nagar, Victoria Layout
+              Bangalore Karnataka 560025
+            </p>
+            <button class="bg-white text-blue-600 font-semibold py-2 px-4 border border-blue-600 rounded">
+              CHANGE PICKUP POINT
+            </button>
+          </div>
+        </div>
+        <div class="mt-4 p-4 bg-gray-100 rounded">
+          <p class="text-lg font-bold text-blue-600">
+            You save ₹ 760 in this order
+          </p>
         </div>
       </div>
       <button className="text-white border-r-emerald-100 mt-4 p-3 bg-blue-500 sticky bottom-0 w-full hover:bg-blue-900">

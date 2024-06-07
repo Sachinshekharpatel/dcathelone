@@ -12,6 +12,7 @@ import sportsacceimage from "./sportsacceimage.avif";
 import sportsequipimage from "./sportsequipimage.avif";
 import summarcollectionimage from "./summarcollectionimage.avif";
 import {useNavigate} from "react-router-dom"
+import FooterPage from "../footer/footer";
 const images = [imageoneSlide, imageTwoSlide, imageThreeSlide];
 const HomePage = () => {
   const [transForm, setTransForm] = useState(false);
@@ -216,6 +217,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
+      <FooterPage></FooterPage>
     </div>
   );
 };
