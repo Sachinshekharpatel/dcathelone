@@ -12,7 +12,7 @@ const CartPage = () => {
         home
       </button>
       <div className="w-full flex bg-slate-100 sticky top-0 justify-between">
-        <div className="p-4">
+        <div onClick={() => navigate("/")} className="p-4">
           <svg
             viewBox="0 0 188 28"
             fill="none"
