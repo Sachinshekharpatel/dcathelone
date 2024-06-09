@@ -13,11 +13,16 @@ import sportsequipimage from "./sportsequipimage.avif";
 import summarcollectionimage from "./summarcollectionimage.avif";
 import { useNavigate } from "react-router-dom";
 import FooterPage from "../footer/footer";
+import { useSelector } from "react-redux";
+import { cartReduxActions } from "../reduxstore/reduxstore";
+import { useDispatch } from "react-redux";
 const images = [imageoneSlide, imageTwoSlide, imageThreeSlide];
 const HomePage = () => {
+  const dispatch = useDispatch();
   const [transForm, setTransForm] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
+  const cartArrayItem = useSelector((state) => state.itemInDetailPage.cartTotalItemsArray);
   const navigate = useNavigate();
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -26,6 +31,9 @@ const HomePage = () => {
 
     return () => clearTimeout(timer);
   }, [transForm]);
+
+
+
 
   useEffect(() => {
     const intervalId = setInterval(() => {
