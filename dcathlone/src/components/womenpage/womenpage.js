@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import Header from "../header/header";
-import imageoneSlide from "./menimage.avif";
-import imageTwoSlide from "./menimage2.avif";
-import imageThreeSlide from "./menimage3.avif";
+import imageoneSlide from "./women1.avif";
+import imageTwoSlide from "./women2.avif";
+import imageThreeSlide from "./women3.avif";
 import FooterPage from "../footer/footer";
-import filterBtnImage from "./filterbtn.svg"
-import image1men from "./image1men.avif";
-import "./menpage.css";
-import image3men from "./image3men.avif";
+import filterBtnImage from "./filterbtn.svg";
+import image1men from "./womenBe1.avif";
+import "./womenpage.css";
+import image3men from "./womenBe2.avif";
 const images = [imageoneSlide, imageTwoSlide, imageThreeSlide];
-const MenPage = () => {
+const WomenPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
   const [menProduct, setMenProduct] = useState([]);
@@ -17,7 +17,7 @@ const MenPage = () => {
   const filterValue = useRef("");
   useEffect(() => {
     try {
-      fetch("https://fakestoreapi.com/products/category/men's%20clothing")
+      fetch("https://fakestoreapi.com/products/category/women's%20clothing")
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -501,4 +501,4 @@ const MenPage = () => {
   );
 };
 
-export default MenPage;
+export default WomenPage;

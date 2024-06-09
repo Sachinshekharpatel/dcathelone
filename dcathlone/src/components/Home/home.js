@@ -43,13 +43,13 @@ const HomePage = () => {
     <div>
       <button
         onClick={() => navigate("/productdetailpage")}
-        class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        className="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
       >
         Single productdetailpage
       </button>
       <button
         onClick={() => navigate("/cartpage")}
-        class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        className="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
       >
         Cartpage
       </button>
@@ -74,14 +74,14 @@ const HomePage = () => {
                   style={{ color: "transparent" }}
                 />
               </div>
-              <div class="md:text-12 text-8 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
+              <div className="md:text-12 text-8 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
                 <span>Men</span>
               </div>
             </div>
           </a>
-          <a class="w-1/4 max-w-32">
-            <div class="flex flex-col gap-1 justify-start items-center">
-              <div class="w-full px-2.5 relative">
+          <a  onClick={() => navigate("/womenpage")} className="w-1/4 max-w-32">
+            <div className="flex flex-col gap-1 justify-start items-center">
+              <div className="w-full px-2.5 relative">
                 <img
                   alt="Women"
                   fetchpriority="high"
@@ -93,14 +93,14 @@ const HomePage = () => {
                   style={{ color: "transparent" }}
                 />
               </div>
-              <div class="md:text-12 text-8 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
+              <div className="md:text-12 text-8 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
                 <span>Women</span>
               </div>
             </div>
           </a>
-          <a class="w-1/4 max-w-32">
-            <div class="flex flex-col gap-1 justify-start items-center">
-              <div class="w-full px-2.5 relative">
+          <a className="w-1/4 max-w-32">
+            <div className="flex flex-col gap-1 justify-start items-center">
+              <div className="w-full px-2.5 relative">
                 <img
                   alt="Kids"
                   fetchpriority="high"
@@ -112,14 +112,14 @@ const HomePage = () => {
                   style={{ color: "transparent" }}
                 />
               </div>
-              <div class="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
+              <div className="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
                 <span>Kids</span>
               </div>
             </div>
           </a>
-          <a class="w-1/4 max-w-32">
-            <div class="flex flex-col gap-1 justify-start items-center">
-              <div class="w-full px-2.5 relative">
+          <a className="w-1/4 max-w-32">
+            <div className="flex flex-col gap-1 justify-start items-center">
+              <div className="w-full px-2.5 relative">
                 <img
                   alt="Shoes"
                   fetchpriority="high"
@@ -131,14 +131,14 @@ const HomePage = () => {
                   style={{ color: "transparent" }}
                 />
               </div>
-              <div class="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
+              <div className="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
                 <span>Shoes</span>
               </div>
             </div>
           </a>
-          <a class="w-1/4 max-w-32">
-            <div class="flex flex-col gap-1 justify-start items-center">
-              <div class="w-full px-2.5 relative">
+          <a className="w-1/4 max-w-32">
+            <div className="flex flex-col gap-1 justify-start items-center">
+              <div className="w-full px-2.5 relative">
                 <img
                   alt="Summer Collection"
                   fetchpriority="high"
@@ -150,14 +150,14 @@ const HomePage = () => {
                   style={{ color: "transparent" }}
                 />
               </div>
-              <div class="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
+              <div className="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
                 <span>Summer Collection</span>
               </div>
             </div>
           </a>
-          <a class="w-1/4 max-w-32">
-            <div class="flex flex-col gap-1 justify-start items-center">
-              <div class="w-full px-2.5 relative">
+          <a className="w-1/4 max-w-32">
+            <div className="flex flex-col gap-1 justify-start items-center">
+              <div className="w-full px-2.5 relative">
                 <img
                   alt="Sale"
                   fetchpriority="high"
@@ -169,14 +169,14 @@ const HomePage = () => {
                   style={{ color: "transparent" }}
                 />
               </div>
-              <div class="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
+              <div className="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
                 <span>Sale</span>
               </div>
             </div>
           </a>
-          <a class="w-1/4 max-w-32">
-            <div class="flex flex-col gap-1 justify-start items-center">
-              <div class="w-full px-2.5 relative">
+          <a className="w-1/4 max-w-32">
+            <div className="flex flex-col gap-1 justify-start items-center">
+              <div className="w-full px-2.5 relative">
                 <img
                   alt="Sports Accessories"
                   fetchpriority="high"
@@ -188,14 +188,14 @@ const HomePage = () => {
                   style={{ color: "transparent" }}
                 />
               </div>
-              <div class="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
+              <div className="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
                 <span>Sports Accessories</span>
               </div>
             </div>
           </a>
-          <a class="w-1/4 max-w-32">
-            <div class="flex flex-col gap-1 justify-start items-center">
-              <div class="w-full px-2.5 relative">
+          <a className="w-1/4 max-w-32">
+            <div className="flex flex-col gap-1 justify-start items-center">
+              <div className="w-full px-2.5 relative">
                 <img
                   alt="Sports Equipment"
                   fetchpriority="high"
@@ -207,7 +207,7 @@ const HomePage = () => {
                   style={{ color: "transparent" }}
                 />
               </div>
-              <div class="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
+              <div className="md:text-16 text-10 text-center font-medium md:max-w-[22ch] bKLdgR text-black break-words">
                 <span>Sports Equipment </span>
               </div>
             </div>
