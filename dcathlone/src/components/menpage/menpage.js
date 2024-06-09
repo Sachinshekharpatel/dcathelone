@@ -84,7 +84,7 @@ const MenPage = () => {
         <div className="flex justify-between">
           <div className="mt-2 md:mt-0 flex flex-wrap">
             <div className="flex mr-3.5 px-1.5 py-2.5 border-none rounded font-bold uppercase text-[#424453] cursor-pointer hover:bg-gray-100 hover:bg-grey-50 hover:shadow-none bg-transparent text-[13px]">
-              MAIN MATERIAL
+              <span className="mt-0 md:mt-[16px] ">MAIN MATERIAL</span>
               <span className="flex">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/icons/down_arrow.155714143ed7eeef.svg"
@@ -94,7 +94,7 @@ const MenPage = () => {
               </span>
             </div>
             <div className="flex mr-3.5 px-1.5 py-2.5 border-none rounded font-bold uppercase text-[#424453] cursor-pointer hover:bg-gray-100 hover:bg-grey-50 hover:shadow-none bg-transparent text-[13px]">
-              Sleeves length
+            <span className="mt-0 md:mt-[16px] ">Sleeve Length</span>
               <span className="flex">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/icons/down_arrow.155714143ed7eeef.svg"
@@ -104,7 +104,7 @@ const MenPage = () => {
               </span>
             </div>
             <div className="flex mr-3.5 px-1.5 py-2.5 border-none rounded font-bold uppercase text-[#424453] cursor-pointer hover:bg-gray-100 hover:bg-grey-50 hover:shadow-none bg-transparent text-[13px]">
-              Style
+            <span className="mt-0 md:mt-[16px] ">Style</span>
               <span className="flex">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/icons/down_arrow.155714143ed7eeef.svg"
@@ -114,7 +114,7 @@ const MenPage = () => {
               </span>
             </div>
             <div className="flex mr-3.5 px-1.5 py-2.5 border-none rounded font-bold uppercase text-[#424453] cursor-pointer hover:bg-gray-100 hover:bg-grey-50 hover:shadow-none bg-transparent text-[13px]">
-              Neck Type
+            <span className="mt-0 md:mt-[16px] ">Neck Type</span>
               <span className="flex">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/icons/down_arrow.155714143ed7eeef.svg"
@@ -124,7 +124,8 @@ const MenPage = () => {
               </span>
             </div>
             <div className="flex mr-3.5 px-1.5 py-2.5 border-none rounded font-bold uppercase text-[#424453] cursor-pointer hover:bg-gray-100 hover:bg-grey-50 hover:shadow-none bg-transparent text-[13px]">
-              Cut
+            <span className="mt-0 md:mt-[16px] ">Cut</span>
+           
               <span className="flex">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/icons/down_arrow.155714143ed7eeef.svg"
@@ -134,7 +135,8 @@ const MenPage = () => {
               </span>
             </div>
             <div className="flex mr-3.5 px-1.5 py-2.5 border-none rounded font-bold uppercase text-[#424453] cursor-pointer hover:bg-gray-100 hover:bg-grey-50 hover:shadow-none bg-transparent text-[13px]">
-              Number Of Pockets
+            <span className="mt-0 md:mt-[16px] ">Number Of Pockets </span>
+           
               <span className="flex">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/icons/down_arrow.155714143ed7eeef.svg"
@@ -145,7 +147,8 @@ const MenPage = () => {
             </div>
 
             <div className="flex mr-3.5 px-1.5 py-2.5 border-none rounded font-bold uppercase text-[#424453] cursor-pointer hover:bg-gray-100 hover:bg-grey-50 hover:shadow-none bg-transparent text-[13px]">
-              Pockets
+            <span className="mt-0 md:mt-[16px] "> Pockets</span>
+           
               <span className="flex">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/icons/down_arrow.155714143ed7eeef.svg"
