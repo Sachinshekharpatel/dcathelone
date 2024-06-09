@@ -11,7 +11,7 @@ import shoesimage from "./shoesimage.avif";
 import sportsacceimage from "./sportsacceimage.avif";
 import sportsequipimage from "./sportsequipimage.avif";
 import summarcollectionimage from "./summarcollectionimage.avif";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import FooterPage from "../footer/footer";
 const images = [imageoneSlide, imageTwoSlide, imageThreeSlide];
 const HomePage = () => {
@@ -41,19 +41,28 @@ const HomePage = () => {
 
   return (
     <div>
-      <button onClick={() => navigate("/productdetailpage")} class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-      Single productdetailpage
+      <button
+        onClick={() => navigate("/productdetailpage")}
+        class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+      >
+        Single productdetailpage
       </button>
-      <button onClick={() => navigate("/cartpage")} class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-       Cartpage 
+      <button
+        onClick={() => navigate("/cartpage")}
+        class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+      >
+        Cartpage
       </button>
       <Header></Header>
 
-      <div class="w-full flex flex-wrap bg-white items-center justify-center h-auto  py-3 grid-cols-2 md:grid-cols-8 gap-4">
-        <div class="py-2 flex flex-wrap md:px-7 md:py-3 md:flex-nowrap justify-around">
-          <a href="/" class="w-1/4 max-w-32">
-            <div class="flex flex-col gap-1 justify-start items-center">
-              <div class="w-full px-2.5 relative">
+      <div className="w-full flex flex-wrap bg-white items-center justify-center h-auto  py-3 grid-cols-2 md:grid-cols-8 gap-4">
+        <div className="py-2 flex flex-wrap md:px-7 md:py-3 md:flex-nowrap justify-around">
+          <a className="w-1/4 max-w-32">
+            <div className="flex flex-col gap-1 justify-start items-center">
+              <div
+                onClick={() => navigate("/menpage")}
+                className=" w-full px-2.5 relative"
+              >
                 <img
                   alt="Men"
                   fetchpriority="high"
@@ -70,7 +79,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a href="/" class="w-1/4 max-w-32">
+          <a class="w-1/4 max-w-32">
             <div class="flex flex-col gap-1 justify-start items-center">
               <div class="w-full px-2.5 relative">
                 <img
@@ -89,7 +98,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a href="/" class="w-1/4 max-w-32">
+          <a class="w-1/4 max-w-32">
             <div class="flex flex-col gap-1 justify-start items-center">
               <div class="w-full px-2.5 relative">
                 <img
@@ -108,7 +117,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a href="/" class="w-1/4 max-w-32">
+          <a class="w-1/4 max-w-32">
             <div class="flex flex-col gap-1 justify-start items-center">
               <div class="w-full px-2.5 relative">
                 <img
@@ -127,7 +136,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a href="/" class="w-1/4 max-w-32">
+          <a class="w-1/4 max-w-32">
             <div class="flex flex-col gap-1 justify-start items-center">
               <div class="w-full px-2.5 relative">
                 <img
@@ -146,7 +155,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a href="/" class="w-1/4 max-w-32">
+          <a class="w-1/4 max-w-32">
             <div class="flex flex-col gap-1 justify-start items-center">
               <div class="w-full px-2.5 relative">
                 <img
@@ -165,7 +174,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a href="/" class="w-1/4 max-w-32">
+          <a class="w-1/4 max-w-32">
             <div class="flex flex-col gap-1 justify-start items-center">
               <div class="w-full px-2.5 relative">
                 <img
@@ -184,7 +193,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a href="/" class="w-1/4 max-w-32">
+          <a class="w-1/4 max-w-32">
             <div class="flex flex-col gap-1 justify-start items-center">
               <div class="w-full px-2.5 relative">
                 <img
