@@ -41,18 +41,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <button
-        onClick={() => navigate("/productdetailpage")}
-        className="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-      >
-        Single productdetailpage
-      </button>
-      <button
-        onClick={() => navigate("/cartpage")}
-        className="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-      >
-        Cartpage
-      </button>
       <Header></Header>
 
       <div className="w-full flex flex-wrap bg-white items-center justify-center h-auto  py-3 grid-cols-2 md:grid-cols-8 gap-4">
