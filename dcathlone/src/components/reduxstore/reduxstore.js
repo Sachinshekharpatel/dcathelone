@@ -18,22 +18,24 @@ const cartSlice = createSlice({
     addItemIncartFunction: (state, action) => {
       console.log(action.payload);
       state.cartTotalItemsArray.push(action.payload);
-      state.totalPrice = state.cartTotalItemsArray.map((item) => item.price).reduce((a, b) => a + b, 0);
-    
+      state.totalPrice = state.cartTotalItemsArray
+        .map((item) => item.price)
+        .reduce((a, b) => a + b, 0);
     },
-    fetchFromDatabaseFunction: (state, action) => {     
+    fetchFromDatabaseFunction: (state, action) => {
       state.cartTotalItemsArray = action.payload;
-      state.totalPrice = state.cartTotalItemsArray.map((item) => item.price).reduce((a, b) => a + b, 0);
-    
+      state.totalPrice = state.cartTotalItemsArray
+        .map((item) => item.price)
+        .reduce((a, b) => a + b, 0);
     },
 
     removeItemFromCartFunction: (state, action) => {
-      console.log("action.payload", action.payload, "removebuttonclicked");
       state.cartTotalItemsArray = state.cartTotalItemsArray.filter(
         (item) => item.id !== action.payload
       );
-      state.totalPrice = state.cartTotalItemsArray.map((item) => item.price).reduce((a, b) => a + b, 0);
-    
+      state.totalPrice = state.cartTotalItemsArray
+        .map((item) => item.price)
+        .reduce((a, b) => a + b, 0);
     },
   },
 });
