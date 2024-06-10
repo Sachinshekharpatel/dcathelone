@@ -24,7 +24,8 @@ const MenPage = () => {
   const filterValue = useRef("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [productToAdd, setProductToAdd] = useState(null);
-
+  const [productAddedButtonBoolean, setproductAddedButtonBoolean] =
+    useState(false);
   useEffect(() => {
     try {
       fetch("https://fakestoreapi.com/products/category/men's%20clothing")
@@ -103,7 +104,7 @@ const MenPage = () => {
   }, [selectedValue]);
 
   const selectSizeHandlerFunction = (item) => {
-     console.log(item);
+    console.log(item);
     setSelectedSize(item);
   };
 
@@ -134,6 +135,8 @@ const MenPage = () => {
                 setIsModalVisible(!isModalVisible);
                 setProductToAdd(null);
                 setSelectedSize(null);
+                setproductAddedButtonBoolean(true);
+                setTimeout(() => setproductAddedButtonBoolean(false), 2000);
                 dispatch(cartReduxActions.addItemIncartFunction(data));
               });
           });
@@ -672,7 +675,9 @@ const MenPage = () => {
               </div>
 
               <p className="text-black-500 text-[12px] bg-blue-100 p-2 my-1 font-semibold">
-                {selectSize !== null ? `Selected Size : ${selectSize}` : "Please select  a size"}  
+                {selectSize !== null
+                  ? `Selected Size : ${selectSize}`
+                  : "Please select  a size"}
               </p>
 
               <div className="flex w-full">
@@ -690,6 +695,29 @@ const MenPage = () => {
               </div>
             </div>
           </div>
+        </div>
+      ) : null}
+      {productAddedButtonBoolean ? (
+        <div className="fixed top-[100px] md:top-[140px] flex left-1/2 transform -translate-x-1/2 bg-black text-white px-4 py-2 rounded-lg shadow-md">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 48 48"
+          >
+            <path
+              fill="#c8e6c9"
+              d="M36,42H12c-3.314,0-6-2.686-6-6V12c0-3.314,2.686-6,6-6h24c3.314,0,6,2.686,6,6v24C42,39.314,39.314,42,36,42z"
+            ></path>
+            <path
+              fill="#4caf50"
+              d="M34.585 14.586L21.014 28.172 15.413 22.584 12.587 25.416 21.019 33.828 37.415 17.414z"
+            ></path>
+          </svg>
+          <button className="text-white px-3 py-1 bg-[#black] font-bold text-[14px] rounded">
+            {" "}
+            Successfully Added To Cart{" "}
+          </button>
         </div>
       ) : null}
       <FooterPage></FooterPage>

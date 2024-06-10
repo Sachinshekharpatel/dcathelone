@@ -18,6 +18,8 @@ const ProductDetailPage = () => {
   const productToDisplay = useSelector(
     (state) => state.itemInDetailPage.SingleProductDetail || null
   );
+  const [productAddedButtonBoolean, setproductAddedButtonBoolean] =
+    useState(false);
   const [shake, setShake] = useState(false);
   const dispatch = useDispatch();
   const [selectSize, setSelectedSize] = useState(null);
@@ -32,7 +34,6 @@ const ProductDetailPage = () => {
       setTimeout(() => setShake(false), 500);
     } else {
       try {
-        
         axios
           .post(
             `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart.json`,
@@ -52,6 +53,8 @@ const ProductDetailPage = () => {
               )
               .then(() => {
                 setItemIsAdded(true);
+                setproductAddedButtonBoolean(true);
+                setTimeout(() => setproductAddedButtonBoolean(false), 2000);
                 setTimeout(() => setItemIsAdded(false), 1000);
                 console.log("added to cart");
                 dispatch(cartReduxActions.addItemIncartFunction(data));
@@ -69,12 +72,6 @@ const ProductDetailPage = () => {
 
   return (
     <div>
-      <button
-        onClick={() => navigate("/")}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-      >
-        Home
-      </button>
       <Header></Header>
 
       {/* below part */}
@@ -464,6 +461,31 @@ const ProductDetailPage = () => {
           </div>
         </>
       )}
+
+      {productAddedButtonBoolean ? (
+        <div className="fixed top-[100px] md:top-[140px] flex left-1/2 md:right-1 md:left-auto transform -translate-x-1/2 bg-black text-white px-4 py-2 rounded-lg shadow-md">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 48 48"
+          >
+            <path
+              fill="#c8e6c9"
+              d="M36,42H12c-3.314,0-6-2.686-6-6V12c0-3.314,2.686-6,6-6h24c3.314,0,6,2.686,6,6v24C42,39.314,39.314,42,36,42z"
+            ></path>
+            <path
+              fill="#4caf50"
+              d="M34.585 14.586L21.014 28.172 15.413 22.584 12.587 25.416 21.019 33.828 37.415 17.414z"
+            ></path>
+          </svg>
+          <button className="text-white px-3 py-1 bg-[#black] font-bold text-[14px] rounded">
+            {" "}
+            Successfully Added To Cart{" "}
+          </button>
+        </div>
+      ) : null}
+
       <FooterPage></FooterPage>
     </div>
   );

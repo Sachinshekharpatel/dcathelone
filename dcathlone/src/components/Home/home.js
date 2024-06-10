@@ -214,6 +214,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
+      
       <FooterPage></FooterPage>
     </div>
   );
