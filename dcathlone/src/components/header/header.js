@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./header.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Header = () => {
   const [transForm, setTransForm] = useState(false);
   const navigate = useNavigate();
+  const itemInCart = useSelector((state) => state.itemInDetailPage.cartTotalItemsArray);
+   
+  useEffect(() => {
+    // console.log(itemInCart);
+  }, [itemInCart]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setTransForm(!transForm);
@@ -175,7 +182,7 @@ const Header = () => {
               </div>
             </a>
             <div className="mx-5" onClick={() => navigate("/cartpage")}>
-              <div className="relative">
+              <div className="flex relative">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -204,7 +211,11 @@ const Header = () => {
                     d="M9.5 19.75C9.5 20.4404 8.94036 21 8.25 21C7.55964 21 7 20.4404 7 19.75C7 19.0596 7.55964 18.5 8.25 18.5C8.94036 18.5 9.5 19.0596 9.5 19.75ZM18.5 19.75C18.5 20.4404 17.9404 21 17.25 21C16.5596 21 16 20.4404 16 19.75C16 19.0596 16.5596 18.5 17.25 18.5C17.9404 18.5 18.5 19.0596 18.5 19.75ZM8.25 20.75C8.80228 20.75 9.25 20.3023 9.25 19.75C9.25 19.1977 8.80228 18.75 8.25 18.75C7.69772 18.75 7.25 19.1977 7.25 19.75C7.25 20.3023 7.69772 20.75 8.25 20.75ZM17.25 20.75C17.8023 20.75 18.25 20.3023 18.25 19.75C18.25 19.1977 17.8023 18.75 17.25 18.75C16.6977 18.75 16.25 19.1977 16.25 19.75C16.25 20.3023 16.6977 20.75 17.25 20.75Z"
                     fill="currentColor"
                   ></path>
+                   
                 </svg>
+                {itemInCart.length ? (
+                  <p>{itemInCart.length}</p>
+                ):null}
               </div>
               <p className="text-center font-semibold text-6 lg:text-8">Cart</p>
             </div>
@@ -215,14 +226,14 @@ const Header = () => {
       {/* below this the free shipping chnaging avery second*/}
       <div>
         <div
-          class="relative w-full py-2 flex items-center justify-center px-10 text-center"
+          className="relative w-full py-2 flex items-center justify-center px-10 text-center"
           id="ribbon-container"
           style={{ backgroundColor: "rgb(54, 67, 186)" }}
         >
           {transForm ? (
             <span
               id="text-message"
-              class="text-14 md:text-16 font-normal slide-right"
+              className="text-14 md:text-16 font-normal slide-right"
               style={{ color: "rgb(255, 255, 255)" }}
             >
               <b>Free Shipping</b> on order worth <b>2999/-</b> and above
@@ -231,16 +242,16 @@ const Header = () => {
             <>
               <span
                 id="text-message"
-                class="text-14 md:text-16 font-normal slide-right"
+                className="text-14 md:text-16 font-normal slide-right"
                 style={{ color: "rgb(255, 255, 255)" }}
               >
                 Enjoy <b>₹200/- Off</b> on your first purchase.T&amp;C apply
               </span>
             </>
           )}
-          <div id="close-icon" class="absolute right-4 hidden">
+          <div id="close-icon" className="absolute right-4 hidden">
             <img
-              class="md:w-4 md:h-4 dQmWAp FIuiPj cursor-pointer"
+              className="md:w-4 md:h-4 dQmWAp FIuiPj cursor-pointer"
               src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/close-ribbon.e576dae11fb9e8d8.svg"
               alt="ribbon-banner-close-icon"
             />

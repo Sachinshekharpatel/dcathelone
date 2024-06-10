@@ -4,12 +4,19 @@ import imageoneSlide from "./menimage.avif";
 import imageTwoSlide from "./menimage2.avif";
 import imageThreeSlide from "./menimage3.avif";
 import FooterPage from "../footer/footer";
-import filterBtnImage from "./filterbtn.svg"
+import filterBtnImage from "./filterbtn.svg";
 import image1men from "./image1men.avif";
 import "./menpage.css";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import image3men from "./image3men.avif";
+import { cartReduxActions } from "../reduxstore/reduxstore";
 const images = [imageoneSlide, imageTwoSlide, imageThreeSlide];
 const MenPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
   const [menProduct, setMenProduct] = useState([]);
@@ -28,6 +35,11 @@ const MenPage = () => {
     }
   }, []);
 
+  const singleProductPageHandler = (item) => {
+    console.log(item);
+    dispatch(cartReduxActions.viewProductDetailFunction(item));
+    navigate(`/productdetailpage`);
+  };
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -82,6 +94,35 @@ const MenPage = () => {
 
     handleFilterChange();
   }, [selectedValue]);
+
+  const addToCartBtnHandler = (item) => {
+    try {
+      axios
+        .post(
+          `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart.json`,
+          item
+        )
+        .then((res) => {
+          const data = {
+            ...item,
+            id: res.data.name,
+            quantity: 1,
+            size: "M",
+          };
+          axios
+            .put(
+              `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${res.data.name}.json`,
+              data
+            )
+            .then(() => {
+              console.log("added to cart");
+              dispatch(cartReduxActions.addItemIncartFunction(data));
+            });
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -307,10 +348,10 @@ const MenPage = () => {
           </div>
           <div className="p-2">
             <p className="font-bold text-gray-600 text-[13px] p-2">Category</p>
-            <div class="relative flex py-1 pl-0  border-2  rounded-md  w-full ">
+            <div className="relative flex py-1 pl-0  border-2  rounded-md  w-full ">
               <input
                 type="input"
-                class="focus:outline-none w-full mx-3  md:mx-3"
+                className="focus:outline-none w-full mx-3  md:mx-3"
                 placeholder="Search..."
                 value=""
               />
@@ -414,7 +455,10 @@ const MenPage = () => {
             {menProduct &&
               menProduct.map((product) => (
                 <div className=" px-2 border md:border-0 border-gray-100 p-1">
-                  <div className="bg:[#F7F8F9] relative p-3 h-[240px] md:h-[300px]">
+                  <div
+                    onClick={() => singleProductPageHandler(product)}
+                    className="bg:[#F7F8F9] relative p-3 h-[240px] md:h-[300px]"
+                  >
                     <img
                       className=" absolute top-0 left-0 p-1 h-full w-full object-cover"
                       src={product.image}
@@ -485,7 +529,7 @@ const MenPage = () => {
                         ₹ {product.price}
                       </p>
                     </div>
-                    <button className="w-full bg-[] border border-[#949494] text-white py-2">
+                    <button onClick={() => addToCartBtnHandler(product)} className="w-full bg-[] border border-[#949494] text-white py-2">
                       <p className="text-sm text-[#000000] text-[10px] font-semibold">
                         ADD TO CART
                       </p>

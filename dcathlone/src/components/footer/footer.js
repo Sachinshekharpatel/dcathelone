@@ -128,50 +128,50 @@ const FooterPage = () => {
                 ></path>
               </svg>
               <div>
-                <span class=" text-[14px] text-[#34450]-700 uppercase font-bold">
+                <span className=" text-[14px] text-[#34450]-700 uppercase font-bold">
                   100% Secure transaction
                 </span>
-                <p class="mt-[2px] text-[12px] text-gray-400">
+                <p className="mt-[2px] text-[12px] text-gray-400">
                   Secure SSL encryption
                 </p>
               </div>
             </div>
             <div className="md:mr-3 px-1 mb-2 text-center justify-between flex pl-2">
             <img
-                class="mr-1 mt-1 md:w-1/4"
+                className="mr-1 mt-1 md:w-1/4"
                 src={debitcard}
                 alt="Debit"
                 loading="lazy"
               />
               <img
-                class="mr-1 mt-1 md:w-1/4"
+                className="mr-1 mt-1 md:w-1/4"
                 src={creditcardimage}
                 alt="Credit"
                 loading="lazy"
               />
               <img
-                class="mr-1 mt-1 md:w-1/4"
+                className="mr-1 mt-1 md:w-1/4"
                 src={upiImage}
                 alt="UPI"
                 loading="lazy"
               />
               <img
-                class=" mt-1 mr-1 md:w-1/4"
+                className=" mt-1 mr-1 md:w-1/4"
                 src={netbanking}
                 alt="Net Banking"
                 loading="lazy"
               />
             </div>
-            <div class="border-l-[2px] border-[#F5F4F5] px-2 flex md:justify-center items-center md:ml-1 mr-1 ">
-              <p class="align-middle  text-[#344450] text-sm">
+            <div className="border-l-[2px] border-[#F5F4F5] px-2 flex md:justify-center items-center md:ml-1 mr-1 ">
+              <p className="align-middle  text-[#344450] text-sm">
                 Site Map
               </p>
             </div>
-            <div class="flex md:justify-center items-center p-1 border-[#F5F4F5] border-l-[2px]">
+            <div className="flex md:justify-center items-center p-1 border-[#F5F4F5] border-l-[2px]">
               <p className="ml-2 text-[#344450] text-[12px] mr-1">
                 DECATHLON is present in
               </p>
-              <div class=" border-[1px] p-1 border-[#4E5D6B] " style={{ borderRadius: "4px" }}>
+              <div className=" border-[1px] p-1 border-[#4E5D6B] " style={{ borderRadius: "4px" }}>
                 <label>
                   <select className="text-[12px]">
                     <option value="">3 Countries</option>
@@ -195,8 +195,8 @@ const FooterPage = () => {
             <p className="text-14 font-bold mb-2">
               EXPERIENCE DECATHLON APP ON MOBILE
             </p>
-            <div class="flex mt-4">
-              <a class="no-underline">
+            <div className="flex mt-4">
+              <a className="no-underline">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/google-play-badge.f6fa1f85049d9cdc.webp"
                   alt="Gplay"
@@ -206,7 +206,7 @@ const FooterPage = () => {
               <a
                 href="https://apps.apple.com/in/app/decathlon-online-shopping-app/id1387810949"
                 target="_blank"
-                class="ml-2.5"
+                className="ml-2.5"
               >
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/appstore.b3fa2df12dd0536e.svg"
@@ -227,32 +227,32 @@ const FooterPage = () => {
           >
             <p className="text-14 font-bold">FOLLOW US</p>
             <div className="flex justify-between mt-3">
-              <a class="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
+              <a className="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/facebook.eb87d42a519970a4.svg"
                   alt="facebook"
-                  class="inline-block align-middle"
+                  className="inline-block align-middle"
                 />
               </a>
-              <a class="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
+              <a className="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/twitter.b197a84f1fb0535d.svg"
                   alt="X"
-                  class="inline-block align-middle"
+                  className="inline-block align-middle"
                 />
               </a>
-              <a class="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
+              <a className="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/youtube.c67fd6223e18d3f1.svg"
                   alt="Youtube"
-                  class="inline-block align-middle"
+                  className="inline-block align-middle"
                 />
               </a>
-              <a class="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
+              <a className="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/instagram.af05cd998024d3c8.svg"
                   alt="Instagram"
-                  class="inline-block align-middle"
+                  className="inline-block align-middle"
                 />
               </a>
             </div>
@@ -279,8 +279,8 @@ const FooterPage = () => {
           </div>
         </div>
       </div>
-      <div class="relative overflow-hidden">
-        <p class="h-18 my-4 text-sm  text-center" style={{ color: "#344450" }}>
+      <div className="relative overflow-hidden">
+        <p className="h-18 my-4 text-sm  text-center" style={{ color: "#344450" }}>
           © 2024 Decathlon Sports India Pvt Ltd. All rights reserved.
         </p>
       </div>

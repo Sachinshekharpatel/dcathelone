@@ -13,16 +13,11 @@ import sportsequipimage from "./sportsequipimage.avif";
 import summarcollectionimage from "./summarcollectionimage.avif";
 import { useNavigate } from "react-router-dom";
 import FooterPage from "../footer/footer";
-import { useSelector } from "react-redux";
-import { cartReduxActions } from "../reduxstore/reduxstore";
-import { useDispatch } from "react-redux";
 const images = [imageoneSlide, imageTwoSlide, imageThreeSlide];
 const HomePage = () => {
-  const dispatch = useDispatch();
   const [transForm, setTransForm] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
-  const cartArrayItem = useSelector((state) => state.itemInDetailPage.cartTotalItemsArray);
   const navigate = useNavigate();
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,9 +26,6 @@ const HomePage = () => {
 
     return () => clearTimeout(timer);
   }, [transForm]);
-
-
-
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -87,7 +79,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a  onClick={() => navigate("/womenpage")} className="w-1/4 max-w-32">
+          <a onClick={() => navigate("/womenpage")} className="w-1/4 max-w-32">
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img

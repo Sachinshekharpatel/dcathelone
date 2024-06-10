@@ -8,9 +8,14 @@ import filterBtnImage from "./filterbtn.svg";
 import image1men from "./womenBe1.avif";
 import "./womenpage.css";
 import image3men from "./womenBe2.avif";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { cartReduxActions } from "../reduxstore/reduxstore";
 const images = [imageoneSlide, imageTwoSlide, imageThreeSlide];
 const WomenPage = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
   const [menProduct, setMenProduct] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
@@ -27,6 +32,12 @@ const WomenPage = () => {
       console.log("error menpage data not fetched");
     }
   }, []);
+
+  const singleProductPageHandler = (item) => {
+    console.log(item);
+    dispatch(cartReduxActions.viewProductDetailFunction(item));
+    navigate(`/productdetailpage`);
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -307,10 +318,10 @@ const WomenPage = () => {
           </div>
           <div className="p-2">
             <p className="font-bold text-gray-600 text-[13px] p-2">Category</p>
-            <div class="relative flex py-1 pl-0  border-2  rounded-md  w-full ">
+            <div className="relative flex py-1 pl-0  border-2  rounded-md  w-full ">
               <input
                 type="input"
-                class="focus:outline-none w-full mx-3  md:mx-3"
+                className="focus:outline-none w-full mx-3  md:mx-3"
                 placeholder="Search..."
                 value=""
               />
@@ -413,8 +424,8 @@ const WomenPage = () => {
           <div className=" grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2 mt-3 md:mt-5">
             {menProduct &&
               menProduct.map((product) => (
-                <div className=" px-2 border md:border-0 border-gray-100 p-1">
-                  <div className="bg:[#F7F8F9] relative p-3 h-[240px] md:h-[300px]">
+                <div  className=" px-2 border md:border-0 border-gray-100 p-1">
+                  <div  onClick={() => singleProductPageHandler(product)} className="bg:[#F7F8F9] relative p-3 h-[240px] md:h-[300px]">
                     <img
                       className=" absolute top-0 left-0 p-1 h-full w-full object-cover"
                       src={product.image}
@@ -478,8 +489,8 @@ const WomenPage = () => {
                       <p className="text-sm text-[13px] font-bold">
                         {product.title.split(" ").slice(0, 2).join(" ")}
                       </p>
-                      <p className=" mt-1 text-[11px] font-semibold">
-                        {product.title}
+                      <p className=" mt-2 text-[11px] font-semibold">
+                      {product.title.split(" ").slice(0, 6).join(" ")}
                       </p>
                       <p className="text-lg mt-1 mb-1 text-[11px] font-bold">
                         ₹ {product.price}

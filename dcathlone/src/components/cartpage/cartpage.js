@@ -1,16 +1,82 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import image1 from "./image5.avif";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import FooterPage from "../footer/footer";
+import { cartReduxActions } from "../reduxstore/reduxstore";
 const CartPage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [productToDelete, setProductToDelete] = useState(null);
+  const totalItemInCart = useSelector(
+    (state) => state.itemInDetailPage.cartTotalItemsArray || null
+  );
+  const totalPrice = useSelector(
+    (state) => state.itemInDetailPage.totalPrice || 0
+  );
+  const discount = totalPrice - (totalPrice / 100) * 20;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const toggleModalVisibility = (productItem) => {
+    setIsModalVisible(!isModalVisible);
+    setProductToDelete(productItem);
+  };
+  const formatDateWithSuffix = (date) => {
+    const day = date.getDate();
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+
+    const getDaySuffix = (day) => {
+      if (day > 3 && day < 21) return "th"; // catches 11th - 20th
+      switch (day % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    };
+
+    return `${day}${getDaySuffix(day)} ${month} ${year}`;
+  };
+
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 2);
+  const formattedDate = formatDateWithSuffix(currentDate);
+
+  const removeFromCartBtnHandler = (item) => {
+    axios
+      .delete(
+        `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`
+      )
+      .then(() => {
+        setIsModalVisible(!isModalVisible);
+        setProductToDelete(null);
+        dispatch(cartReduxActions.removeItemFromCartFunction(item.id));
+      });
+  };
+
   return (
     <div className="w-full" style={{ backgroundColor: "#F5F4F5" }}>
-      <button
-        onClick={() => navigate("/")}
-        class="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-      >
-        home
-      </button>
       <div className="w-full flex bg-slate-100 sticky top-0 justify-between">
         <div onClick={() => navigate("/")} className="p-4">
           <svg
@@ -30,7 +96,7 @@ const CartPage = () => {
             ></path>
           </svg>
         </div>
-        <div class="flex items-center mr-2">
+        <div className="flex items-center mr-2">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -53,6 +119,9 @@ const CartPage = () => {
           </p>
         </div>
       </div>
+
+      {/* delivery option */}
+
       <div className="block md:flex w-full mt-2 ">
         <div className="m-2 block md:w-3/5 h-auto bg-white p-4">
           <div className="flex justify-between ">
@@ -64,7 +133,7 @@ const CartPage = () => {
               </span>
             </p>
           </div>
-          <p class="text-sm text-[#687787] mb-4">
+          <p className="text-sm text-[#687787] mb-4">
             Choose home delivery or pickup from store
           </p>
           <div className="flex w-full mt-3 ">
@@ -78,7 +147,7 @@ const CartPage = () => {
                     width="44"
                     height="44"
                     stroke-width="1.5"
-                    class="text-[#3643BA] mr-1"
+                    className="text-[#3643BA] mr-1"
                     alt=""
                   >
                     <path
@@ -90,18 +159,20 @@ const CartPage = () => {
                 </div>
                 <div className="ml-2">
                   <p className="font-semibold">Home Delivery</p>
-                  <p class="text-sm text-gray-600">Get it by Monday </p>
+                  <p className="text-sm text-gray-600">Get it by Monday </p>
                 </div>
               </div>
               <p className="text-gray-400 font-medium mt-3">Delivery Address</p>
-              <p className="text-[#000000] md:text-[12px]">Rewa, Madhyapradesh, 486001</p>
+              <p className="text-[#000000] md:text-[12px]">
+                Rewa, Madhyapradesh, 486001
+              </p>
               <button className="text-white text-[12px] md:text-[10px] border-r-emerald-100 mt-4 p-3 bg-[#3643BA]">
                 LOGIN TO ADD DELIVERY ADDRESS
               </button>
             </div>
             <div className="w-1/2 ml-2 border-[2px] border-gray-300  p-4">
               <div className="flex ">
-                <div class="w-10 h-10 bg-grey-50 flex items-center justify-center">
+                <div className="w-10 h-10 bg-grey-50 flex items-center justify-center">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -119,15 +190,19 @@ const CartPage = () => {
                 </div>
                 <div className="ml-2 ">
                   <p className="font-semibold">Pickup from Store</p>
-                  <p class="text-sm text-gray-600">Pick after 3 pm on Monday</p>
+                  <p className="text-sm text-gray-600">
+                    Pick after 3 pm on Monday
+                  </p>
                 </div>
               </div>
               <p className="text-gray-400 font-medium mt-3 text-[12px] mb-1">
                 Store Address
               </p>
               <p className="text-gray-700 md:text-[14px]">
-                <span className="font-semibold text-[14px] md:text-[14px]">DSI BRIGADE ROAD :</span>Eva
-                Mall,No.60 Ashok Nagar, Victoria Layout Rewa Madhyapradesh
+                <span className="font-semibold text-[14px] md:text-[14px]">
+                  DSI BRIGADE ROAD :
+                </span>
+                Eva Mall,No.60 Ashok Nagar, Victoria Layout Rewa Madhyapradesh
                 486001
               </p>
               <div className="text-center align-middle ">
@@ -178,7 +253,8 @@ const CartPage = () => {
                     className="w-4 h-4 mt-[5px] text-center bg-[#3643BA]"
                   ></input>
                   <span className="font-semibold ml-1">
-                    1 / 1 items selected
+                    {totalItemInCart.length} / {totalItemInCart.length} items
+                    selected
                   </span>
                 </div>
                 <button
@@ -192,7 +268,7 @@ const CartPage = () => {
                     width="24"
                     height="24"
                     stroke-width="1.5"
-                    class="w-4 h-4 text-black "
+                    className="w-4 h-4 text-black "
                   >
                     <path
                       d="M17.2 4.8V3.8C17.2 3.2 16.8 2.8 16.2 2.8H7.8C7.2 2.8 6.8 3.2 6.8 3.8V4.8M9.8 9.2V18.4M14.2 9.2V18.4M19.5 6.5L17.7 20.4C17.6 20.9 17.2 21.3 16.7 21.3H7.3C6.8 21.3 6.4 20.9 6.3 20.4L4.5 6.5H19.5Z"
@@ -201,134 +277,145 @@ const CartPage = () => {
                   </svg>
                 </button>
               </div>
-              <div className="flex justify-evenly">
-                <img className="w-1/5" src={image1}></img>
-                <div className="ml-2">
-                  <p className="font-bold text-[14px]">ARTENGO</p>
-                  <p className="font-light text-[13px]">
-                    Men's Tennis Short-Sleeved T-Shirt Dry RN - Navy/White
-                  </p>
-                  <div className="flex">
-                    <button
-                      className=" flex font-bold p-2 border bg-slate-100"
-                      type="select"
-                      style={{
-                        borderRadius: "4px",
-                      }}
-                    >
-                      {" "}
-                      Size : S{" "}
-                      <svg
-                        class="fill-current mt-[9px] ml-2 w-2 stroke-[#101010] stroke-1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10.653"
-                        height="5.679"
-                        viewBox="0 0 10.653 5.679"
+              {totalItemInCart.map((product) => (
+                <div className="flex justify-evenly my-2 border-b-[1px] py-3">
+                  <img className="w-1/5" src={product.image}></img>
+                  <div className="ml-2">
+                    <p className="font-bold text-[14px]">
+                      {product.title.split(" ")[0]}
+                    </p>
+                    <p className="font-light text-[13px]">
+                      {product.title.split(" ").slice(1, 6).join(" ")}
+                    </p>
+                    <div className="flex">
+                      <button
+                        className=" flex font-bold p-2 border bg-slate-100"
+                        type="select"
+                        style={{
+                          borderRadius: "4px",
+                        }}
                       >
-                        <defs></defs>
-                        <g transform="translate(10.653) rotate(90)">
-                          <g transform="translate(0 0)">
-                            <path
-                              class="a"
-                              d="M.362,33.772a.355.355,0,0,1-.25-.606l4.972-4.972a.355.355,0,0,1,.5.5L.612,33.667A.355.355,0,0,1,.362,33.772Z"
-                              transform="translate(-0.008 -23.119)"
-                            ></path>
-                            <path
-                              class="a"
-                              d="M5.334,5.689a.355.355,0,0,1-.25-.1L.112.612a.354.354,0,1,1,.5-.5L5.584,5.084a.355.355,0,0,1-.25.606Z"
-                              transform="translate(-0.008 -0.008)"
-                            ></path>
+                        {" "}
+                        Size : {product.size}{" "}
+                        <svg
+                          className="fill-current mt-[9px] ml-2 w-2 stroke-[#101010] stroke-1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="10.653"
+                          height="5.679"
+                          viewBox="0 0 10.653 5.679"
+                        >
+                          <defs></defs>
+                          <g transform="translate(10.653) rotate(90)">
+                            <g transform="translate(0 0)">
+                              <path
+                                className="a"
+                                d="M.362,33.772a.355.355,0,0,1-.25-.606l4.972-4.972a.355.355,0,0,1,.5.5L.612,33.667A.355.355,0,0,1,.362,33.772Z"
+                                transform="translate(-0.008 -23.119)"
+                              ></path>
+                              <path
+                                className="a"
+                                d="M5.334,5.689a.355.355,0,0,1-.25-.1L.112.612a.354.354,0,1,1,.5-.5L5.584,5.084a.355.355,0,0,1-.25.606Z"
+                                transform="translate(-0.008 -0.008)"
+                              ></path>
+                            </g>
                           </g>
-                        </g>
-                      </svg>
-                    </button>
-                    <button
-                      className="flex font-bold ml-2 p-2 border bg-slate-100"
-                      type="select"
-                      style={{
-                        borderRadius: "4px",
-                      }}
-                    >
-                      {" "}
-                      Qty : 1
-                      <svg
-                        class="fill-current mt-[9px] ml-2 w-2 stroke-[#101010] stroke-1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10.653"
-                        height="5.679"
-                        viewBox="0 0 10.653 5.679"
+                        </svg>
+                      </button>
+                      <button
+                        className="flex font-bold ml-2 p-2 border bg-slate-100"
+                        type="select"
+                        style={{
+                          borderRadius: "4px",
+                        }}
                       >
-                        <defs></defs>
-                        <g transform="translate(10.653) rotate(90)">
-                          <g transform="translate(0 0)">
-                            <path
-                              class="a"
-                              d="M.362,33.772a.355.355,0,0,1-.25-.606l4.972-4.972a.355.355,0,0,1,.5.5L.612,33.667A.355.355,0,0,1,.362,33.772Z"
-                              transform="translate(-0.008 -23.119)"
-                            ></path>
-                            <path
-                              class="a"
-                              d="M5.334,5.689a.355.355,0,0,1-.25-.1L.112.612a.354.354,0,1,1,.5-.5L5.584,5.084a.355.355,0,0,1-.25.606Z"
-                              transform="translate(-0.008 -0.008)"
-                            ></path>
+                        {" "}
+                        Qty : 1
+                        <svg
+                          className="fill-current mt-[9px] ml-2 w-2 stroke-[#101010] stroke-1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="10.653"
+                          height="5.679"
+                          viewBox="0 0 10.653 5.679"
+                        >
+                          <defs></defs>
+                          <g transform="translate(10.653) rotate(90)">
+                            <g transform="translate(0 0)">
+                              <path
+                                className="a"
+                                d="M.362,33.772a.355.355,0,0,1-.25-.606l4.972-4.972a.355.355,0,0,1,.5.5L.612,33.667A.355.355,0,0,1,.362,33.772Z"
+                                transform="translate(-0.008 -23.119)"
+                              ></path>
+                              <path
+                                className="a"
+                                d="M5.334,5.689a.355.355,0,0,1-.25-.1L.112.612a.354.354,0,1,1,.5-.5L5.584,5.084a.355.355,0,0,1-.25.606Z"
+                                transform="translate(-0.008 -0.008)"
+                              ></path>
+                            </g>
                           </g>
-                        </g>
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="flex mt-3">
+                      <h1 className="text-16 font-bold mr-3">
+                        ₹ {product.price}
+                      </h1>
+                      <span className=" relative text-16 mr-2 text-[#687787]  after:absolute after:h-[1px] after:w-full after:mt-[12px] after:left-0 after:bg-black">
+                        MRP : ₹{" "}
+                        {Math.floor(product.price + (product.price * 20) / 100)}
+                        .00
+                      </span>
+                    </div>
+                    <p className="font-semibold text-[12px] mb-1 text-[#687787]">
+                      Pickup after 3 pm, {formattedDate}
+                    </p>
+                    <div className="flex">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 13 14"
+                        className=" w-4 fill-orange-400"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M9 .25H4V1.5h5V.25Zm1.92 2.197-.909.908a5.625 5.625 0 1 0 .884.884l.908-.908-.884-.884Zm-.631 7.49A4.375 4.375 0 1 1 2.71 5.564a4.375 4.375 0 0 1 7.578 4.375ZM7.125 4.625v3.75h-1.25v-3.75h1.25Z"
+                          clip-rule="evenodd"
+                        ></path>
+                        <path
+                          fill="#FF600A"
+                          d="M4 .25v-.1h-.1v.1H4Zm5 0h.1v-.1H9v.1ZM4 1.5h-.1v.1H4v-.1Zm5 0v.1h.1v-.1H9Zm1.011 1.855-.062.078.07.056.063-.063-.071-.071Zm.908-.908.07-.07-.07-.072-.07.071.07.07Zm-8.396 9.28-.071.07.07-.07Zm7.727.215.067.075-.067-.075Zm.645-7.703-.071-.071-.063.063.056.07.078-.062Zm.908-.908.07.07.071-.07-.07-.071-.071.07Zm-1.514 6.607.086.05-.086-.05Zm0-4.376.086-.05-.086.05ZM7.125 8.376v.1h.1v-.1h-.1Zm0-3.75h.1v-.1h-.1v.1Zm-1.25 3.75h-.1v.1h.1v-.1Zm0-3.75v-.1h-.1v.1h.1ZM4 .35h5v-.2H4v.2Zm.1 1.15V.25h-.2V1.5h.2ZM9 1.4H4v.2h5v-.2ZM8.9.25V1.5h.2V.25h-.2Zm1.182 3.176.908-.908-.142-.142-.908.908.142.142Zm-7.7.64a5.525 5.525 0 0 1 7.567-.633l.124-.156a5.725 5.725 0 0 0-7.84.656l.149.133Zm.211 7.59a5.525 5.525 0 0 1-.211-7.59l-.15-.133a5.725 5.725 0 0 0 .22 7.865l.141-.142Zm7.59.212a5.525 5.525 0 0 1-7.59-.212l-.141.142a5.725 5.725 0 0 0 7.865.219l-.134-.15Zm.634-7.567a5.525 5.525 0 0 1-.634 7.567l.134.149a5.725 5.725 0 0 0 .656-7.84l-.156.124Zm.915-1.041-.908.908.142.141.908-.908-.142-.141Zm-.884-.742.884.883.142-.141-.884-.884-.142.142ZM6.5 12.225a4.475 4.475 0 0 0 3.875-2.237l-.173-.1A4.275 4.275 0 0 1 6.5 12.024v.2ZM2.025 7.75A4.475 4.475 0 0 0 6.5 12.225v-.2A4.275 4.275 0 0 1 2.225 7.75h-.2ZM6.5 3.275A4.475 4.475 0 0 0 2.025 7.75h.2A4.275 4.275 0 0 1 6.5 3.475v-.2Zm3.875 2.238A4.475 4.475 0 0 0 6.5 3.275v.2c1.527 0 2.938.815 3.702 2.137l.173-.1Zm0 4.475c.8-1.385.8-3.09 0-4.475l-.173.1a4.275 4.275 0 0 1 0 4.274l.173.1Zm-3.15-1.613v-3.75h-.2v3.75h.2Zm-1.35.1h1.25v-.2h-1.25v.2Zm-.1-3.85v3.75h.2v-3.75h-.2Zm1.35-.1h-1.25v.2h1.25v-.2Z"
+                        ></path>
                       </svg>
-                    </button>
+                      <p>In {product.rating.count} cart(s) now</p>
+                    </div>
                   </div>
-                  <div class="flex mt-3">
-                    <h1 class="text-16 font-bold mr-3">₹ 999</h1>
-                    <span class=" relative text-16 mr-2 text-[#687787]  after:absolute after:h-[1px] after:w-full after:mt-[12px] after:left-0 after:bg-black">
-                      MRP : ₹ 1,299
-                    </span>
-                  </div>
-                  <p className="font-semibold text-[12px] mb-1 text-[#687787]">
-                    Pickup after 3 pm, 08th Jun 2024
-                  </p>
-                  <div className="flex">
+                  <button
+                    onClick={() => {
+                      toggleModalVisibility(product);
+                    }}
+                    type="button"
+                    className=" w-7 h-7 bg-white rounded-full cursor-pointer flex items-center justify-center border border-solid mt-2"
+                  >
                     <svg
-                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
                       fill="none"
-                      viewBox="0 0 13 14"
-                      class=" w-4 fill-orange-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      stroke-width="1.5"
+                      className="w-4 h-4 text-black "
                     >
                       <path
-                        fill-rule="evenodd"
-                        d="M9 .25H4V1.5h5V.25Zm1.92 2.197-.909.908a5.625 5.625 0 1 0 .884.884l.908-.908-.884-.884Zm-.631 7.49A4.375 4.375 0 1 1 2.71 5.564a4.375 4.375 0 0 1 7.578 4.375ZM7.125 4.625v3.75h-1.25v-3.75h1.25Z"
-                        clip-rule="evenodd"
-                      ></path>
-                      <path
-                        fill="#FF600A"
-                        d="M4 .25v-.1h-.1v.1H4Zm5 0h.1v-.1H9v.1ZM4 1.5h-.1v.1H4v-.1Zm5 0v.1h.1v-.1H9Zm1.011 1.855-.062.078.07.056.063-.063-.071-.071Zm.908-.908.07-.07-.07-.072-.07.071.07.07Zm-8.396 9.28-.071.07.07-.07Zm7.727.215.067.075-.067-.075Zm.645-7.703-.071-.071-.063.063.056.07.078-.062Zm.908-.908.07.07.071-.07-.07-.071-.071.07Zm-1.514 6.607.086.05-.086-.05Zm0-4.376.086-.05-.086.05ZM7.125 8.376v.1h.1v-.1h-.1Zm0-3.75h.1v-.1h-.1v.1Zm-1.25 3.75h-.1v.1h.1v-.1Zm0-3.75v-.1h-.1v.1h.1ZM4 .35h5v-.2H4v.2Zm.1 1.15V.25h-.2V1.5h.2ZM9 1.4H4v.2h5v-.2ZM8.9.25V1.5h.2V.25h-.2Zm1.182 3.176.908-.908-.142-.142-.908.908.142.142Zm-7.7.64a5.525 5.525 0 0 1 7.567-.633l.124-.156a5.725 5.725 0 0 0-7.84.656l.149.133Zm.211 7.59a5.525 5.525 0 0 1-.211-7.59l-.15-.133a5.725 5.725 0 0 0 .22 7.865l.141-.142Zm7.59.212a5.525 5.525 0 0 1-7.59-.212l-.141.142a5.725 5.725 0 0 0 7.865.219l-.134-.15Zm.634-7.567a5.525 5.525 0 0 1-.634 7.567l.134.149a5.725 5.725 0 0 0 .656-7.84l-.156.124Zm.915-1.041-.908.908.142.141.908-.908-.142-.141Zm-.884-.742.884.883.142-.141-.884-.884-.142.142ZM6.5 12.225a4.475 4.475 0 0 0 3.875-2.237l-.173-.1A4.275 4.275 0 0 1 6.5 12.024v.2ZM2.025 7.75A4.475 4.475 0 0 0 6.5 12.225v-.2A4.275 4.275 0 0 1 2.225 7.75h-.2ZM6.5 3.275A4.475 4.475 0 0 0 2.025 7.75h.2A4.275 4.275 0 0 1 6.5 3.475v-.2Zm3.875 2.238A4.475 4.475 0 0 0 6.5 3.275v.2c1.527 0 2.938.815 3.702 2.137l.173-.1Zm0 4.475c.8-1.385.8-3.09 0-4.475l-.173.1a4.275 4.275 0 0 1 0 4.274l.173.1Zm-3.15-1.613v-3.75h-.2v3.75h.2Zm-1.35.1h1.25v-.2h-1.25v.2Zm-.1-3.85v3.75h.2v-3.75h-.2Zm1.35-.1h-1.25v.2h1.25v-.2Z"
+                        d="M17.2 4.8V3.8C17.2 3.2 16.8 2.8 16.2 2.8H7.8C7.2 2.8 6.8 3.2 6.8 3.8V4.8M9.8 9.2V18.4M14.2 9.2V18.4M19.5 6.5L17.7 20.4C17.6 20.9 17.2 21.3 16.7 21.3H7.3C6.8 21.3 6.4 20.9 6.3 20.4L4.5 6.5H19.5Z"
+                        stroke="currentColor"
                       ></path>
                     </svg>
-                    <p>In 396 cart(s) now</p>
-                  </div>
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  className=" w-7 h-7 bg-white rounded-full cursor-pointer flex items-center justify-center border border-solid mt-2"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    stroke-width="1.5"
-                    class="w-4 h-4 text-black "
-                  >
-                    <path
-                      d="M17.2 4.8V3.8C17.2 3.2 16.8 2.8 16.2 2.8H7.8C7.2 2.8 6.8 3.2 6.8 3.8V4.8M9.8 9.2V18.4M14.2 9.2V18.4M19.5 6.5L17.7 20.4C17.6 20.9 17.2 21.3 16.7 21.3H7.3C6.8 21.3 6.4 20.9 6.3 20.4L4.5 6.5H19.5Z"
-                      stroke="currentColor"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
+              ))}
             </div>
           </div>
           <div className="md:flex justify-between border mt-2 p-2">
-            <div class="flex items-center mb-3">
+            <div className="flex items-center mb-3">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -336,7 +423,7 @@ const CartPage = () => {
                 width="24"
                 height="24"
                 stroke-width="1.5"
-                class="mr-3 img-fluid w-8"
+                className="mr-3 img-fluid w-8"
                 alt="Security"
               >
                 <path
@@ -398,11 +485,15 @@ const CartPage = () => {
           <div>
             <div className="flex justify-between mt-2">
               <p className="font-semibold text-[13px]">Total Price (Inc Gst)</p>
-              <p className="font-semibold text-[13px]">₹ 1,299</p>
+              <p className="font-semibold text-[13px]">
+                ₹ {Math.floor(totalPrice)}
+              </p>
             </div>
             <div className="flex justify-between mt-2">
               <p className="font-semibold text-[13px]">Discount</p>
-              <p className="font-semibold text-[13px]">-₹ 300</p>
+              <p className="font-semibold text-[13px]">
+                -₹ {Math.floor(totalPrice - discount)}
+              </p>
             </div>
             <div className="flex justify-between border-b-[1px] mt-2 pb-2">
               <p className="font-semibold text-[13px]">Convenience fee</p>
@@ -410,10 +501,10 @@ const CartPage = () => {
             </div>
             <div className="flex justify-between mt-2 pb-2 ">
               <p className="font-bold">Total </p>
-              <p className="font-bold">₹ 999</p>
+              <p className="font-bold">₹ {Math.ceil(discount)}</p>
             </div>
             <div className="bg-[#E1E3F5] justify-center p-3  align-middle font-bold text-[15px] flex ">
-              You save ₹ 300 in this order
+              You save ₹ {Math.floor(totalPrice - discount)} in this order
             </div>
             <div>
               <button className="text-whit mt-4 p-3 text-white bg-[#3643BA] w-full hover:bg-blue-900">
@@ -421,8 +512,8 @@ const CartPage = () => {
               </button>
             </div>
             <div className="mt-3 p-3">
-              <ul class="flex items-center p-0 m-0 md:items-stretch md:justify-between ">
-                <li class="mr-2.5 md:mb-0 py-4 px-2 h-32 text-center bg-white w-1/3 list-none border-none shadow rounded-t-lg rounded-b-lg">
+              <ul className="flex items-center p-0 m-0 md:items-stretch md:justify-between ">
+                <li className="mr-2.5 md:mb-0 py-4 px-2 h-32 text-center bg-white w-1/3 list-none border-none shadow rounded-t-lg rounded-b-lg">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -430,16 +521,16 @@ const CartPage = () => {
                     width="24"
                     height="24"
                     stroke-width="1.5"
-                    class="w-8 h-8 mx-auto mb-2"
+                    className="w-8 h-8 mx-auto mb-2"
                   >
                     <path
                       d="M21.2001 11.3C21.2001 11.5 21.2001 11.7 21.2001 12C21.2001 17.1 17.1 21.2 12 21.2C6.90005 21.2 2.80005 17.1 2.80005 12C2.80005 6.9 6.90005 2.8 12 2.8C13.9 2.8 15.6 3.3 17 4.3M7.80005 11.7L11.1 15C11.3 15.2 11.7 15.2 11.9 15L21.4 5.5"
                       stroke="currentColor"
                     ></path>
                   </svg>
-                  <p class="leading-4 text-[13px]">Easy returns</p>
+                  <p className="leading-4 text-[13px]">Easy returns</p>
                 </li>
-                <li class="mr-2.5 py-4 px-2 h-32 text-center bg-white  w-1/3 list-none border-none shadow rounded-t-lg rounded-b-lg">
+                <li className="mr-2.5 py-4 px-2 h-32 text-center bg-white  w-1/3 list-none border-none shadow rounded-t-lg rounded-b-lg">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -447,18 +538,18 @@ const CartPage = () => {
                     width="24"
                     height="24"
                     stroke-width="1.5"
-                    class="w-8 h-8 mx-auto mb-2"
+                    className="w-8 h-8 mx-auto mb-2"
                   >
                     <path
                       d="M21.2001 11.3C21.2001 11.5 21.2001 11.7 21.2001 12C21.2001 17.1 17.1 21.2 12 21.2C6.90005 21.2 2.80005 17.1 2.80005 12C2.80005 6.9 6.90005 2.8 12 2.8C13.9 2.8 15.6 3.3 17 4.3M7.80005 11.7L11.1 15C11.3 15.2 11.7 15.2 11.9 15L21.4 5.5"
                       stroke="currentColor"
                     ></path>
                   </svg>
-                  <p class="leading-4 text-[13px]">
+                  <p className="leading-4 text-[13px]">
                     Home Delivery at Your Doorstep
                   </p>
                 </li>
-                <li class="w-1/3 h-32 px-2 py-4 m-0 text-center list-none bg-white border-none rounded-t-lg rounded-b-lg shadow">
+                <li className="w-1/3 h-32 px-2 py-4 m-0 text-center list-none bg-white border-none rounded-t-lg rounded-b-lg shadow">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -466,20 +557,22 @@ const CartPage = () => {
                     width="24"
                     height="24"
                     stroke-width="1.5"
-                    class="w-8 h-8 mx-auto mb-2"
+                    className="w-8 h-8 mx-auto mb-2"
                   >
                     <path
                       d="M21.2001 11.3C21.2001 11.5 21.2001 11.7 21.2001 12C21.2001 17.1 17.1 21.2 12 21.2C6.90005 21.2 2.80005 17.1 2.80005 12C2.80005 6.9 6.90005 2.8 12 2.8C13.9 2.8 15.6 3.3 17 4.3M7.80005 11.7L11.1 15C11.3 15.2 11.7 15.2 11.9 15L21.4 5.5"
                       stroke="currentColor"
                     ></path>
                   </svg>
-                  <p class="leading-4 text-[13px]">Minimum 2 years warranty</p>
+                  <p className="leading-4 text-[13px]">
+                    Minimum 2 years warranty
+                  </p>
                 </li>
               </ul>
             </div>
-            <div class=" w-full flex bg-white rounded  text-left justify-between items-center p-2  border mt-2">
-              <div class="flex items-center  lg:text-black cursor-pointer px-1   ">
-                <span class="pr-3">
+            <div className=" w-full flex bg-white rounded  text-left justify-between items-center p-2  border mt-2">
+              <div className="flex items-center  lg:text-black cursor-pointer px-1   ">
+                <span className="pr-3">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -505,6 +598,89 @@ const CartPage = () => {
       <button className="text-white border-r-emerald-100 mt-4 p-3 bg-[#3643BA] sticky bottom-0 w-full hover:bg-blue-900">
         PROCEED TO CHECKOUT
       </button>
+      {isModalVisible ? (
+        <div className="relative bg-gray-200">
+          <div className="fixed bottom-0 md:fixed md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:w-[400px] md:h-[350px] w-full h-[300px] p-3 bg-gray-100">
+            <div className="mb-4 flex  justify-between">
+              <h2 className="text-[14px] font-bold">DELETE ITEM</h2>
+              <button
+                onClick={toggleModalVisibility}
+                className=" sticky top-0 bg-white-500 border-[2px] px-4 py-2 rounded hover:bg-white-700"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 text-black"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div className="mb-4 flex">
+              <p className="text-gray-600">
+                Are you sure you want to remove this item from cart?
+              </p>
+            </div>
+            <div className="mb-4 flex">
+              <div className="mr-3 h-100 w-[100px]">
+                <img src={productToDelete.image}></img>
+              </div>
+
+              <div>
+                <h3 className="text-gray-800 text-[16px]">
+                  {productToDelete.title.slice(0, 6)}
+                </h3>
+                <p className="text-gray-800 text-[14px]">
+                  {productToDelete.title.slice(" ")}
+                </p>
+                <div className="flex mt-1 mb-1">
+                  <p className="text-gray-600 font-semibold ">
+                    Size: {productToDelete.size || "XS"}
+                  </p>
+                  <p className="text-gray-600 font-semibold ml-2">
+                    Qty: {productToDelete.quantity || 1}
+                  </p>
+                </div>
+                <p className="text-gray-800 font-bold">
+                  ₹ {productToDelete.price}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex w-full">
+              <button
+                onClick={() => {
+                  removeFromCartBtnHandler(productToDelete);
+                }}
+                className="w-1/3 bg-white-500 border-[2px] border-black px-4 py-2 hover:bg-white-700"
+              >
+                <span className="font-bold text-[18px]"> Delete</span>
+              </button>
+
+              <button
+                onClick={toggleModalVisibility}
+                className="flex w-2/3 bg-[#3643BA] justify-center text-white px-4 py-2 rounded ml-4 hover:bg-blue-800"
+              >
+                <img
+                  className="mr-4  mt-1"
+                  src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/wishlist/wishlist-white.f17dbe9e8b8e7374.svg"
+                  alt="Cart"
+                  class="h-4"
+                ></img>
+                <span>Move To Wishlist</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      <FooterPage />
     </div>
   );
 };

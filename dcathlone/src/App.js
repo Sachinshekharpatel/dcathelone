@@ -1,4 +1,8 @@
 import "./App.css";
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { cartReduxActions } from "./components/reduxstore/reduxstore";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/Home/home";
 import ProductDetailPage from "./components/singleproductpage/productdetailpage";
@@ -7,6 +11,23 @@ import MenPage from "./components/menpage/menpage";
 import WomenPage from "./components/womenpage/womenpage";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    try {
+      axios
+        .get(
+          `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart.json`
+        )
+        .then((res) => {
+          const dataArray = Object.values(res.data);
+          dispatch(cartReduxActions.fetchFromDatabaseFunction(dataArray));
+        });
+    } catch (error) {
+      console.log("error menpage data not fetched");
+    }
+  }, []);
+
   return (
     <div>
       <Router>
