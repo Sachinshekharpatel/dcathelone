@@ -20,8 +20,12 @@ function App() {
           `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart.json`
         )
         .then((res) => {
-          const dataArray = Object.values(res.data);
-          dispatch(cartReduxActions.fetchFromDatabaseFunction(dataArray));
+          if (res.data !== null) {
+            const dataArray = Object.values(res.data);
+            dispatch(cartReduxActions.fetchFromDatabaseFunction(dataArray));
+          } else {
+            dispatch(cartReduxActions.fetchFromDatabaseFunction([]));
+          }
         });
     } catch (error) {
       console.log("error menpage data not fetched");

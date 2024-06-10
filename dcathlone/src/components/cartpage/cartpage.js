@@ -13,6 +13,7 @@ const CartPage = () => {
   const totalItemInCart = useSelector(
     (state) => state.itemInDetailPage.cartTotalItemsArray || null
   );
+
   const totalPrice = useSelector(
     (state) => state.itemInDetailPage.totalPrice || 0
   );
@@ -71,6 +72,7 @@ const CartPage = () => {
       .then(() => {
         setIsModalVisible(!isModalVisible);
         setProductToDelete(null);
+      
         dispatch(cartReduxActions.removeItemFromCartFunction(item.id));
       });
   };
