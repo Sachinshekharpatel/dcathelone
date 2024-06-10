@@ -7,6 +7,7 @@ import FooterPage from "../footer/footer";
 import filterBtnImage from "./filterbtn.svg";
 import image1men from "./womenBe1.avif";
 import "./womenpage.css";
+import axios from "axios";
 import image3men from "./womenBe2.avif";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,13 @@ const WomenPage = () => {
   const [menProduct, setMenProduct] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const filterValue = useRef("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [productToAdd, setProductToAdd] = useState(null);
+  const [selectSize, setSelectedSize] = useState(null);
+
+  const selectSizeHandlerFunction = (size) => {
+    setSelectedSize(size);
+  }
   useEffect(() => {
     try {
       fetch("https://fakestoreapi.com/products/category/women's%20clothing")
@@ -32,6 +40,7 @@ const WomenPage = () => {
       console.log("error menpage data not fetched");
     }
   }, []);
+
 
   const singleProductPageHandler = (item) => {
     console.log(item);
@@ -61,6 +70,10 @@ const WomenPage = () => {
     setMenProduct(sortedProducts);
   };
 
+  const toggleModalVisibility = (productItem) => {
+    setIsModalVisible(!isModalVisible);
+    setProductToAdd(productItem);
+  };
   const handleChange = (e) => {
     const value = e.target.value;
     filterValue.current = value;
@@ -93,6 +106,42 @@ const WomenPage = () => {
 
     handleFilterChange();
   }, [selectedValue]);
+
+  const addToCartBtnHandler = (item) => {
+    if (selectSize === null) {
+      alert("Please select size first");
+    } else {
+      try {
+        axios
+          .post(
+            `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart.json`,
+            item
+          )
+          .then((res) => {
+            const data = {
+              ...item,
+              id: res.data.name,
+              quantity: 1,
+              size: "M",
+            };
+            axios
+              .put(
+                `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${res.data.name}.json`,
+                data
+              )
+              .then(() => {
+                console.log("added to cart");
+                setIsModalVisible(!isModalVisible);
+                setProductToAdd(null);
+                setSelectedSize(null);
+                dispatch(cartReduxActions.addItemIncartFunction(data));
+              });
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <div>
@@ -496,7 +545,7 @@ const WomenPage = () => {
                         ₹ {product.price}
                       </p>
                     </div>
-                    <button className="w-full bg-[] border border-[#949494] text-white py-2">
+                    <button onClick={() => toggleModalVisibility(product)} className="w-full bg-[] border border-[#949494] text-white py-2">
                       <p className="text-sm text-[#000000] text-[10px] font-semibold">
                         ADD TO CART
                       </p>
@@ -507,6 +556,136 @@ const WomenPage = () => {
           </div>
         </div>
       </div>
+      {isModalVisible ? (
+        <div className="relative bg-gray-200">
+          <div className="fixed bottom-0 md:fixed md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:w-[400px] md:h-[350px] w-full h-[auto] p-3 bg-gray-100">
+            <button
+              onClick={() => {
+                setSelectedSize(null);
+                setIsModalVisible(!isModalVisible);
+              }}
+              className="absolute top-0 right-0 mt-2 mr-2 bg-white border-[2px] px-4 py-2 rounded hover:bg-gray-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 text-black"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+            <div className="mb-4 mt-2 flex">
+              <div className="mr-3 h-100 w-[80px]">
+                <img src={productToAdd.image}></img>
+              </div>
+
+              <div>
+                <h3 className="text-gray-800 font-bold text-[16px]">
+                  {productToAdd.title.slice(0, 6)}
+                </h3>
+                <p className="text-gray-800 font-semibold text-[14px]">
+                  {productToAdd.title.slice(" ")}
+                </p>
+                <div className="flex mt-1 mb-1"></div>
+                <p className="text-gray-800 font-bold">
+                  ₹ {productToAdd.price}
+                </p>
+              </div>
+            </div>
+            <div className="px-2">
+              <h3 className="mb-2 text-gray-800 font-bold text-[16px]">
+                COLOR OPTIONS
+              </h3>
+              <div className="flex h-[60px] mb-2 w-[100px]">
+                <img
+                  className="mr-2 border-[2px] p-1 border-blue-900"
+                  src={productToAdd.image}
+                ></img>
+                <img src={image1men}></img>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between ">
+                <h3 className="mb-2 p-3 text-gray-800 font-bold text-[16px]">
+                  SIZE OPTIONS
+                </h3>
+                <h3 className="mb-2 p-3 text-[#3643BA] font-bold text-[12px]">
+                  : SIZE CHART
+                </h3>
+              </div>
+              <div className="flex md:flex-wrap mb-2 items-start gap-3 whitespace-nowrap ">
+                <div className="hover:bg-slate-200">
+                  <div
+                    onClick={() => selectSizeHandlerFunction("S")}
+                    className="hover:bg-slate-200"
+                  >
+                    <div className="py-2 px-3 font-medium text-14 BwXiuw mb-1 text-center transition ease-in-out delay-100 border-2 hover:border-2 hover:bg-bg-purple-200 hover:border-grey-400 hover:text-black hover:cursor-pointer border-solid border-grey-400">
+                      S
+                    </div>
+                  </div>
+                </div>
+                <div
+                  onClick={() => selectSizeHandlerFunction("M")}
+                  className="hover:bg-slate-200"
+                >
+                  <div>
+                    <div className="py-2 px-3 font-medium text-14 BwXiuw mb-1 text-center transition ease-in-out delay-100 border-2 hover:border-2 hover:bg-bg-purple-200 hover:border-grey-400 hover:text-black hover:cursor-pointer border-solid border-grey-400">
+                      M
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => selectSizeHandlerFunction("L")}
+                  className="hover:bg-slate-200"
+                >
+                  <div>
+                    <div className="py-2 px-3 font-medium text-14 BwXiuw mb-1 text-center transition ease-in-out delay-100 border-2 hover:border-2 hover:bg-bg-purple-200 hover:border-grey-400 hover:text-black hover:cursor-pointer border-solid border-grey-400">
+                      L
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => selectSizeHandlerFunction("XL")}
+                  className="hover:bg-slate-200"
+                >
+                  <div>
+                    <div className="py-2 px-3 font-medium text-14 BwXiuw mb-1 text-center transition ease-in-out delay-100 border-2 hover:border-2 hover:bg-bg-purple-200 hover:border-grey-400 hover:text-black hover:cursor-pointer border-solid border-grey-400">
+                      XL
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-black-500 text-[12px] bg-blue-100 p-2 my-1 font-semibold">
+                {selectSize !== null ? `Selected Size : ${selectSize}` : "Please select  a size"}  
+              </p>
+
+              <div className="flex w-full">
+                <button
+                  onClick={() => {
+                    addToCartBtnHandler(productToAdd);
+                  }}
+                  className="w-full bg-white-500 bg-[#3643BA] px-4 py-2 hover:bg-blue-900"
+                >
+                  <span className="font-bold text-white text-[14px]">
+                    {" "}
+                    ADD TO CART
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
       <FooterPage></FooterPage>
     </div>
   );
