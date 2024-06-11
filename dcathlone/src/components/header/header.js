@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./header.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,6 +8,23 @@ const Header = () => {
   const itemInCart = useSelector(
     (state) => state.itemInDetailPage.cartTotalItemsArray
   );
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
+  const toggleDropdown = () => {
+    setDropdownVisible(!isDropdownVisible);
+  };
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     // console.log(itemInCart);
@@ -27,27 +44,56 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className=" md:flex items-center">
             <div className="flex items-center">
-              <div className="flex items-center">
-                <button type="button" className="flex items-center">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    strokeWidth="2"
+              <div className="relative inline-block text-left">
+                <div className="flex items-center">
+                  <button
+                    onClick={toggleDropdown}
+                    type="button"
+                    className="flex items-center"
                   >
-                    <path
-                      d="M2.75 12H21.25M2.75 5.75H21.25M2.75 18.25H21.25"
-                      stroke="currentColor"
-                      stroke-linecap="square"
-                    ></path>{" "}
-                  </svg>
-                </button>
-                <p className="hidden ml-4 leading-5 text-left uppercase lg:block text-16">
-                  All<br></br> Sports
-                </p>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      strokeWidth="2"
+                    >
+                      <path
+                        d="M2.75 12H21.25M2.75 5.75H21.25M2.75 18.25H21.25"
+                        stroke="currentColor"
+                        strokeLinecap="square"
+                      ></path>
+                    </svg>
+                  </button>
+                  <p className="hidden ml-4 leading-5 text-left uppercase lg:block text-16">
+                    All
+                    <br /> Sports
+                  </p>
+                </div>
+                {isDropdownVisible && (
+                  <div
+                    ref={dropdownRef}
+                    className="absolute mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10"
+                  >
+                    <div className="py-1">
+                      <a
+                        href="/menpage"
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      >
+                        Men Page
+                      </a>
+                      <a
+                        href="/womenpage"
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      >
+                        Women Page
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
+
               <div className="flex items-center ml-2">
                 <a href="/" className="ml-1 cursor-pointer  md:ml-6">
                   <svg
@@ -160,7 +206,7 @@ const Header = () => {
                   </p>
                 </div>
               </a>
-              <a className="mx-5" href="/">
+              <a className="mx-5" href="/wishlist">
                 <div className="">
                   <div className="relative">
                     <svg
