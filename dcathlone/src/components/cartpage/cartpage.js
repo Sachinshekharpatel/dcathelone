@@ -7,6 +7,7 @@ import missingItemSvg from "./missingitem.svg";
 import FooterPage from "../footer/footer";
 import { cartReduxActions } from "../reduxstore/reduxstore";
 const CartPage = () => {
+  const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [productToDelete, setProductToDelete] = useState(null);
@@ -18,7 +19,7 @@ const CartPage = () => {
   );
   const discount = totalPrice - (totalPrice / 100) * 20;
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const totalAmount = totalPrice - discount;
   const toggleModalVisibility = (productItem) => {
     setIsModalVisible(!isModalVisible);
     setProductToDelete(productItem);
@@ -64,10 +65,7 @@ const CartPage = () => {
   currentDate.setDate(currentDate.getDate() + 2);
   const formattedDate = formatDateWithSuffix(currentDate);
 
-
-  useEffect(() => {
-    
-  }, [totalItemInCart]);
+  useEffect(() => {}, [totalItemInCart]);
   const removeFromCartBtnHandler = (item) => {
     axios
       .delete(
@@ -81,42 +79,56 @@ const CartPage = () => {
       });
   };
 
-  const updateSizeHandlerProduct = (e,item) => {
-    console.log(e.target.value)
-
+  const updateSizeHandlerProduct = (e, item) => {
     const updatedItem = {
       ...item,
-      size: e.target.value
-    }
+      size: e.target.value,
+    };
     try {
-        axios.put(`https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`, updatedItem).then(()=>{
-          console.log('updated size of this product successfully')
-          dispatch(cartReduxActions.updateSizeOfProductHandler(updatedItem))
-        })
+      axios
+        .put(
+          `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`,
+          updatedItem
+        )
+        .then(() => {
+          console.log("updated size of this product successfully");
+          dispatch(cartReduxActions.updateSizeOfProductHandler(updatedItem));
+        });
     } catch (error) {
-       console.log('update size of this product failed')
+      console.log("update size of this product failed");
     }
   };
 
-  const updateQtyHandlerProduct = (e,item) => { 
-    console.log(e.target.value)
-
+  const updateQtyHandlerProduct = (e, item) => {
     const updatedItem = {
       ...item,
-      quantity: e.target.value
-    }
+      quantity: e.target.value,
+    };
     try {
-        axios.put(`https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`, updatedItem).then(()=>{
-          console.log('updated quantity of this product successfully')
-          dispatch(cartReduxActions.updateQuantityOfProductHandler(updatedItem))
-        })
+      axios
+        .put(
+          `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`,
+          updatedItem
+        )
+        .then(() => {
+          console.log("updated quantity of this product successfully");
+          dispatch(
+            cartReduxActions.updateQuantityOfProductHandler(updatedItem)
+          );
+        });
     } catch (error) {
-       console.log('update quantity of this product failed')
+      console.log("update quantity of this product failed");
     }
-  }
-  
-  
-  
+  };
+
+
+  const paymentInitiateHandler = async () => {
+    
+    console.log("inside paymentInitiateHandler");
+    setLoader(true);
+    
+  };
+
   return (
     <div className="w-full" style={{ backgroundColor: "#F5F4F5" }}>
       <div className="w-full flex bg-slate-100 sticky top-0 justify-between">
@@ -344,12 +356,20 @@ const CartPage = () => {
                           >
                             {" "}
                             Size :
-                            <select onChange={(e) => updateSizeHandlerProduct(e,product)} value={product.size} className="ml-1 mt-[2px] bg-gray-100">
-                              <option value={product.size}>{product.size}</option>
+                            <select
+                              onChange={(e) =>
+                                updateSizeHandlerProduct(e, product)
+                              }
+                              value={product.size}
+                              className="ml-1 mt-[2px] bg-gray-100"
+                            >
+                              <option value={product.size}>
+                                {product.size}
+                              </option>
                               <option value={"s"}>S</option>
-                              <option value={'M'}>M</option>
-                              <option value={'L'}>L</option>
-                              <option value={'XL'}>XL</option>
+                              <option value={"M"}>M</option>
+                              <option value={"L"}>L</option>
+                              <option value={"XL"}>XL</option>
                             </select>
                           </div>
                           <div
@@ -361,7 +381,13 @@ const CartPage = () => {
                           >
                             {" "}
                             Qty :
-                            <select onChange={(e) => updateQtyHandlerProduct(e,product)} value={product.quantity} className="ml-1 mt-[2px] bg-gray-100">
+                            <select
+                              onChange={(e) =>
+                                updateQtyHandlerProduct(e, product)
+                              }
+                              value={product.quantity}
+                              className="ml-1 mt-[2px] bg-gray-100"
+                            >
                               <option value={1}>1</option>
                               <option value={2}>2</option>
                               <option value={3}>3</option>
@@ -526,9 +552,17 @@ const CartPage = () => {
                   You save ₹ {Math.floor(totalPrice - discount)} in this order
                 </div>
                 <div>
-                  <button className="text-whit mt-4 p-3 text-white bg-[#3643BA] w-full hover:bg-blue-900">
+                  <button
+                    onClick={() => paymentInitiateHandler()}
+                    className="text-whit mt-4 p-3 text-white bg-[#3643BA] w-full hover:bg-blue-900"
+                  >
                     PROCEED TO CHECKOUT
                   </button>
+                  {loader && (
+                    <div className="loader">
+                      <span> Payment Initialize Please wait ....</span>
+                    </div>
+                  )}
                 </div>
                 <div className="mt-3 p-3">
                   <ul className="flex items-center p-0 m-0 md:items-stretch md:justify-between ">
@@ -614,7 +648,10 @@ const CartPage = () => {
             </div>
           </div>
 
-          <button className="text-white border-r-emerald-100 mt-4 p-3 bg-[#3643BA] sticky bottom-0 w-full hover:bg-blue-900">
+          <button
+            onClick={() => paymentInitiateHandler()}
+            className="text-white border-r-emerald-100 mt-4 p-3 bg-[#3643BA] sticky bottom-0 w-full hover:bg-blue-900"
+          >
             PROCEED TO CHECKOUT
           </button>
           {isModalVisible ? (
