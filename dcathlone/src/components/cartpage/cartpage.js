@@ -13,7 +13,6 @@ const CartPage = () => {
   const totalItemInCart = useSelector(
     (state) => state.itemInDetailPage.cartTotalItemsArray || null
   );
-
   const totalPrice = useSelector(
     (state) => state.itemInDetailPage.totalPrice || 0
   );
@@ -24,6 +23,7 @@ const CartPage = () => {
     setIsModalVisible(!isModalVisible);
     setProductToDelete(productItem);
   };
+
   const formatDateWithSuffix = (date) => {
     const day = date.getDate();
     const monthNames = [
@@ -64,6 +64,10 @@ const CartPage = () => {
   currentDate.setDate(currentDate.getDate() + 2);
   const formattedDate = formatDateWithSuffix(currentDate);
 
+
+  useEffect(() => {
+    
+  }, [totalItemInCart]);
   const removeFromCartBtnHandler = (item) => {
     axios
       .delete(
@@ -77,6 +81,42 @@ const CartPage = () => {
       });
   };
 
+  const updateSizeHandlerProduct = (e,item) => {
+    console.log(e.target.value)
+
+    const updatedItem = {
+      ...item,
+      size: e.target.value
+    }
+    try {
+        axios.put(`https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`, updatedItem).then(()=>{
+          console.log('updated size of this product successfully')
+          dispatch(cartReduxActions.updateSizeOfProductHandler(updatedItem))
+        })
+    } catch (error) {
+       console.log('update size of this product failed')
+    }
+  };
+
+  const updateQtyHandlerProduct = (e,item) => { 
+    console.log(e.target.value)
+
+    const updatedItem = {
+      ...item,
+      quantity: e.target.value
+    }
+    try {
+        axios.put(`https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`, updatedItem).then(()=>{
+          console.log('updated quantity of this product successfully')
+          dispatch(cartReduxActions.updateQuantityOfProductHandler(updatedItem))
+        })
+    } catch (error) {
+       console.log('update quantity of this product failed')
+    }
+  }
+  
+  
+  
   return (
     <div className="w-full" style={{ backgroundColor: "#F5F4F5" }}>
       <div className="w-full flex bg-slate-100 sticky top-0 justify-between">
@@ -295,7 +335,7 @@ const CartPage = () => {
                           {product.title.split(" ").slice(1, 6).join(" ")}
                         </p>
                         <div className="flex">
-                          <button
+                          <div
                             className=" flex font-bold p-2 border bg-slate-100"
                             type="select"
                             style={{
@@ -303,32 +343,16 @@ const CartPage = () => {
                             }}
                           >
                             {" "}
-                            Size : {product.size}{" "}
-                            <svg
-                              className="fill-current mt-[9px] ml-2 w-2 stroke-[#101010] stroke-1"
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="10.653"
-                              height="5.679"
-                              viewBox="0 0 10.653 5.679"
-                            >
-                              <defs></defs>
-                              <g transform="translate(10.653) rotate(90)">
-                                <g transform="translate(0 0)">
-                                  <path
-                                    className="a"
-                                    d="M.362,33.772a.355.355,0,0,1-.25-.606l4.972-4.972a.355.355,0,0,1,.5.5L.612,33.667A.355.355,0,0,1,.362,33.772Z"
-                                    transform="translate(-0.008 -23.119)"
-                                  ></path>
-                                  <path
-                                    className="a"
-                                    d="M5.334,5.689a.355.355,0,0,1-.25-.1L.112.612a.354.354,0,1,1,.5-.5L5.584,5.084a.355.355,0,0,1-.25.606Z"
-                                    transform="translate(-0.008 -0.008)"
-                                  ></path>
-                                </g>
-                              </g>
-                            </svg>
-                          </button>
-                          <button
+                            Size :
+                            <select onChange={(e) => updateSizeHandlerProduct(e,product)} value={product.size} className="ml-1 mt-[2px] bg-gray-100">
+                              <option value={product.size}>{product.size}</option>
+                              <option value={"s"}>S</option>
+                              <option value={'M'}>M</option>
+                              <option value={'L'}>L</option>
+                              <option value={'XL'}>XL</option>
+                            </select>
+                          </div>
+                          <div
                             className="flex font-bold ml-2 p-2 border bg-slate-100"
                             type="select"
                             style={{
@@ -336,31 +360,15 @@ const CartPage = () => {
                             }}
                           >
                             {" "}
-                            Qty : 1
-                            <svg
-                              className="fill-current mt-[9px] ml-2 w-2 stroke-[#101010] stroke-1"
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="10.653"
-                              height="5.679"
-                              viewBox="0 0 10.653 5.679"
-                            >
-                              <defs></defs>
-                              <g transform="translate(10.653) rotate(90)">
-                                <g transform="translate(0 0)">
-                                  <path
-                                    className="a"
-                                    d="M.362,33.772a.355.355,0,0,1-.25-.606l4.972-4.972a.355.355,0,0,1,.5.5L.612,33.667A.355.355,0,0,1,.362,33.772Z"
-                                    transform="translate(-0.008 -23.119)"
-                                  ></path>
-                                  <path
-                                    className="a"
-                                    d="M5.334,5.689a.355.355,0,0,1-.25-.1L.112.612a.354.354,0,1,1,.5-.5L5.584,5.084a.355.355,0,0,1-.25.606Z"
-                                    transform="translate(-0.008 -0.008)"
-                                  ></path>
-                                </g>
-                              </g>
-                            </svg>
-                          </button>
+                            Qty :
+                            <select onChange={(e) => updateQtyHandlerProduct(e,product)} value={product.quantity} className="ml-1 mt-[2px] bg-gray-100">
+                              <option value={1}>1</option>
+                              <option value={2}>2</option>
+                              <option value={3}>3</option>
+                              <option value={4}>4</option>
+                              <option value={5}>5</option>
+                            </select>
+                          </div>
                         </div>
                         <div className="flex mt-3">
                           <h1 className="text-16 font-bold mr-3">
@@ -680,12 +688,12 @@ const CartPage = () => {
                     className="flex w-2/3 bg-[#3643BA] justify-center text-white px-4 py-2 rounded ml-4 hover:bg-blue-800"
                   >
                     <img
-                      className="mr-4  mt-1"
+                      className="mt-1"
                       src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/wishlist/wishlist-white.f17dbe9e8b8e7374.svg"
                       alt="Cart"
                       class="h-4"
                     ></img>
-                    <span>Move To Wishlist</span>
+                    <span className="ml-2">Move To Wishlist</span>
                   </button>
                 </div>
               </div>

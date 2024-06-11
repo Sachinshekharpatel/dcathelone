@@ -1,4 +1,3 @@
-import React from "react";
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
@@ -18,24 +17,61 @@ const cartSlice = createSlice({
     addItemIncartFunction: (state, action) => {
       console.log(action.payload);
       state.cartTotalItemsArray.push(action.payload);
-      state.totalPrice = state.cartTotalItemsArray
-        .map((item) => item.price)
-        .reduce((a, b) => a + b, 0);
+      if (state.cartTotalItemsArray.length > 0) {
+        state.totalPrice = state.cartTotalItemsArray.reduce((acc, item) => {
+          return acc + item.price * item.quantity;
+        }, 0);
+      }
     },
     fetchFromDatabaseFunction: (state, action) => {
       state.cartTotalItemsArray = action.payload;
-      state.totalPrice = state.cartTotalItemsArray
-        .map((item) => item.price)
-        .reduce((a, b) => a + b, 0);
+      if (state.cartTotalItemsArray.length > 0) {
+        state.totalPrice = state.cartTotalItemsArray.reduce((acc, item) => {
+          return acc + item.price * item.quantity;
+        }, 0);
+      }
     },
 
     removeItemFromCartFunction: (state, action) => {
       state.cartTotalItemsArray = state.cartTotalItemsArray.filter(
         (item) => item.id !== action.payload
       );
-      state.totalPrice = state.cartTotalItemsArray
-        .map((item) => item.price)
-        .reduce((a, b) => a + b, 0);
+      if (state.cartTotalItemsArray.length > 0) {
+        state.totalPrice = state.cartTotalItemsArray.reduce((acc, item) => {
+          return acc + item.price * item.quantity;
+        }, 0);
+      }
+    },
+
+    updateSizeOfProductHandler: (state, action) => {
+      state.cartTotalItemsArray = state.cartTotalItemsArray.map((item) => {
+        if (item.id === action.payload.id) {
+          return {
+            ...item,
+            size: action.payload.size,
+          };
+        }
+        return item;
+      });
+      state.totalPrice = state.cartTotalItemsArray.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+      }, 0);
+    },
+
+    updateQuantityOfProductHandler: (state, action) => {
+      state.cartTotalItemsArray = state.cartTotalItemsArray.map((item) => {
+        if (item.id === action.payload.id) {
+          return {
+            ...item,
+            quantity: action.payload.quantity,
+          };
+        }
+
+        return item;
+      });
+      state.totalPrice = state.cartTotalItemsArray.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+      }, 0);
     },
   },
 });
