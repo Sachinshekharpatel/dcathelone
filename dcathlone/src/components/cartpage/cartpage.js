@@ -132,7 +132,7 @@ const CartPage = () => {
   return (
     <div className="w-full" style={{ backgroundColor: "#F5F4F5" }}>
       <div className="w-full flex bg-slate-100 sticky top-0 justify-between">
-        <div onClick={() => navigate("/")} className="p-4">
+        <div onClick={() => navigate("/")} className="p-4 cursor-pointer">
           <svg
             viewBox="0 0 188 28"
             fill="none"
@@ -191,7 +191,7 @@ const CartPage = () => {
                 Choose home delivery or pickup from store
               </p>
               <div className="flex w-full mt-3 ">
-                <div className="w-1/2 border-[2px] border-dotted bg-[#E1E3F5] border-blue-900  p-4">
+              <div className="cursor-pointer w-1/2 border-[2px] border-dotted bg-[#E1E3F5] border-blue-900  p-4">
                   <div className="flex ">
                     <div className="bg-gray-100 p-2">
                       <svg
@@ -226,7 +226,7 @@ const CartPage = () => {
                     LOGIN TO ADD DELIVERY ADDRESS
                   </button>
                 </div>
-                <div className="w-1/2 ml-2 border-[2px] border-gray-300  p-4">
+                <div className=" cursor-pointer w-1/2 ml-2 border-[2px] border-gray-300  p-4">
                   <div className="flex ">
                     <div className="w-10 h-10 bg-grey-50 flex items-center justify-center">
                       <svg
@@ -348,7 +348,7 @@ const CartPage = () => {
                         </p>
                         <div className="flex">
                           <div
-                            className=" flex font-bold p-2 border bg-slate-100"
+                            className="cursor-pointer flex font-bold p-2 border bg-slate-100"
                             type="select"
                             style={{
                               borderRadius: "4px",
@@ -373,7 +373,7 @@ const CartPage = () => {
                             </select>
                           </div>
                           <div
-                            className="flex font-bold ml-2 p-2 border bg-slate-100"
+                            className="cursor-pointer flex font-bold ml-2 p-2 border bg-slate-100"
                             type="select"
                             style={{
                               borderRadius: "4px",
@@ -486,7 +486,7 @@ const CartPage = () => {
                 <div className="flex justify-between items-center">
                   <div
                     style={{ borderRadius: "5px" }}
-                    className="flex items-center mr-[2px]  text-[13px] md:text-[10px] text-gray-900 justify-center border px-4 py-2"
+                    className="cursor-pointer flex items-center mr-[2px]  text-[13px] md:text-[10px] text-gray-900 justify-center border px-4 py-2"
                   >
                     <img
                       className=" w-2 mr-1 "
@@ -497,7 +497,7 @@ const CartPage = () => {
                   </div>
                   <div
                     style={{ borderRadius: "5px" }}
-                    className="flex items-center mr-[2px] text-[13px] md:text-[10px] text-gray-900 justify-center border px-4 py-2"
+                    className="cursor-pointer flex items-center mr-[2px] text-[13px] md:text-[10px] text-gray-900 justify-center border px-4 py-2"
                   >
                     <img
                       className="  w-4  mr-1 "
@@ -508,7 +508,7 @@ const CartPage = () => {
                   </div>
                   <div
                     style={{ borderRadius: "5px" }}
-                    className="flex items-center text-[13px] md:text-[10px] text-gray-900   justify-center border px-[50px] py-2"
+                    className="cursor-pointer flex items-center text-[13px] md:text-[10px] text-gray-900   justify-center border px-[50px] py-2"
                   >
                     <img
                       className=" w-4 h-4 mr-1 "

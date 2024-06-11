@@ -202,7 +202,7 @@ const HomePage = () => {
           </a>
         </div>
       </div>
-      <div className="relative w-full overflow-hidden">
+      <div className="cursor-pointer relative w-full overflow-hidden">
         <div ref={slideRef} className="flex w-full m">
           {images.map((image, index) => (
             <img

@@ -69,18 +69,22 @@ const FooterPage = () => {
           </div>
           <div className="flex py-6 px-2 justify-between mt-5 pb-5 border-b-[1px] border-[#F5F4F5]">
             <div className="">
-              <p className="mb-1  text-[#34450] font-bold ">Support</p>
+              <p className="cursor-pointer mb-1  text-[#34450] font-bold ">
+                Support
+              </p>
               <p className=" mb-1 text-sm text-[#344450]">
                 Contact our Stores{" "}
               </p>
               <p className="mb-1 text-sm text-[#344450]">Delivery</p>
             </div>
             <div>
-              <p className="mb-1  text-[#34450] font-bold ">OUR SERVICES</p>
+              <p className="mb-1 cursor-pointer  text-[#34450] font-bold ">
+                OUR SERVICES
+              </p>
               <p className="mb-1  text-sm text-[#344450]">
                 Contact our Stores{" "}
               </p>
-              <p className="mb-1 text-sm text-[#344450]">Delivery</p>
+              <p className=" mb-1 text-sm text-[#344450]">Delivery</p>
               <p className="mb-1  text-[#344450] text-sm">
                 Contact our Stores{" "}
               </p>
@@ -88,14 +92,18 @@ const FooterPage = () => {
               <p className="mb-1 text-[#344450] text-sm">Delivery</p>
             </div>
             <div>
-              <p className="mb-1  text-[#34450] font-bold ">ABOUT US</p>
+              <p className="mb-1 cursor-pointer  text-[#34450] font-bold ">
+                ABOUT US
+              </p>
               <p className="mb-1 text-[#344450] text-sm">Contact our Stores </p>
               <p className="mb-1 text-[#344450] text-sm">Delivery</p>
               <p className="mb-1 text-[#344450] text-sm">Contact our Stores </p>
               <p className="mb-1 text-[#344450] text-sm">Delivery</p>
             </div>
             <div>
-              <p className="mb-1  text-[#34450] font-bold ">LEGAL</p>
+              <p className="mb-1 cursor-pointer text-[#34450] font-bold ">
+                LEGAL
+              </p>
               <p className="mb-1 text-[#344450] text-sm">Contact our Stores </p>
               <p className="mb-1 text-[#344450] text-sm">Delivery</p>
               <p className=" mb-1 text-[#344450] text-sm">
@@ -137,43 +145,44 @@ const FooterPage = () => {
               </div>
             </div>
             <div className="md:mr-3 px-1 mb-2 text-center justify-between flex pl-2">
-            <img
-                className="mr-1 mt-1 md:w-1/4"
+              <img
+                className="cursor-pointer mr-1 mt-1 md:w-1/4"
                 src={debitcard}
                 alt="Debit"
                 loading="lazy"
               />
               <img
-                className="mr-1 mt-1 md:w-1/4"
+                className="cursor-pointer mr-1 mt-1 md:w-1/4"
                 src={creditcardimage}
                 alt="Credit"
                 loading="lazy"
               />
               <img
-                className="mr-1 mt-1 md:w-1/4"
+                className="cursor-pointer mr-1 mt-1 md:w-1/4"
                 src={upiImage}
                 alt="UPI"
                 loading="lazy"
               />
               <img
-                className=" mt-1 mr-1 md:w-1/4"
+                className="cursor-pointer mt-1 mr-1 md:w-1/4"
                 src={netbanking}
                 alt="Net Banking"
                 loading="lazy"
               />
             </div>
             <div className="border-l-[2px] border-[#F5F4F5] px-2 flex md:justify-center items-center md:ml-1 mr-1 ">
-              <p className="align-middle  text-[#344450] text-sm">
-                Site Map
-              </p>
+              <p className="align-middle  text-[#344450] text-sm">Site Map</p>
             </div>
             <div className="flex md:justify-center items-center p-1 border-[#F5F4F5] border-l-[2px]">
               <p className="ml-2 text-[#344450] text-[12px] mr-1">
                 DECATHLON is present in
               </p>
-              <div className=" border-[1px] p-1 border-[#4E5D6B] " style={{ borderRadius: "4px" }}>
+              <div
+                className=" border-[1px] p-1 border-[#4E5D6B] "
+                style={{ borderRadius: "4px" }}
+              >
                 <label>
-                  <select className="text-[12px]">
+                  <select className="text-[12px] bg-[#F5F4F5]">
                     <option value="">3 Countries</option>
                     <option value="India">India</option>
                     <option value="Belgium">Belgium</option>
@@ -196,7 +205,7 @@ const FooterPage = () => {
               EXPERIENCE DECATHLON APP ON MOBILE
             </p>
             <div className="flex mt-4">
-              <a className="no-underline">
+              <a className="cursor-pointer no-underline">
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/google-play-badge.f6fa1f85049d9cdc.webp"
                   alt="Gplay"
@@ -227,28 +236,44 @@ const FooterPage = () => {
           >
             <p className="text-14 font-bold">FOLLOW US</p>
             <div className="flex justify-between mt-3">
-              <a className="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
+              <a
+                href="https://www.facebook.com/Heroftshekhar/"
+                target="_blank"
+                className="cursor-pointer w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center"
+              >
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/facebook.eb87d42a519970a4.svg"
                   alt="facebook"
                   className="inline-block align-middle"
                 />
               </a>
-              <a className="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
+              <a
+                href="https://www.twitter.com/sachin._shekhar/"
+                target="_blank"
+                className="cursor-pointer w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center"
+              >
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/twitter.b197a84f1fb0535d.svg"
                   alt="X"
                   className="inline-block align-middle"
                 />
               </a>
-              <a className="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
+              <a
+                href="https://www.youtube.com/sachin._shekhar/"
+                target="_blank"
+                className="cursor-pointer w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center"
+              >
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/youtube.c67fd6223e18d3f1.svg"
                   alt="Youtube"
                   className="inline-block align-middle"
                 />
               </a>
-              <a className="w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center">
+              <a
+                href="https://www.instagram.com/sachin._shekhar/"
+                target="_blank"
+                className="cursor-pointer w-8 h-8 mr-3 rounded bg-gray-700 leading-loose text-center"
+              >
                 <img
                   src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/instagram.af05cd998024d3c8.svg"
                   alt="Instagram"
@@ -280,7 +305,10 @@ const FooterPage = () => {
         </div>
       </div>
       <div className="relative overflow-hidden">
-        <p className="h-18 my-4 text-sm  text-center" style={{ color: "#344450" }}>
+        <p
+          className="cursor-pointer h-18 my-4 text-sm  text-center"
+          style={{ color: "#344450" }}
+        >
           © 2024 Decathlon Sports India Pvt Ltd. All rights reserved.
         </p>
       </div>

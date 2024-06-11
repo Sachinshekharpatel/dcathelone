@@ -66,7 +66,7 @@ const Header = () => {
                 </a>
               </div>
             </div>
-            <div className="relative flex-1 w-full md:w-[300px] md:ml-5">
+            <div className="cursor-pointer relative flex-1 w-full md:w-[300px] md:ml-5">
               <input
                 type="text"
                 placeholder="Search"
@@ -182,7 +182,7 @@ const Header = () => {
               </div>
             </a>
             <div className="mx-5" onClick={() => navigate("/cartpage")}>
-              <div className="flex relative">
+              <div className="cursor-pointer flex relative">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"

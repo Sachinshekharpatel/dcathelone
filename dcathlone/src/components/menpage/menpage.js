@@ -150,13 +150,13 @@ const MenPage = () => {
     <div>
       <Header></Header>
       <div className="hidden md:block relative w-full mt-1 overflow-hidden">
-        <div ref={slideRef} className="flex w-full h-[200px] bg-[#F7F8FA]">
+        <div ref={slideRef} className="cursor-pointer flex w-full h-[200px] bg-[#F7F8FA]">
           {images.map((image, index) => (
             <img
               key={index}
               src={image}
               alt={`Slide ${index}`}
-              className="w-full h-full flex-shrink-0 object-contain"
+              className="bg-[#F7F8FA] w-full h-full flex-shrink-0 object-contain"
             />
           ))}
         </div>
@@ -479,7 +479,7 @@ const MenPage = () => {
                 <div className=" px-2 border md:border-0 border-gray-100 p-1">
                   <div
                     onClick={() => singleProductPageHandler(product)}
-                    className="bg:[#F7F8F9] relative p-3 h-[240px] md:h-[300px]"
+                    className="cursor-pointer bg:[#F7F8F9] relative p-3 h-[240px] md:h-[300px]"
                   >
                     <img
                       className=" absolute top-0 left-0 p-1 h-full w-full object-cover"
@@ -529,15 +529,15 @@ const MenPage = () => {
                   </div>
 
                   <div className="bg-[#F7F8F9] m-2 grid grid-cols-3 md:grid-cols-5 gap-[1px] ">
-                    <img className="hidden md:block"></img>
+                    <img className=" hidden md:block"></img>
                     <img className="hidden md:block"></img>
 
-                    <img src={image1men}></img>
+                    <img className="cursor-pointer" src={image1men}></img>
                     <img
-                      className="w-full h-[89px] border border-[#3643BA] md:h-[60px] bg-[#F5F4F5] p-1"
+                      className="cursor-pointer w-full h-[89px] border border-[#3643BA] md:h-[60px] bg-[#F5F4F5] p-1"
                       src={product.image}
                     ></img>
-                    <img src={image3men}></img>
+                    <img className="cursor-pointer" src={image3men}></img>
                   </div>
                   <div className="mt-2 p-2">
                     <div>
@@ -591,7 +591,7 @@ const MenPage = () => {
               </svg>
             </button>
             <div className="mb-4 mt-2 flex">
-              <div className="mr-3 h-100 w-[80px]">
+              <div className="cursor-pointer mr-3 h-100 w-[80px]">
                 <img src={productToAdd.image}></img>
               </div>
 
@@ -614,10 +614,10 @@ const MenPage = () => {
               </h3>
               <div className="flex h-[60px] mb-2 w-[100px]">
                 <img
-                  className="mr-2 border-[2px] p-1 border-blue-900"
+                  className="cursor-pointer mr-2 border-[2px] p-1 border-blue-900"
                   src={productToAdd.image}
                 ></img>
-                <img src={image1men}></img>
+                <img className="cursor-pointer" src={image1men}></img>
               </div>
             </div>
             <div>
@@ -625,7 +625,7 @@ const MenPage = () => {
                 <h3 className="mb-2 p-3 text-gray-800 font-bold text-[16px]">
                   SIZE OPTIONS
                 </h3>
-                <h3 className="mb-2 p-3 text-[#3643BA] font-bold text-[12px]">
+                <h3 className="cursor-pointer mb-2 p-3 text-[#3643BA] font-bold text-[12px]">
                   : SIZE CHART
                 </h3>
               </div>
