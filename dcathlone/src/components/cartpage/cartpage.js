@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./cartpage.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import missingItemSvg from "./missingitem.svg";
 import FooterPage from "../footer/footer";
+import greensvgimage from "./greensvg.png";
 import { cartReduxActions } from "../reduxstore/reduxstore";
 const CartPage = () => {
+  const [paymentSuccess, setPaymentSuccess] = useState(null);
   const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -121,12 +124,108 @@ const CartPage = () => {
     }
   };
 
-
+  const receipt_id = "qwsaq1";
   const paymentInitiateHandler = async () => {
-    
     console.log("inside paymentInitiateHandler");
     setLoader(true);
-    
+    try {
+      const response = await fetch(
+        "https://carrental2024backend.onrender.com/order",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            amount: Math.ceil(discount) * 100,
+            currency: "INR",
+            receipt: receipt_id,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to create Razorpay order");
+      }
+
+      const order = await response.json();
+      setLoader(false);
+      console.log(order);
+
+      const options = {
+        key: "rzp_test_WJBeJ4wZWRWu3i",
+        amount: order.amount,
+        currency: "INR",
+        name: "Dacthelone Shekhar",
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: order.id,
+        handler: async function (response) {
+          const body = { ...response };
+
+          const validateResponse = await fetch(
+            "https://carrental2024backend.onrender.com/order/validate",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body),
+            }
+          );
+
+          const jsonRes = await validateResponse.json();
+
+          // console.log(jsonRes);
+          // console.log(totalItemInCart);
+          try {
+            setPaymentSuccess(jsonRes.orderId);
+
+            // delete cart
+            for (let i = 0; i < totalItemInCart.length; i++) {
+              setTimeout(() => {
+                navigate("/");
+              }, 3000);
+              axios
+                .delete(
+                  `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${totalItemInCart[i].id}.json`
+                )
+                .then(() => {
+                  dispatch(
+                    cartReduxActions.removeItemFromCartFunction(
+                      totalItemInCart[i].id
+                    )
+                  );
+                });
+            }
+          } catch (error) {
+            console.log("Error in payment validation:", error);
+          }
+        },
+        prefill: {
+          name: "Sachin Shekhar",
+          email: "heroft7024@gmail.com",
+          contact: "6263877374",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+
+      rzp1.on("payment.failed", function (response) {
+        console.error(response.error);
+        alert(`Payment Failed: ${response.error.description}`);
+      });
+
+      rzp1.open();
+    } catch (error) {
+      console.error("Error initializing Razorpay payment:", error);
+    }
   };
 
   return (
@@ -191,7 +290,7 @@ const CartPage = () => {
                 Choose home delivery or pickup from store
               </p>
               <div className="flex w-full mt-3 ">
-              <div className="cursor-pointer w-1/2 border-[2px] border-dotted bg-[#E1E3F5] border-blue-900  p-4">
+                <div className="cursor-pointer w-1/2 border-[2px] border-dotted bg-[#E1E3F5] border-blue-900  p-4">
                   <div className="flex ">
                     <div className="bg-gray-100 p-2">
                       <svg
@@ -558,11 +657,20 @@ const CartPage = () => {
                   >
                     PROCEED TO CHECKOUT
                   </button>
+                  {/* payment loader */}
                   {loader && (
-                    <div className="loader">
-                      <span> Payment Initialize Please wait ....</span>
+                    <div className="flex my-3">
+                      Payment Initialize Please wait
+                      <section style={{ height: "35px",width:"35px" }} className="ml-5 dots-container">
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                      </section>
                     </div>
                   )}
+                  {/* payment loader */}
                 </div>
                 <div className="mt-3 p-3">
                   <ul className="flex items-center p-0 m-0 md:items-stretch md:justify-between ">
@@ -650,10 +758,18 @@ const CartPage = () => {
 
           <button
             onClick={() => paymentInitiateHandler()}
-            className="text-white border-r-emerald-100 mt-4 p-3 bg-[#3643BA] sticky bottom-0 w-full hover:bg-blue-900"
+            className="md:hidden text-white border-r-emerald-100 mt-4 p-3 bg-[#3643BA] sticky bottom-0 w-full hover:bg-blue-900"
           >
             PROCEED TO CHECKOUT
           </button>
+          {paymentSuccess !== null && (
+            <>
+              <button className="fixed top-[150px]  flex left-1/2 transform -translate-x-1/2 text-white bg-black border mt-4 px-4 py-3 rounded">
+                <img src={greensvgimage} className="mt-[3px] mr-2 w-5 h-5" />
+                <span>{`Payment Successful. Order ID: ${paymentSuccess}`}</span>
+              </button>
+            </>
+          )}
           {isModalVisible ? (
             <div className="relative bg-gray-200">
               <div className="fixed bottom-0 md:fixed md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:w-[400px] md:h-[350px] w-full h-[300px] p-3 bg-gray-100">
