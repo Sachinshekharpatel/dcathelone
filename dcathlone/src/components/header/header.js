@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const [transForm, setTransForm] = useState(false);
   const navigate = useNavigate();
-  const itemInCart = useSelector((state) => state.itemInDetailPage.cartTotalItemsArray);
-   
+  const itemInCart = useSelector(
+    (state) => state.itemInDetailPage.cartTotalItemsArray
+  );
+
   useEffect(() => {
     // console.log(itemInCart);
   }, [itemInCart]);
@@ -98,69 +100,26 @@ const Header = () => {
             </div>
           </div>
           <div className="md:flex items-center">
-          <div className="flex items-center ">
-            <p className=" text-center  text-12 lg:text-14 whitespace-nowrap text-grey-900 font-bold text-[12px] mr-1">
-              Delivery Location
-            </p>
+            <div className="flex items-center ">
+              <p className=" text-center  text-12 lg:text-14 whitespace-nowrap text-grey-900 font-bold text-[12px] mr-1">
+                Delivery Location
+              </p>
 
-            <div className="flex justify-center">
-              <span className="text-[14px] font-bold text-[#3643BA]">
-                486001
-              </span>
-              <button
-                type="button"
-                className="ml-1 text-[12px] text-[#3643BA] underline uppercase border-none  outline-none"
-              >
-                Change
-              </button>
+              <div className="flex justify-center">
+                <span className="text-[14px] font-bold text-[#3643BA]">
+                  486001
+                </span>
+                <button
+                  type="button"
+                  className="ml-1 text-[12px] text-[#3643BA] underline uppercase border-none  outline-none"
+                >
+                  Change
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center space-x-0.5">
-            <a className="mx-1" href="/">
-              <div className="relative flex flex-col group">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  stroke-width="1.5"
-                  className="mx-auto"
-                >
-                  <path
-                    d="M5 22C5 16.1 8.1 12.3 12 12.2C15.9 12.1 19 16 19 21.9M12 2.79999C10.1 2.79999 8.5 4.39999 8.5 6.29999C8.5 8.19999 10.1 9.79999 12 9.79999C13.9 9.79999 15.5 8.19999 15.5 6.29999C15.5 4.39999 13.9 2.79999 12 2.79999Z"
-                    stroke="currentColor"
-                  ></path>
-                </svg>
-                <p className="text-center font-semibold text-6 lg:text-8">
-                  SignIn
-                </p>
-              </div>
-            </a>
-            <a href="/store" className="mx-5">
-              <div className="relative flex flex-col group">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  stroke-width="1.5"
-                  className="mx-auto"
-                >
-                  <path
-                    d="M7.50005 12.8V5.59998H21.2001H21.3V12.8H7.50005ZM7.50005 12.8V17.6M7.50005 8.19998H2.80005V17.6H16V12.6M21.2001 12.8V18.4"
-                    stroke="currentColor"
-                  ></path>
-                </svg>
-                <p className="text-center font-semibold text-6 lg:text-8">
-                  Store
-                </p>
-              </div>
-            </a>
-            <a className="mx-5" href="/wishlist">
-              <div className="">
-                <div className="relative">
+            <div className="flex items-center space-x-0.5">
+              <a className="mx-1" href="/">
+                <div className="relative flex flex-col group">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -171,55 +130,97 @@ const Header = () => {
                     className="mx-auto"
                   >
                     <path
-                      d="M20.2 8C19.9 6.1 18.5 4.9 17.3 4.5C15.1 3.8 13.4 5.3 12.7 6.1L12 6.8L11.4 6.1C10.6 5.3 9.00002 3.9 6.70002 4.5C5.50002 4.9 4.10002 6.1 3.80002 8C3.50002 9.7 3.90002 13.9 12 19.6C20.1 13.9 20.5 9.7 20.2 8Z"
+                      d="M5 22C5 16.1 8.1 12.3 12 12.2C15.9 12.1 19 16 19 21.9M12 2.79999C10.1 2.79999 8.5 4.39999 8.5 6.29999C8.5 8.19999 10.1 9.79999 12 9.79999C13.9 9.79999 15.5 8.19999 15.5 6.29999C15.5 4.39999 13.9 2.79999 12 2.79999Z"
                       stroke="currentColor"
                     ></path>
                   </svg>
+                  <p className="text-center font-semibold text-6 lg:text-8">
+                    SignIn
+                  </p>
+                </div>
+              </a>
+              <a href="/womenpage" className="mx-5">
+                <div className="relative flex flex-col group">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    stroke-width="1.5"
+                    className="mx-auto"
+                  >
+                    <path
+                      d="M7.50005 12.8V5.59998H21.2001H21.3V12.8H7.50005ZM7.50005 12.8V17.6M7.50005 8.19998H2.80005V17.6H16V12.6M21.2001 12.8V18.4"
+                      stroke="currentColor"
+                    ></path>
+                  </svg>
+                  <p className="text-center font-semibold text-6 lg:text-8">
+                    Store
+                  </p>
+                </div>
+              </a>
+              <a className="mx-5" href="/">
+                <div className="">
+                  <div className="relative">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      stroke-width="1.5"
+                      className="mx-auto"
+                    >
+                      <path
+                        d="M20.2 8C19.9 6.1 18.5 4.9 17.3 4.5C15.1 3.8 13.4 5.3 12.7 6.1L12 6.8L11.4 6.1C10.6 5.3 9.00002 3.9 6.70002 4.5C5.50002 4.9 4.10002 6.1 3.80002 8C3.50002 9.7 3.90002 13.9 12 19.6C20.1 13.9 20.5 9.7 20.2 8Z"
+                        stroke="currentColor"
+                      ></path>
+                    </svg>
+                  </div>
+                  <p className="text-center font-semibold text-6 lg:text-8">
+                    Wishlist
+                  </p>
+                </div>
+              </a>
+              <div className="mx-5" onClick={() => navigate("/cartpage")}>
+                <div className="cursor-pointer flex relative">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    stroke-width="1.5"
+                    className="mx-autp"
+                  >
+                    <path
+                      d="M1.75 3.75H3.89728C4.38858 3.75 4.8071 4.10688 4.88472 4.59201L5.23 6.75M5.23 6.75L6.61528 15.408C6.6929 15.8931 7.11142 16.25 7.60272 16.25H17.8035C18.2956 16.25 18.7145 15.892 18.7913 15.406L20.1537 6.75H5.23Z"
+                      stroke="currentColor"
+                      stroke-linecap="square"
+                    ></path>
+                    <path
+                      d="M9.25 19.75C9.25 20.3023 8.80228 20.75 8.25 20.75C7.69772 20.75 7.25 20.3023 7.25 19.75C7.25 19.1977 7.69772 18.75 8.25 18.75C8.80228 18.75 9.25 19.1977 9.25 19.75Z"
+                      fill="currentColor"
+                    ></path>
+                    <path
+                      d="M18.25 19.75C18.25 20.3023 17.8023 20.75 17.25 20.75C16.6977 20.75 16.25 20.3023 16.25 19.75C16.25 19.1977 16.6977 18.75 17.25 18.75C17.8023 18.75 18.25 19.1977 18.25 19.75Z"
+                      fill="currentColor"
+                    ></path>
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M9.5 19.75C9.5 20.4404 8.94036 21 8.25 21C7.55964 21 7 20.4404 7 19.75C7 19.0596 7.55964 18.5 8.25 18.5C8.94036 18.5 9.5 19.0596 9.5 19.75ZM18.5 19.75C18.5 20.4404 17.9404 21 17.25 21C16.5596 21 16 20.4404 16 19.75C16 19.0596 16.5596 18.5 17.25 18.5C17.9404 18.5 18.5 19.0596 18.5 19.75ZM8.25 20.75C8.80228 20.75 9.25 20.3023 9.25 19.75C9.25 19.1977 8.80228 18.75 8.25 18.75C7.69772 18.75 7.25 19.1977 7.25 19.75C7.25 20.3023 7.69772 20.75 8.25 20.75ZM17.25 20.75C17.8023 20.75 18.25 20.3023 18.25 19.75C18.25 19.1977 17.8023 18.75 17.25 18.75C16.6977 18.75 16.25 19.1977 16.25 19.75C16.25 20.3023 16.6977 20.75 17.25 20.75Z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                  {itemInCart.length ? <p>{itemInCart.length}</p> : null}
                 </div>
                 <p className="text-center font-semibold text-6 lg:text-8">
-                  Wishlist
+                  Cart
                 </p>
               </div>
-            </a>
-            <div className="mx-5" onClick={() => navigate("/cartpage")}>
-              <div className="cursor-pointer flex relative">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  stroke-width="1.5"
-                  className="mx-autp"
-                >
-                  <path
-                    d="M1.75 3.75H3.89728C4.38858 3.75 4.8071 4.10688 4.88472 4.59201L5.23 6.75M5.23 6.75L6.61528 15.408C6.6929 15.8931 7.11142 16.25 7.60272 16.25H17.8035C18.2956 16.25 18.7145 15.892 18.7913 15.406L20.1537 6.75H5.23Z"
-                    stroke="currentColor"
-                    stroke-linecap="square"
-                  ></path>
-                  <path
-                    d="M9.25 19.75C9.25 20.3023 8.80228 20.75 8.25 20.75C7.69772 20.75 7.25 20.3023 7.25 19.75C7.25 19.1977 7.69772 18.75 8.25 18.75C8.80228 18.75 9.25 19.1977 9.25 19.75Z"
-                    fill="currentColor"
-                  ></path>
-                  <path
-                    d="M18.25 19.75C18.25 20.3023 17.8023 20.75 17.25 20.75C16.6977 20.75 16.25 20.3023 16.25 19.75C16.25 19.1977 16.6977 18.75 17.25 18.75C17.8023 18.75 18.25 19.1977 18.25 19.75Z"
-                    fill="currentColor"
-                  ></path>
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M9.5 19.75C9.5 20.4404 8.94036 21 8.25 21C7.55964 21 7 20.4404 7 19.75C7 19.0596 7.55964 18.5 8.25 18.5C8.94036 18.5 9.5 19.0596 9.5 19.75ZM18.5 19.75C18.5 20.4404 17.9404 21 17.25 21C16.5596 21 16 20.4404 16 19.75C16 19.0596 16.5596 18.5 17.25 18.5C17.9404 18.5 18.5 19.0596 18.5 19.75ZM8.25 20.75C8.80228 20.75 9.25 20.3023 9.25 19.75C9.25 19.1977 8.80228 18.75 8.25 18.75C7.69772 18.75 7.25 19.1977 7.25 19.75C7.25 20.3023 7.69772 20.75 8.25 20.75ZM17.25 20.75C17.8023 20.75 18.25 20.3023 18.25 19.75C18.25 19.1977 17.8023 18.75 17.25 18.75C16.6977 18.75 16.25 19.1977 16.25 19.75C16.25 20.3023 16.6977 20.75 17.25 20.75Z"
-                    fill="currentColor"
-                  ></path>
-                   
-                </svg>
-                {itemInCart.length ? (
-                  <p>{itemInCart.length}</p>
-                ):null}
-              </div>
-              <p className="text-center font-semibold text-6 lg:text-8">Cart</p>
             </div>
-          </div>
           </div>
         </div>
       </div>
