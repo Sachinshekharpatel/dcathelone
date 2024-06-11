@@ -185,7 +185,7 @@ const Header = () => {
                   </p>
                 </div>
               </a>
-              <a href="/womenpage" className="mx-5">
+              <a href="/store" className="mx-5">
                 <div className="relative flex flex-col group">
                   <svg
                     viewBox="0 0 24 24"

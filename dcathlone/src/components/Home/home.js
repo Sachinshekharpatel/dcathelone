@@ -86,7 +86,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/menpage")} className="w-1/4 cursor-pointer max-w-32">
+          <a onClick={() => navigate("/kids")} className="w-1/4 cursor-pointer max-w-32">
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -105,7 +105,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/womenpage")} className="w-1/4 cursor-pointer max-w-32">
+          <a onClick={() => navigate("/shoes")} className="w-1/4 cursor-pointer max-w-32">
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -124,7 +124,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/menpage")} className="w-1/4 cursor-pointer max-w-32">
+          <a onClick={() => navigate("/summercollection")} className="w-1/4 cursor-pointer max-w-32">
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -143,7 +143,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/womenpage")} className="w-1/4 cursor-pointer max-w-32">
+          <a onClick={() => navigate("/sale")} className="w-1/4 cursor-pointer max-w-32">
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -162,7 +162,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/menpage")} className="w-1/4 cursor-pointer max-w-32">
+          <a onClick={() => navigate("/sportsaccessories")} className="w-1/4 cursor-pointer max-w-32">
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -181,7 +181,7 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/menpage")} className="w-1/4 cursor-pointer max-w-32">
+          <a onClick={() => navigate("/sportsequipment")} className="w-1/4 cursor-pointer max-w-32">
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img

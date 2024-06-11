@@ -45,7 +45,14 @@ function App() {
           <Route path="/wishlist" exact element={<WishList />}></Route>
           <Route path="/" exact element={<HomePage />}></Route>
           <Route path="/menpage" element={<MenPage />}></Route>
+          <Route path="/store" exact element={<WomenPage />}></Route>
           <Route path="/womenpage" exact element={<WomenPage />}></Route>
+          <Route path="/shoes" exact element={<MenPage />}></Route>
+          <Route path="/kids" exact element={<MenPage />}></Route>
+          <Route path="/sportsaccessories" exact element={<MenPage />}></Route>
+          <Route path="/summercollection" exact element={<WomenPage />}></Route>
+          <Route path="/sportsequipment" exact element={<MenPage />}></Route>
+          <Route path="/sale" exact element={<MenPage />}></Route>
         </Routes>
       </Router>
     </div>
