@@ -151,11 +151,12 @@ const Header = () => {
                 type="button"
                 className="md:hidden px-2.5 py-1.5 mr-2 border-1 border-black uppercase border text-[9px]  rounded-full text-10"
               >
-                Sign In
+                Signin
               </a>
-              <div className="md:mr-3">
-                <p className=" text-center ml-1 text-grey-900 font-semibold text-[12px] mr-1">
-                  Delivery Location
+              <div className="md:mr-3 mb-2 md:mb-0">
+                <p className=" flex text-center ml-1 text-grey-900 font-semibold text-[12px] mr-1">
+                  <span> Delivery </span>
+                  <span className="ml-1"> Location</span>
                 </p>
 
                 <div className="flex justify-center">
@@ -238,7 +239,10 @@ const Header = () => {
                 </div>
               </a>
               <div className="mx-5" onClick={() => navigate("/cartpage")}>
-                <div className="cursor-pointer flex relative">
+                <div class="relative">
+                  <div class="absolute top-0 right-0 flex items-center justify-center w-4 h-4 pt- -mt-2 -mr-3 font-bold bg-[#3643BA] text-white rounded-full xl:w-5 xl:h-5 text-10 xl:text-12">
+                    {itemInCart.length ? <p>{itemInCart.length}</p> : null}
+                  </div>
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -246,7 +250,7 @@ const Header = () => {
                     width="24"
                     height="24"
                     stroke-width="1.5"
-                    className="mx-autp"
+                    class="mx-autp"
                   >
                     <path
                       d="M1.75 3.75H3.89728C4.38858 3.75 4.8071 4.10688 4.88472 4.59201L5.23 6.75M5.23 6.75L6.61528 15.408C6.6929 15.8931 7.11142 16.25 7.60272 16.25H17.8035C18.2956 16.25 18.7145 15.892 18.7913 15.406L20.1537 6.75H5.23Z"
@@ -268,7 +272,6 @@ const Header = () => {
                       fill="currentColor"
                     ></path>
                   </svg>
-                  {itemInCart.length ? <p>{itemInCart.length}</p> : null}
                 </div>
                 <p className="hidden md:block text-center font-semibold text-[10px]">
                   Cart
