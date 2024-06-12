@@ -41,8 +41,8 @@ const Header = () => {
   return (
     <header className="top-0 z-50 md:z-30 lg:sticky bg-white">
       <div className="px-4 py-3 2xl:px-16 xl:py-4">
-        <div className="flex items-center justify-between">
-          <div className=" md:flex items-center">
+        <div className=" flex items-center justify-between">
+          <div className=" md:flex md:w-3/5 items-center">
             <div className="flex items-center">
               <div className="relative inline-block text-left">
                 <div className="flex items-center">
@@ -66,7 +66,7 @@ const Header = () => {
                       ></path>
                     </svg>
                   </button>
-                  <p className="hidden ml-4 leading-5 text-left uppercase lg:block text-16">
+                  <p className="hidden leading-2 ml-4 md:mr-3 font-semibold text-left uppercase lg:block text-[12px]">
                     All
                     <br /> Sports
                   </p>
@@ -95,12 +95,12 @@ const Header = () => {
               </div>
 
               <div className="flex items-center ml-2">
-                <a href="/" className="ml-1 cursor-pointer  md:ml-6">
+                <a href="/" className="ml-1 cursor-pointer">
                   <svg
                     viewBox="0 0 188 28"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-32 md:w-40 "
+                    className="w-[200px] sm:w-[120px] md:w-[150px]"
                   >
                     <path
                       d="M57.9108 23.8H71.1548V19.544H62.9508V15.974H70.2169V12.012H62.9508V8.442H71.1548V4.2H57.9108V23.8ZM87.5909 15.358C85.6728 18.41 83.8108 19.684 81.4168 19.684C78.3088 19.684 76.5028 17.5 76.5028 13.706C76.5028 10.108 78.1688 8.316 80.7309 8.316C82.4248 8.316 83.8248 9.072 84.2589 11.592H89.2989C88.7528 6.79 85.6869 3.808 80.7868 3.808C75.1028 3.808 71.3648 7.82599 71.3648 13.986C71.3648 20.188 75.1028 24.192 81.2488 24.192C85.2669 24.192 87.9968 22.512 89.8028 20.244H96.6768V23.8H101.689V4.2H94.5769L87.5909 15.358ZM96.6768 16.31H92.2388L96.6768 9.1V16.31ZM47.1588 4.2H39.7948V23.8H47.1588C52.9969 23.8 56.7628 19.95 56.7628 14C56.7628 8.05 52.9969 4.2 47.1588 4.2ZM47.0888 19.544H44.8348V8.442H47.0888C50.0008 8.442 51.6388 10.5 51.6388 14C51.6388 17.486 50.0008 19.544 47.0888 19.544ZM159.537 3.808C153.615 3.808 149.639 7.826 149.639 14C149.639 20.174 153.615 24.192 159.537 24.192C165.473 24.192 169.435 20.174 169.435 14C169.435 7.82601 165.473 3.808 159.537 3.808ZM159.537 19.684C156.625 19.684 154.791 17.738 154.791 14C154.791 10.262 156.625 8.316 159.537 8.316C162.463 8.316 164.283 10.262 164.283 14C164.283 17.738 162.463 19.684 159.537 19.684ZM102.949 8.442H107.891V23.8H112.931V8.442H117.873V4.2H102.949L102.949 8.442ZM182.301 4.2V14.994L175.805 4.2H170.583V23.8H175.455V12.558L182.217 23.8H187.173V4.2L182.301 4.2ZM142.499 4.2H137.459V23.8H150.101V19.558H142.499V4.2ZM130.963 11.676H124.173V4.2H119.133V23.8H124.173V15.904H130.963V23.8H136.003V4.2H130.963V11.676Z"
@@ -109,15 +109,15 @@ const Header = () => {
                     <path
                       d="M25.5711 0C14.6267 0 1.01309 11.3236 1.01309 20.7085C1.01309 25.5554 4.73612 28 9.65333 28C13.264 28 17.6333 26.6794 21.848 24.1365V5.40893C20.7241 7.33366 15.4416 15.0888 11.1987 19.2193C9.03518 21.3266 7.32118 22.2398 5.84602 22.2398C4.18821 22.2398 3.40146 21.1159 3.40146 19.4441C3.40146 11.8575 16.1722 1.99498 24.6298 1.99498C28.114 1.99498 30.3618 3.54039 30.3618 6.54692C30.3618 9.30055 28.4933 12.7566 25.3041 15.9458V21.7481C30.8676 17.3507 34.1972 11.7451 34.1972 7.22127C34.1972 2.4586 30.4883 0 25.5711 0Z"
                       fill="#3643BA"
-                    ></path>{" "}
+                    ></path>
                   </svg>
                 </a>
               </div>
             </div>
-            <div className="cursor-pointer relative flex-1 w-full md:w-[300px] md:ml-5">
+            <div className="cursor-pointer mt-1 relative flex-1 w-[300px] md:w-[440px] md:ml-[50px]">
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search for 60+ products"
                 className="w-full py-2 pl-10 pr-4 rounded-full outline-none bg-gray-100 text-sm"
               />
               <svg
@@ -147,24 +147,32 @@ const Header = () => {
           </div>
           <div className="md:flex items-center">
             <div className="flex items-center ">
-              <p className=" text-center  text-12 lg:text-14 whitespace-nowrap text-grey-900 font-bold text-[12px] mr-1">
-                Delivery Location
-              </p>
+              <a
+                type="button"
+                className="md:hidden px-2.5 py-1.5 mr-2 border-1 border-black uppercase border text-[9px]  rounded-full text-10"
+              >
+                Sign In
+              </a>
+              <div className="md:mr-3">
+                <p className=" text-center ml-1 text-grey-900 font-semibold text-[12px] mr-1">
+                  Delivery Location
+                </p>
 
-              <div className="flex justify-center">
-                <span className="text-[14px] font-bold text-[#3643BA]">
-                  486001
-                </span>
-                <button
-                  type="button"
-                  className="ml-1 text-[12px] text-[#3643BA] underline uppercase border-none  outline-none"
-                >
-                  Change
-                </button>
+                <div className="flex justify-center">
+                  <span className="text-[14px] font-bold text-[#3643BA]">
+                    486001
+                  </span>
+                  <button
+                    type="button"
+                    className="ml-1 text-[12px] text-[#3643BA] underline uppercase border-none  outline-none"
+                  >
+                    Change
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="flex items-center space-x-0.5">
-              <a className="mx-1" href="/">
+            <div className="flex md:items-center  ">
+              <a className="hidden md:block mx-1" href="/">
                 <div className="relative flex flex-col group">
                   <svg
                     viewBox="0 0 24 24"
@@ -180,7 +188,7 @@ const Header = () => {
                       stroke="currentColor"
                     ></path>
                   </svg>
-                  <p className="text-center font-semibold text-6 lg:text-8">
+                  <p className="text-center font-semibold text-[10px]">
                     SignIn
                   </p>
                 </div>
@@ -201,14 +209,14 @@ const Header = () => {
                       stroke="currentColor"
                     ></path>
                   </svg>
-                  <p className="text-center font-semibold text-6 lg:text-8">
+                  <p className="hidden md:block text-[10px] text-center font-semibold ">
                     Store
                   </p>
                 </div>
               </a>
-              <a className="mx-5" href="/wishlist">
+              <a className="" href="/wishlist">
                 <div className="">
-                  <div className="relative">
+                  <div className="relative ">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -216,7 +224,7 @@ const Header = () => {
                       width="24"
                       height="24"
                       stroke-width="1.5"
-                      className="mx-auto"
+                      className="w-6 ml-1"
                     >
                       <path
                         d="M20.2 8C19.9 6.1 18.5 4.9 17.3 4.5C15.1 3.8 13.4 5.3 12.7 6.1L12 6.8L11.4 6.1C10.6 5.3 9.00002 3.9 6.70002 4.5C5.50002 4.9 4.10002 6.1 3.80002 8C3.50002 9.7 3.90002 13.9 12 19.6C20.1 13.9 20.5 9.7 20.2 8Z"
@@ -224,7 +232,7 @@ const Header = () => {
                       ></path>
                     </svg>
                   </div>
-                  <p className="text-center font-semibold text-6 lg:text-8">
+                  <p className="hidden md:block text-center font-semibold text-[10px]">
                     Wishlist
                   </p>
                 </div>
@@ -262,7 +270,7 @@ const Header = () => {
                   </svg>
                   {itemInCart.length ? <p>{itemInCart.length}</p> : null}
                 </div>
-                <p className="text-center font-semibold text-6 lg:text-8">
+                <p className="hidden md:block text-center font-semibold text-[10px]">
                   Cart
                 </p>
               </div>
