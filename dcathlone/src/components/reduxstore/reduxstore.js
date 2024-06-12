@@ -14,6 +14,10 @@ const cartSlice = createSlice({
       state.SingleProductDetail = action.payload;
     },
 
+    singleProductImageChangeHandler: (state, action) => {
+       const data = {...state.SingleProductDetail,image:action.payload};
+      state.SingleProductDetail = data;
+    },
     addItemIncartFunction: (state, action) => {
       console.log(action.payload);
       state.cartTotalItemsArray.push(action.payload);

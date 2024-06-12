@@ -18,6 +18,7 @@ const ProductDetailPage = () => {
   const productToDisplay = useSelector(
     (state) => state.itemInDetailPage.SingleProductDetail || null
   );
+ 
   const [productAddedButtonBoolean, setproductAddedButtonBoolean] =
     useState(false);
   const [shake, setShake] = useState(false);
@@ -28,6 +29,10 @@ const ProductDetailPage = () => {
     console.log(productToDisplay);
   }, []);
 
+  const productImageToDisplayHandlerOnColorChange = (color) => {
+    console.log(color)
+    dispatch(cartReduxActions.singleProductImageChangeHandler(color));
+  }
   const addToCartBtnHandler = (item) => {
     if (selectSize === null) {
       setShake(true);
@@ -160,12 +165,12 @@ const ProductDetailPage = () => {
               <h1 className="text-16 font-bold">COLOUR OPTIONS</h1>
               <div className="grid grid-cols-4">
                 <img
-                  className="w-24 h-24 bg-[#F4F4F4"
+                  className="cursor-pointer w-24 h-24 bg-[#F4F4F4"
                   src={productToDisplay.image}
                 ></img>
-                <img src={imagebelow1}></img>
-                <img src={imagebelow2}></img>
-                <img src={imagebelow3}></img>
+                <img onClick={() => productImageToDisplayHandlerOnColorChange(imagebelow1)} className="cursor-pointer" src={imagebelow1}></img>
+                <img onClick={() => productImageToDisplayHandlerOnColorChange(imagebelow2)} className="cursor-pointer" src={imagebelow2}></img>
+                <img onClick={() => productImageToDisplayHandlerOnColorChange(imagebelow3)} className="cursor-pointer" src={imagebelow3}></img>
               </div>
             </div>
             <div className="border-4 border-slate-50 p-2">
