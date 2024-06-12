@@ -41,6 +41,31 @@ const WomenPage = () => {
       console.log("error menpage data not fetched");
     }
   }, []);
+  const singleProductImageUpdate = (item, imageLink) => {
+    console.log(item, imageLink);
+
+    const data = {
+      ...item,
+      image: imageLink,
+    };
+
+    setMenProduct((prev) => {
+      return prev.map((item) => {
+        if (item.id === data.id) {
+          return data;
+        } else {
+          return item;
+        }
+      });
+    });
+  };
+  const singleProductImageUpdateModal = (productItem, imageLink) => {
+    const data = {
+      ...productItem,
+      image: imageLink,
+    };
+    setProductToAdd(data);
+  };
 
   const singleProductPageHandler = (item) => {
     console.log(item);
@@ -149,7 +174,10 @@ const WomenPage = () => {
     <div>
       <Header></Header>
       <div className="hidden md:block relative w-full mt-1 overflow-hidden">
-        <div ref={slideRef} className="cursor-pointer flex w-full h-[200px] bg-[#F7F8FA]">
+        <div
+          ref={slideRef}
+          className="cursor-pointer flex w-full h-[200px] bg-[#F7F8FA]"
+        >
           {images.map((image, index) => (
             <img
               key={index}
@@ -530,13 +558,27 @@ const WomenPage = () => {
                   <div className="bg-[#F7F8F9] m-2 grid grid-cols-3 md:grid-cols-5 gap-[1px] ">
                     <img className="hidden md:block"></img>
                     <img className="hidden md:block"></img>
-
-                    <img className="cursor-pointer" src={image1men}></img>
                     <img
+                      onClick={() =>
+                        singleProductImageUpdate(product, image1men)
+                      }
+                      className="cursor-pointer"
+                      src={image1men}
+                    ></img>
+                    <img
+                      onClick={() =>
+                        singleProductImageUpdate(product, product.image)
+                      }
                       className="cursor-pointer w-full h-[89px] border border-[#3643BA] md:h-[60px] bg-[#F5F4F5] p-1"
                       src={product.image}
                     ></img>
-                    <img className="cursor-pointer" src={image3men}></img>
+                    <img
+                      onClick={() =>
+                        singleProductImageUpdate(product, image3men)
+                      }
+                      className="cursor-pointer"
+                      src={image3men}
+                    ></img>{" "}
                   </div>
                   <div className="mt-2 p-2">
                     <div>
@@ -613,10 +655,29 @@ const WomenPage = () => {
               </h3>
               <div className="flex h-[60px] mb-2 w-[100px]">
                 <img
+                  onClick={() =>
+                    singleProductImageUpdateModal(
+                      productToAdd,
+                      productToAdd.image
+                    )
+                  }
                   className="cursor-pointer mr-2 border-[2px] p-1 border-blue-900"
                   src={productToAdd.image}
                 ></img>
-                <img className="cursor-pointer" src={image1men}></img>
+                <img
+                  onClick={() =>
+                    singleProductImageUpdateModal(productToAdd, image1men)
+                  }
+                  className="cursor-pointer"
+                  src={image1men}
+                ></img>
+                <img
+                  onClick={() =>
+                    singleProductImageUpdateModal(productToAdd, image3men)
+                  }
+                  className="cursor-pointer"
+                  src={image3men}
+                ></img>
               </div>
             </div>
             <div>

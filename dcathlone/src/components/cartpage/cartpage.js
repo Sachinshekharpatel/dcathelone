@@ -236,7 +236,7 @@ const CartPage = () => {
             viewBox="0 0 188 28"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="h-[20px] w-[300px]"
+            className="h-[20px] md:h-[25px] w-[150px]"
             alt="Decathlon 🛒"
           >
             <path
@@ -265,7 +265,7 @@ const CartPage = () => {
               stroke="currentColor"
             ></path>
           </svg>
-          <p className="ml-2 text-12 font-semibold leading-tight text-gray-600">
+          <p className="ml-2 text-[11px] font-semibold leading-tight text-gray-800">
             100% Secure
             <br />
             Payment
@@ -436,8 +436,8 @@ const CartPage = () => {
                     </button>
                   </div>
                   {totalItemInCart.map((product) => (
-                    <div className="flex justify-evenly my-2 border-b-[1px] py-3">
-                      <img className="w-1/5" src={product.image}></img>
+                    <div className="flex md:justify-evenly justify-around my-2 border-b-[1px] py-3">
+                      <img className="md:w-1/4 md:h-auto w-[100px] h-[100px]" src={product.image}></img>
                       <div className="ml-2">
                         <p className="font-bold text-[14px]">
                           {product.title.split(" ")[0]}
