@@ -75,7 +75,7 @@ const WishList = () => {
             ...item,
             id: res.data.name,
             quantity: 1,
-            size: selectSize,
+            size: selectSize !== null ? selectSize : "M",
           };
           dispatch(cartReduxActions.addItemIncartFunction(data));
           axios.put(
@@ -93,20 +93,23 @@ const WishList = () => {
       {wishListArray.length === 0 ? (
         <div className="flex flex-col justify-center items-center mt-4">
           <img
-            className="w-2/6 md:w-1/6 mt-14 "
+            className="w-2/6 md:w-1/6 mt-8 md:mt-14"
             src={emptywishlist}
             alt="Empty Wishlist"
           ></img>
           <div className="mt-10 lg:mt-[30px] text-18 lg:text-[35px] font-normal lg:font-semibold text-grey-500">
             <h1 className="text-30 font-bold text-[#687787] text-[28px]">
-              Login to Add/View Wishlist
+              Your wishlist is empty
+            </h1>
+            <h1 className="hidden md:block font-semibold mt-2 text-[14px]">
+               Save your favourite products here to buy later
             </h1>
           </div>
           <button
-            onClick={() => navigate("/")}
-            className="bg-[#3643BA] hover:bg-blue-700 text-white font-bold py-2 px-[120px] rounded-sm mt-4"
+            onClick={() => navigate("/store")}
+            className="bg-[#3643BA] mb-6 hover:bg-blue-900 text-white font-bold py-2 px-[120px] rounded-sm mt-4"
           >
-            LOGIN / SIGNUP
+            Continue Shopping 
           </button>
         </div>
       ) : (
