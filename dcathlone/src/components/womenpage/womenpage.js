@@ -594,7 +594,7 @@ const WomenPage = () => {
                     </div>
                     <button
                       onClick={() => toggleModalVisibility(product)}
-                      className="w-full bg-[] border border-[#949494] text-white py-2"
+                      className="w-full bg-[] hover:bg-slate-50 border border-[#949494] text-white py-2"
                     >
                       <p className="text-sm text-[#000000] text-[10px] font-semibold">
                         ADD TO CART

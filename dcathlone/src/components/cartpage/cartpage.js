@@ -9,6 +9,7 @@ import FooterPage from "../footer/footer";
 import greensvgimage from "./greensvg.png";
 import { cartReduxActions } from "../reduxstore/reduxstore";
 const CartPage = () => {
+  const [productAddedWishlistButtonBoolean, setproductAddedWishListButtonBoolean] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(null);
   const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
@@ -77,9 +78,35 @@ const CartPage = () => {
       .then(() => {
         setIsModalVisible(!isModalVisible);
         setProductToDelete(null);
-
         dispatch(cartReduxActions.removeItemFromCartFunction(item.id));
       });
+  };
+
+  const addToWishListBtnHandler = (item) => {
+    try {
+      axios
+        .post(
+          `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneWishlist.json`,
+          item
+        )
+        .then(() => {
+          axios
+            .delete(
+              `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`
+            )
+            .then(() => {
+              setproductAddedWishListButtonBoolean(true);
+              setTimeout(() => setproductAddedWishListButtonBoolean(false), 2000);
+              console.log("added to wishlist");
+              dispatch(cartReduxActions.removeItemFromCartFunction(item.id));
+              dispatch(cartReduxActions.addItemInWishlistFunction(item));
+              setIsModalVisible(!isModalVisible);
+              setProductToDelete(null);
+            });
+        });
+    } catch (error) {
+      console.log("failed to add in the wishlist");
+    }
   };
 
   const updateSizeHandlerProduct = (e, item) => {
@@ -437,7 +464,10 @@ const CartPage = () => {
                   </div>
                   {totalItemInCart.map((product) => (
                     <div className="flex md:justify-evenly justify-around my-2 border-b-[1px] py-3">
-                      <img className="md:w-1/4 md:h-auto w-[100px] h-[100px]" src={product.image}></img>
+                      <img
+                        className="md:w-1/4 md:h-auto w-[100px] h-[100px]"
+                        src={product.image}
+                      ></img>
                       <div className="ml-2">
                         <p className="font-bold text-[14px]">
                           {product.title.split(" ")[0]}
@@ -661,7 +691,10 @@ const CartPage = () => {
                   {loader && (
                     <div className="flex my-3">
                       Payment Initialize Please wait
-                      <section style={{ height: "35px",width:"35px" }} className="ml-5 dots-container">
+                      <section
+                        style={{ height: "35px", width: "35px" }}
+                        className="ml-5 dots-container"
+                      >
                         <div className="dot"></div>
                         <div className="dot"></div>
                         <div className="dot"></div>
@@ -837,7 +870,9 @@ const CartPage = () => {
                   </button>
 
                   <button
-                    onClick={toggleModalVisibility}
+                    onClick={() => {
+                      addToWishListBtnHandler(productToDelete);
+                    }}
                     className="flex w-2/3 bg-[#3643BA] justify-center text-white px-4 py-2 rounded ml-4 hover:bg-blue-800"
                   >
                     <img
@@ -872,6 +907,29 @@ const CartPage = () => {
           </button>
         </div>
       )}
+      {productAddedWishlistButtonBoolean ? (
+        <div className="fixed top-[100px] md:top-[140px] flex left-1/2 transform -translate-x-1/2 bg-black text-white px-4 py-2 rounded-lg shadow-md">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 48 48"
+          >
+            <path
+              fill="#c8e6c9"
+              d="M36,42H12c-3.314,0-6-2.686-6-6V12c0-3.314,2.686-6,6-6h24c3.314,0,6,2.686,6,6v24C42,39.314,39.314,42,36,42z"
+            ></path>
+            <path
+              fill="#4caf50"
+              d="M34.585 14.586L21.014 28.172 15.413 22.584 12.587 25.416 21.019 33.828 37.415 17.414z"
+            ></path>
+          </svg>
+          <button className="text-white px-3 py-1 bg-[#black] font-bold text-[14px] rounded">
+            {" "}
+            The selected item Added To Wishlist{" "}
+          </button>
+        </div>
+      ) : null}
       <FooterPage />
     </div>
   );

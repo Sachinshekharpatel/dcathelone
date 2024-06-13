@@ -4,6 +4,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     cartTotalItemsArray: [],
+    wishListArray: [],
     SingleProductDetail: null,
     quantity: 0,
     totalPrice: 0,
@@ -12,6 +13,12 @@ const cartSlice = createSlice({
     viewProductDetailFunction: (state, action) => {
       console.log(action.payload);
       state.SingleProductDetail = action.payload;
+    },
+    fetchFromDatabaseWishListFunction: (state, action) => {
+      state.wishListArray = action.payload;
+    },
+    addItemInWishlistFunction: (state, action) => {
+      state.wishListArray.push(action.payload);
     },
 
     singleProductImageChangeHandler: (state, action) => {

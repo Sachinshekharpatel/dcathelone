@@ -239,10 +239,10 @@ const Header = () => {
                 </div>
               </a>
               <div className="mx-5" onClick={() => navigate("/cartpage")}>
-                <div class="relative">
-                  <div class="absolute top-0 right-0 flex items-center justify-center w-4 h-4 pt- -mt-2 -mr-3 font-bold bg-[#3643BA] text-white rounded-full xl:w-5 xl:h-5 text-10 xl:text-12">
+                <div className="relative">
+                  {itemInCart.length>0 && <div className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 pt- -mt-2 -mr-3 font-bold bg-[#3643BA] text-white rounded-full xl:w-5 xl:h-5 text-10 xl:text-12">
                     {itemInCart.length ? <p>{itemInCart.length}</p> : null}
-                  </div>
+                  </div>}
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -250,7 +250,7 @@ const Header = () => {
                     width="24"
                     height="24"
                     stroke-width="1.5"
-                    class="mx-autp"
+                    className="mx-autp"
                   >
                     <path
                       d="M1.75 3.75H3.89728C4.38858 3.75 4.8071 4.10688 4.88472 4.59201L5.23 6.75M5.23 6.75L6.61528 15.408C6.6929 15.8931 7.11142 16.25 7.60272 16.25H17.8035C18.2956 16.25 18.7145 15.892 18.7913 15.406L20.1537 6.75H5.23Z"

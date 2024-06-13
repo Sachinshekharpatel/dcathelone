@@ -28,6 +28,19 @@ function App() {
             dispatch(cartReduxActions.fetchFromDatabaseFunction([]));
           }
         });
+
+      axios
+        .get(
+          `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneWishlist.json`
+        )
+        .then((res) => {
+          if (res.data !== null) {
+            const dataArray = Object.values(res.data);
+            dispatch(cartReduxActions.fetchFromDatabaseWishListFunction(dataArray));
+          } else {
+            dispatch(cartReduxActions.fetchFromDatabaseWishListFunction([]));
+          }
+        });
     } catch (error) {
       console.log("error menpage data not fetched");
     }

@@ -1,9 +1,15 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Header from "../header/header";
 import emptywishlist from "./emptywishlist.svg";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const WishList = () => {
     const navigate = useNavigate();
+    const wishListArray = useSelector((state) => state.itemInDetailPage.wishListArray);
+    
+  useEffect(() => {
+    console.log(wishListArray);
+  }, [wishListArray]);
   return (
     <div>
       <Header></Header>

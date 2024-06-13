@@ -44,7 +44,7 @@ const HomePage = () => {
       <Header></Header>
 
       <div className="w-full flex flex-wrap bg-white items-center justify-center h-auto  py-3 grid-cols-2 md:grid-cols-8 gap-4">
-        <div className="py-2 flex flex-wrap md:px-7 md:py-3 md:flex-nowrap justify-around">
+        <div className="py-2 flex flex-wrap md:py-3 md:flex-nowrap justify-around">
           <a className="w-1/4 max-w-32">
             <div className="flex flex-col gap-1 justify-start items-center">
               <div
@@ -67,7 +67,10 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/womenpage")} className="w-1/4 cursor-pointer max-w-32">
+          <a
+            onClick={() => navigate("/womenpage")}
+            className="w-1/4 cursor-pointer max-w-32"
+          >
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -86,7 +89,10 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/kids")} className="w-1/4 cursor-pointer max-w-32">
+          <a
+            onClick={() => navigate("/kids")}
+            className="w-1/4 cursor-pointer max-w-32"
+          >
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -105,7 +111,10 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/shoes")} className="w-1/4 cursor-pointer max-w-32">
+          <a
+            onClick={() => navigate("/shoes")}
+            className="w-1/4 cursor-pointer max-w-32"
+          >
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -124,7 +133,10 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/summercollection")} className="w-1/4 cursor-pointer max-w-32">
+          <a
+            onClick={() => navigate("/summercollection")}
+            className="w-1/4 cursor-pointer max-w-32"
+          >
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -143,7 +155,10 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/sale")} className="w-1/4 cursor-pointer max-w-32">
+          <a
+            onClick={() => navigate("/sale")}
+            className="w-1/4 cursor-pointer max-w-32"
+          >
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -162,7 +177,10 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/sportsaccessories")} className="w-1/4 cursor-pointer max-w-32">
+          <a
+            onClick={() => navigate("/sportsaccessories")}
+            className="w-1/4 cursor-pointer max-w-32"
+          >
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -181,7 +199,10 @@ const HomePage = () => {
               </div>
             </div>
           </a>
-          <a onClick={() => navigate("/sportsequipment")} className="w-1/4 cursor-pointer max-w-32">
+          <a
+            onClick={() => navigate("/sportsequipment")}
+            className="w-1/4 cursor-pointer max-w-32"
+          >
             <div className="flex flex-col gap-1 justify-start items-center">
               <div className="w-full px-2.5 relative">
                 <img
@@ -214,7 +235,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-      
+
       <FooterPage></FooterPage>
     </div>
   );

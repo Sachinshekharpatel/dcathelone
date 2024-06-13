@@ -18,21 +18,25 @@ const ProductDetailPage = () => {
   const productToDisplay = useSelector(
     (state) => state.itemInDetailPage.SingleProductDetail || null
   );
- 
   const [productAddedButtonBoolean, setproductAddedButtonBoolean] =
     useState(false);
   const [shake, setShake] = useState(false);
   const dispatch = useDispatch();
   const [selectSize, setSelectedSize] = useState(null);
   const [itemIsAdded, setItemIsAdded] = useState(false);
+  const [itemIsAddedWishList, setItemIsAddedWishList] = useState(false);
+  const [
+    productAddedWishlistButtonBoolean,
+    setproductAddedWishListButtonBoolean,
+  ] = useState(false);
   useEffect(() => {
     console.log(productToDisplay);
   }, []);
 
   const productImageToDisplayHandlerOnColorChange = (color) => {
-    console.log(color)
+    console.log(color);
     dispatch(cartReduxActions.singleProductImageChangeHandler(color));
-  }
+  };
   const addToCartBtnHandler = (item) => {
     if (selectSize === null) {
       setShake(true);
@@ -68,6 +72,41 @@ const ProductDetailPage = () => {
       } catch (error) {
         console.log(error);
       }
+    }
+  };
+
+  const addToWishListBtnHandler = (item) => {
+    try {
+      axios
+        .post(
+          `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneWishlist.json`,
+          item
+        )
+        .then((res) => {
+          const data = {
+            ...item,
+            id: res.data.name,
+            quantity: 1,
+          };
+          axios
+            .put(
+              `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneWishlist/${res.data.name}.json`,
+              data
+            )
+            .then(() => {
+              setItemIsAddedWishList(true);
+              setproductAddedWishListButtonBoolean(true);
+              setTimeout(
+                () => setproductAddedWishListButtonBoolean(false),
+                2000
+              );
+              setTimeout(() => setItemIsAddedWishList(false), 1000);
+              console.log("added to wishlist");
+              dispatch(cartReduxActions.addItemInWishlistFunction(data));
+            });
+        });
+    } catch (error) {
+      console.log("failed to add in the wishlist");
     }
   };
 
@@ -168,9 +207,27 @@ const ProductDetailPage = () => {
                   className="cursor-pointer w-24 h-24 bg-[#F4F4F4"
                   src={productToDisplay.image}
                 ></img>
-                <img onClick={() => productImageToDisplayHandlerOnColorChange(imagebelow1)} className="cursor-pointer" src={imagebelow1}></img>
-                <img onClick={() => productImageToDisplayHandlerOnColorChange(imagebelow2)} className="cursor-pointer" src={imagebelow2}></img>
-                <img onClick={() => productImageToDisplayHandlerOnColorChange(imagebelow3)} className="cursor-pointer" src={imagebelow3}></img>
+                <img
+                  onClick={() =>
+                    productImageToDisplayHandlerOnColorChange(imagebelow1)
+                  }
+                  className="cursor-pointer"
+                  src={imagebelow1}
+                ></img>
+                <img
+                  onClick={() =>
+                    productImageToDisplayHandlerOnColorChange(imagebelow2)
+                  }
+                  className="cursor-pointer"
+                  src={imagebelow2}
+                ></img>
+                <img
+                  onClick={() =>
+                    productImageToDisplayHandlerOnColorChange(imagebelow3)
+                  }
+                  className="cursor-pointer"
+                  src={imagebelow3}
+                ></img>
               </div>
             </div>
             <div className="border-4 border-slate-50 p-2">
@@ -279,8 +336,17 @@ const ProductDetailPage = () => {
                 {itemIsAdded ? "Item Added in Cart" : "ADD TO CART"}
               </button>
 
-              <button className="bg-white-500 font-light py-2 px-4 w-[300px] rounded m-2 border-2 ">
-                ADD TO WISHLIST
+              <button
+                onClick={() => addToWishListBtnHandler(productToDisplay)}
+                className={`py-2 px-4 w-[300px] rounded m-2 transition-all duration-500 ${
+                  itemIsAddedWishList
+                    ? "bg-white border text-black"
+                    : "bg-[white] border hover:bg-blue-100 text-black"
+                }`}
+              >
+                {itemIsAddedWishList
+                  ? "Product Added to Wishlist"
+                  : "ADD TO WISHLIST"}
               </button>
             </div>
             <div className="border-8 border-slate-50 p-2">
@@ -487,6 +553,30 @@ const ProductDetailPage = () => {
           <button className="text-white px-3 py-1 bg-[#black] font-bold text-[14px] rounded">
             {" "}
             Successfully Added To Cart{" "}
+          </button>
+        </div>
+      ) : null}
+
+      {productAddedWishlistButtonBoolean ? (
+        <div className="fixed top-[100px] md:top-[140px] flex left-1/2 md:right-1 md:left-auto transform -translate-x-1/2 bg-black text-white px-4 py-2 rounded-lg shadow-md">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 48 48"
+          >
+            <path
+              fill="#c8e6c9"
+              d="M36,42H12c-3.314,0-6-2.686-6-6V12c0-3.314,2.686-6,6-6h24c3.314,0,6,2.686,6,6v24C42,39.314,39.314,42,36,42z"
+            ></path>
+            <path
+              fill="#4caf50"
+              d="M34.585 14.586L21.014 28.172 15.413 22.584 12.587 25.416 21.019 33.828 37.415 17.414z"
+            ></path>
+          </svg>
+          <button className="text-white px-3 py-1 bg-[#black] font-bold text-[14px] rounded">
+            {" "}
+            Successfully Added To Wishlist{" "}
           </button>
         </div>
       ) : null}
