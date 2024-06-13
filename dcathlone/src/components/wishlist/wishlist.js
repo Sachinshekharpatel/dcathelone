@@ -107,7 +107,7 @@ const WishList = () => {
           </div>
           <button
             onClick={() => navigate("/store")}
-            className="bg-[#3643BA] mb-6 hover:bg-blue-900 text-white font-bold py-2 px-[120px] rounded-sm mt-4"
+            className="bg-[#3643BA] uppercase mb-6 hover:bg-blue-900 text-white font-bold py-2 px-[120px] rounded-sm mt-4"
           >
             Continue Shopping 
           </button>
