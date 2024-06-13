@@ -3,11 +3,12 @@ import Header from "../header/header";
 import image2 from "./image2.avif";
 import image4 from "./image4.avif";
 import { useDispatch } from "react-redux";
-import imagebelow1 from "./imagebelow2.avif";
+import imagebelow5 from "./imagebelow2.avif";
+import imagebelow1 from "./color11.avif";
 import imagebelow4 from "./womenTshirt.avif";
 import { useNavigate } from "react-router-dom";
-import imagebelow2 from "./imagebelow3.avif";
-import imagebelow3 from "./imagebelow4.avif";
+import imagebelow2 from "./color22.avif";
+import imagebelow3 from "./color33.avif";
 import { useSelector } from "react-redux";
 import missingItemSvg from "./missingitem.svg";
 import { cartReduxActions } from "../reduxstore/reduxstore";
@@ -130,14 +131,14 @@ const ProductDetailPage = () => {
                 <img
                   src={productToDisplay.image}
                   alt="Image 1"
-                  className="w-[75%] p-3 "
+                  className="w-full"
                 />
               </div>
               <div className="col-span-1 grid grid-cols-1 gap-1">
                 <img
                   src={productToDisplay.image}
                   alt="Image 1"
-                  className="w-[75%] p-3 "
+                 className="w-full"
                 />
                 <img src={image4} alt="Image 4" className="w-full h-70" />
               </div>
@@ -146,7 +147,7 @@ const ProductDetailPage = () => {
                 <img
                   src={productToDisplay.image}
                   alt="Image 1"
-                  className="w-[75%] p-3 "
+                  className="w-full"
                 />
               </div>
             </div>
@@ -211,21 +212,21 @@ const ProductDetailPage = () => {
                   onClick={() =>
                     productImageToDisplayHandlerOnColorChange(imagebelow1)
                   }
-                  className="cursor-pointer"
+                   className="cursor-pointer w-24 h-24 bg-[#F4F4F4"
                   src={imagebelow1}
                 ></img>
                 <img
                   onClick={() =>
                     productImageToDisplayHandlerOnColorChange(imagebelow2)
                   }
-                  className="cursor-pointer"
+                   className="cursor-pointer w-24 h-24 bg-[#F4F4F4"
                   src={imagebelow2}
                 ></img>
                 <img
                   onClick={() =>
                     productImageToDisplayHandlerOnColorChange(imagebelow3)
                   }
-                  className="cursor-pointer"
+                  className="cursor-pointer w-24 h-24 bg-[#F4F4F4"
                   src={imagebelow3}
                 ></img>
               </div>
@@ -474,7 +475,7 @@ const ProductDetailPage = () => {
                   <div className="ml-8 mr-5 font-bold h-6 w-6 mt-10  ">+</div>{" "}
                   <div className="w-[200px] border border-gray-300 p-2 text-center">
                     {" "}
-                    <img className="ml-8" src={imagebelow1}></img>
+                    <img className="ml-8" src={imagebelow5}></img>
                     <p className="text-sm font-bold ">Men Shorts</p>
                     <p className="text-sm font-bold ">₹ 399</p>
                   </div>

@@ -9,7 +9,10 @@ import FooterPage from "../footer/footer";
 import greensvgimage from "./greensvg.png";
 import { cartReduxActions } from "../reduxstore/reduxstore";
 const CartPage = () => {
-  const [productAddedWishlistButtonBoolean, setproductAddedWishListButtonBoolean] = useState(false);
+  const [
+    productAddedWishlistButtonBoolean,
+    setproductAddedWishListButtonBoolean,
+  ] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(null);
   const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
@@ -89,19 +92,36 @@ const CartPage = () => {
           `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneWishlist.json`,
           item
         )
-        .then(() => {
+        .then((res) => {
+          const data = {
+            ...item,
+            id: res.data.name,
+            quantity: 1,
+          };
           axios
-            .delete(
-              `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`
+            .put(
+              `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneWishlist/${res.data.name}.json`,
+              data
             )
             .then(() => {
-              setproductAddedWishListButtonBoolean(true);
-              setTimeout(() => setproductAddedWishListButtonBoolean(false), 2000);
-              console.log("added to wishlist");
-              dispatch(cartReduxActions.removeItemFromCartFunction(item.id));
-              dispatch(cartReduxActions.addItemInWishlistFunction(item));
-              setIsModalVisible(!isModalVisible);
-              setProductToDelete(null);
+              axios
+                .delete(
+                  `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart/${item.id}.json`
+                )
+                .then(() => {
+                  setproductAddedWishListButtonBoolean(true);
+                  setTimeout(
+                    () => setproductAddedWishListButtonBoolean(false),
+                    2000
+                  );
+                  console.log("added to wishlist");
+                  dispatch(
+                    cartReduxActions.removeItemFromCartFunction(item.id)
+                  );
+                  dispatch(cartReduxActions.addItemInWishlistFunction(item));
+                  setIsModalVisible(!isModalVisible);
+                  setProductToDelete(null);
+                });
             });
         });
     } catch (error) {

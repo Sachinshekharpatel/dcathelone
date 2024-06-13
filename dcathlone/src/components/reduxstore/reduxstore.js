@@ -14,6 +14,11 @@ const cartSlice = createSlice({
       console.log(action.payload);
       state.SingleProductDetail = action.payload;
     },
+    removeItemFromWishListFunction: (state, action) => {
+      state.wishListArray = state.wishListArray.filter(
+        (item) => item.id !== action.payload
+      );
+    },
     fetchFromDatabaseWishListFunction: (state, action) => {
       state.wishListArray = action.payload;
     },

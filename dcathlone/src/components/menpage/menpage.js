@@ -588,7 +588,7 @@ const MenPage = () => {
                       <p className="text-sm text-[13px] font-bold">
                         {product.title.split(" ").slice(0, 2).join(" ")}
                       </p>
-                      <p className=" mt-1 text-[11px] font-semibold">
+                      <p className="mt-1 text-[11px] font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
                         {product.title}
                       </p>
                       <p className="text-lg mt-1 mb-1 text-[11px] font-bold">
