@@ -243,7 +243,7 @@ const SignupPage = () => {
               to="https://policies.google.com/terms"
               target="_blank cursor-pointer underline "
             >
-              their terms of service
+              <span className="cursor-pointer underline">their terms of service</span>
             </Link>
           </p>
         </div>

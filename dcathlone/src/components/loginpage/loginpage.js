@@ -9,11 +9,11 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [clickOnPhoneNumberOrEmail, setClickOnPhoneNumberOrEmail] =
     useState("email");
-    const [otpSend, setOtpSend] = useState(false);
+  const [otpSend, setOtpSend] = useState(false);
 
-    const nextButtonClickOtpHandler = () => {
-      setOtpSend(true);
-    };
+  const nextButtonClickOtpHandler = () => {
+    setOtpSend(true);
+  };
   return (
     <div>
       <div className="sticky top-0 bg-slate-50  w-full px-6 py-4 flex">
@@ -115,7 +115,10 @@ const LoginPage = () => {
                   </div>
                 )}
 
-                <button onClick={() => nextButtonClickOtpHandler()} className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]">
+                <button
+                  onClick={() => nextButtonClickOtpHandler()}
+                  className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]"
+                >
                   NEXT
                 </button>
 
@@ -241,7 +244,9 @@ const LoginPage = () => {
               to="https://policies.google.com/terms"
               target="_blank cursor-pointer underline "
             >
-              their terms of service
+              <span className="cursor-pointer underline">
+                their terms of service
+              </span>
             </Link>
           </p>
         </div>
