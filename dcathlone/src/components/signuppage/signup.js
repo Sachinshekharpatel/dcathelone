@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import homeimgpng from "./homeimg.png";
 import loginpageImg from "./dcathlonlogin.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import indiaFlag from "./indiaflag.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -10,7 +10,11 @@ const SignupPage = () => {
   const navigate = useNavigate();
   const [clickOnPhoneNumberOrEmail, setClickOnPhoneNumberOrEmail] =
     useState("email");
+  const [otpSend, setOtpSend] = useState(false);
 
+  const nextButtonClickOtpHandler = () => {
+    setOtpSend(true);
+  };
   return (
     <div>
       <div className="w-full px-6 py-4 sticky top-0 bg-slate-50 flex">
@@ -26,7 +30,7 @@ const SignupPage = () => {
         </div>
         <div className="w-1/2">
           <div className="flex items-center ml-1">
-            <a href="/" className="ml-1 cursor-pointer">
+            <Link to="/" className="ml-1 cursor-pointer">
               <svg
                 viewBox="0 0 188 28"
                 fill="none"
@@ -42,107 +46,181 @@ const SignupPage = () => {
                   fill="#3643BA"
                 ></path>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
       <div className="w-full md:flex">
         <div className="hidden md:block fixed top-[60px] left-0 h-full w-1/2">
-          <img src={loginpageImg} alt="Login Page" className="h-full w-full object-cover" />
+          <img
+            src={loginpageImg}
+            alt="Login Page"
+            className="h-full w-full object-cover"
+          />
         </div>
+
         <div className="md:w-1/2 ml-auto p-8">
-          <p className="text-3xl font-semibold">Let's go!</p>
-          <p className="mt-5 w-full text-sm font-semibold">
-            Create an account once and log all Decathlon sites and partners in
-            one click!
-          </p>
-
-          <div className="flex mt-5 w-full ">
-            <div
-              onClick={() => setClickOnPhoneNumberOrEmail("email")}
-              className={`w-1/2 text-center ${
-                clickOnPhoneNumberOrEmail == "email"
-                  ? "border-blue-500 border-b-2"
-                  : "border-gray-400 border-b  text-gray-400"
-              }`}
-            >
-              <p className="cursor-pointer mt-5 text-lg  ">E-mail</p>
-            </div>
-            <div
-              onClick={() => setClickOnPhoneNumberOrEmail("phoneNumber")}
-              className={`w-1/2 text-center ${
-                clickOnPhoneNumberOrEmail == "phoneNumber"
-                  ? "border-blue-500 border-b-2 "
-                  : "border-gray-400 border-b  text-gray-400"
-              }`}
-            >
-              {" "}
-              <p className="cursor-pointer mt-5 text-lg ">Phone number</p>
-            </div>
-          </div>
-
-          {clickOnPhoneNumberOrEmail == "email" && (
+          {!otpSend && (
             <>
-              <p className="mt-3 w-full text-lg">Enter an email address</p>
-              <input
-                className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
-                placeholder="Email"
-              />
+              <div>
+                <p className="text-3xl font-semibold">Login</p>
+                <p className="mt-5 w-full text-sm font-semibold">
+                  Go to your DECATHLON account here.
+                </p>
+
+                <div className="flex mt-5 w-full ">
+                  <div
+                    onClick={() => setClickOnPhoneNumberOrEmail("email")}
+                    className={`w-1/2 text-center ${
+                      clickOnPhoneNumberOrEmail == "email"
+                        ? "border-blue-500 border-b-2"
+                        : "border-gray-400 border-b  text-gray-400"
+                    }`}
+                  >
+                    <p className="cursor-pointer mt-5 text-lg  ">E-mail</p>
+                  </div>
+                  <div
+                    onClick={() => setClickOnPhoneNumberOrEmail("phoneNumber")}
+                    className={`w-1/2 text-center ${
+                      clickOnPhoneNumberOrEmail == "phoneNumber"
+                        ? "border-blue-500 border-b-2 "
+                        : "border-gray-400 border-b  text-gray-400"
+                    }`}
+                  >
+                    {" "}
+                    <p className="cursor-pointer mt-5 text-lg ">Phone number</p>
+                  </div>
+                </div>
+
+                {clickOnPhoneNumberOrEmail == "email" && (
+                  <>
+                    <p className="mt-3 w-full text-lg">
+                      Enter an email address
+                    </p>
+                    <input
+                      className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
+                      placeholder="Email"
+                    />
+                  </>
+                )}
+                {clickOnPhoneNumberOrEmail == "phoneNumber" && (
+                  <div className="items-center mt-3">
+                    <p className="mt-3 mb-2 w-full text-lg">
+                      Enter a phone number
+                    </p>
+                    <PhoneInput
+                      className="w-full border-gray-400 hover:shadow-blue-border"
+                      country="in"
+                      enableSearch
+                      placeholder="Mobile phone number"
+                    />
+                  </div>
+                )}
+
+                <button onClick={() => nextButtonClickOtpHandler()} className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]">
+                  NEXT
+                </button>
+
+                <p className="mt-5 w-full text-[17px] mb-2">Social Login</p>
+                <div className="flex gap-4">
+                  <div className="border align-center hover:bg-blue-100 px-2 pt-2">
+                    <button type="button" aria-label="GOOGLE">
+                      <img
+                        alt="google"
+                        src="https://login.decathlon.net/assets/google-CXYtgH5h.svg"
+                      />
+                    </button>
+                  </div>
+                  <div className="border align-center  hover:bg-blue-100 px-2 pt-2">
+                    <button type="button" aria-label="FACEBOOK">
+                      <img
+                        alt="facebook"
+                        src="https://login.decathlon.net/assets/facebook-WuuN3sW7.svg"
+                      />
+                    </button>
+                  </div>
+                  <div className="border align-center  hover:bg-blue-100 px-2 pt-2">
+                    <button type="button" id="IN0903APP" aria-label="APPLE">
+                      <img
+                        alt="apple"
+                        src="https://login.decathlon.net/assets/apple-BbTnnE8R.svg"
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                <p className="mt-5 w-full text-[17px] font-semibold">
+                  Already have an account ?
+                </p>
+                <p
+                  onClick={() => navigate("/login")}
+                  className="cursor-pointer mt-5 w-full underline "
+                >
+                  Login
+                </p>
+              </div>
             </>
           )}
-          {clickOnPhoneNumberOrEmail == "phoneNumber" && (
-            <div className="items-center mt-3">
-              <p className="mt-3 mb-2  w-full text-lg">Enter a phone number</p>
-              <PhoneInput
-                className="w-full border-gray-400 hover:shadow-blue-border"
-                country="in"
-                enableSearch
-                placeholder="Mobile phone number"
-              />
+          {/* OTP Enter */}
+          {otpSend && (
+            <div className="p-10">
+              <p className="cursor-pointer font-bold text-center mt-9 w-full text-[22px]">
+                Enter the code you received:
+              </p>
+              <div className="flex mt-9">
+                <p className="cursor-pointer font-bold text-center mt-9 w-full text-[16px]">
+                  (+91) 8518093478
+                </p>
+                <p
+                  onClick={() => setOtpSend(false)}
+                  className=" underline cursor-pointer font-bold text-center mt-9 w-full text-[16px]"
+                >
+                  EDIT
+                </p>
+              </div>
+              <div className="flex">
+                <p className="cursor-pointer text-center w-full text-[16px]">
+                  I didn't receive the code.
+                </p>
+                <p className="text-blue-500 text-center cursor-pointer w-full text-[16px]">
+                  Send again
+                </p>
+              </div>
+              <div className="flex mt-9 text-center justify-center mr-[25px] ">
+                <input
+                  className="border h-[40px] w-[40px]"
+                  type="number"
+                ></input>
+                <input
+                  className="border h-[40px] w-[40px]"
+                  type="number"
+                ></input>
+                <input
+                  className="border h-[40px] w-[40px]"
+                  type="number"
+                ></input>
+                <input
+                  className="border h-[40px] w-[40px]"
+                  type="number"
+                ></input>
+                <input
+                  className="border h-[40px] w-[40px]"
+                  type="number"
+                ></input>
+                <input
+                  className="border h-[40px] w-[40px]"
+                  type="number"
+                ></input>
+              </div>
+              <button
+                disabled
+                className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]"
+              >
+                NEXT
+              </button>
             </div>
           )}
-
-          <button className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]">
-            NEXT
-          </button>
-
-          <p className="mt-5 w-full text-[17px] mb-2">Social Login</p>
-          <div className="flex gap-4">
-            <div className="border align-center hover:bg-blue-100 px-2 pt-2">
-              <button type="button" aria-label="GOOGLE">
-                <img
-                  alt="google"
-                  src="https://login.decathlon.net/assets/google-CXYtgH5h.svg"
-                />
-              </button>
-            </div>
-            <div className="border align-center  hover:bg-blue-100 px-2 pt-2">
-              <button type="button" aria-label="FACEBOOK">
-                <img
-                  alt="facebook"
-                  src="https://login.decathlon.net/assets/facebook-WuuN3sW7.svg"
-                />
-              </button>
-            </div>
-            <div className="border align-center  hover:bg-blue-100 px-2 pt-2">
-              <button type="button" id="IN0903APP" aria-label="APPLE">
-                <img
-                  alt="apple"
-                  src="https://login.decathlon.net/assets/apple-BbTnnE8R.svg"
-                />
-              </button>
-            </div>
-          </div>
-
-          <p className="mt-5 w-full text-[17px] font-semibold">
-            Already have an account ?
-          </p>
-          <p
-            onClick={() => navigate("/login")}
-            className="cursor-pointer mt-5 w-full underline "
-          >
-            Login
-          </p>
+          {/* OTP Enter complete */}
           <p className="cursor-pointer mt-9 w-full text-[15px]">
             Having trouble logging in ? Privacy
           </p>
@@ -153,20 +231,20 @@ const SignupPage = () => {
           </div>
           <p className=" mt-9 w-full text-[13px] text-gray-400 ">
             This site is protected by reCaptcha.{" "}
-            <a
-              href="https://policies.google.com/privacy"
+            <Link
+              to="https://policies.google.com/privacy"
               target="_blank"
               className="cursor-pointer underline"
             >
               Google Privacy Policy
-            </a>{" "}
+            </Link>{" "}
             applies as well as{" "}
-            <a
-              href="https://policies.google.com/terms"
+            <Link
+              to="https://policies.google.com/terms"
               target="_blank cursor-pointer underline "
             >
               their terms of service
-            </a>
+            </Link>
           </p>
         </div>
       </div>
