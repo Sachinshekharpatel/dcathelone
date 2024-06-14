@@ -10,6 +10,8 @@ import CartPage from "./components/cartpage/cartpage";
 import MenPage from "./components/menpage/menpage";
 import WomenPage from "./components/womenpage/womenpage";
 import WishList from "./components/wishlist/wishlist";
+import LoginPage from "./components/loginpage/loginpage";
+import SignupPage from "./components/signuppage/signup";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +38,9 @@ function App() {
         .then((res) => {
           if (res.data !== null) {
             const dataArray = Object.values(res.data);
-            dispatch(cartReduxActions.fetchFromDatabaseWishListFunction(dataArray));
+            dispatch(
+              cartReduxActions.fetchFromDatabaseWishListFunction(dataArray)
+            );
           } else {
             dispatch(cartReduxActions.fetchFromDatabaseWishListFunction([]));
           }
@@ -50,6 +54,8 @@ function App() {
     <div>
       <Router>
         <Routes>
+        <Route path="/signup" element={<SignupPage />}></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/cartpage" element={<CartPage />}></Route>
           <Route
             path="/productdetailpage"
