@@ -277,7 +277,7 @@ const CartPage = () => {
 
   return (
     <div className="w-full" style={{ backgroundColor: "#F5F4F5" }}>
-      <div className="w-full flex bg-slate-100 sticky top-0 justify-between">
+      <div className="w-full flex bg-slate-50 sticky top-0 justify-between">
         <div onClick={() => navigate("/")} className="p-4 cursor-pointer">
           <svg
             viewBox="0 0 188 28"
