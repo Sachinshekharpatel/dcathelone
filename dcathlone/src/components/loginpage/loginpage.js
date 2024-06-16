@@ -1,19 +1,102 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import homeimgpng from "./homeimg.png";
 import loginpageImg from "./dcathlonlogin.png";
 import { Link, useNavigate } from "react-router-dom";
 import indiaFlag from "./indiaflag.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import axios from "axios";
+import {
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "../firebase/firebase";
+// AIzaSyAllgfwKiZq4fpktO4NyfuZANG6weowTM4  [firebase project api , named of project = dcathelone]
+
 const LoginPage = () => {
+  const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
+  const [wrongCredential, setWrongCredential] = useState(false);
   const [clickOnPhoneNumberOrEmail, setClickOnPhoneNumberOrEmail] =
     useState("email");
   const [otpSend, setOtpSend] = useState(false);
-
+  const enteredEmailRef = useRef("");
+  const enteredPasswordRef = useRef("");
   const nextButtonClickOtpHandler = () => {
     setOtpSend(true);
   };
+
+  const signupWithGoogle = async () => {
+    try {
+      const response = await signInWithPopup(auth, googleProvider);
+      // console.log(response);
+      localStorage.setItem(
+        "DcathelonUserEmail",
+        JSON.stringify(response.user.email)
+      );
+      localStorage.setItem(
+        "DcathelonAccessToken",
+        JSON.stringify(response.user.accessToken)
+      );
+      navigate("/");
+    } catch (error) {
+      console.log("error while signing in with google", error);
+    }
+  };
+
+  const signupWithFacebook = async () => {
+    alert("This feature is on progress...please try alterate way to signin.");
+  };
+
+  const signupWithApple = async () => {
+    alert("This feature is on progress...please try alterate way to signin.");
+  };
+
+  const signInButtonClickHandler = async () => {
+    if (enteredEmailRef.current.value && enteredPasswordRef.current.value) {
+      try {
+        const res = await axios.post(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAllgfwKiZq4fpktO4NyfuZANG6weowTM4",
+          {
+            email: enteredEmailRef.current.value,
+            password: enteredPasswordRef.current.value,
+            returnSecureToken: true,
+          }
+        );
+
+        if (res.status === 200) {
+          console.log("response while signing in with custom email", res);
+          localStorage.setItem(
+            "DcathelonUserEmail",
+            JSON.stringify(res.data.email)
+          );
+          localStorage.setItem(
+            "DcathelonAccessToken",
+            JSON.stringify(res.data.idToken)
+          );
+          navigate("/");
+        } else {
+          setWrongCredential(true);
+          setTimeout(() => {
+            setWrongCredential(false);
+          }, 2000);
+        }
+      } catch (error) {
+        console.error("Error while signing in with custom email", error);
+        setWrongCredential(true);
+        setTimeout(() => {
+          setWrongCredential(false);
+        }, 2000);
+      } finally {
+        enteredEmailRef.current.value = "";
+        enteredPasswordRef.current.value = "";
+      }
+    }
+  };
+
   return (
     <div>
       <div className="sticky top-0 bg-slate-50  w-full px-6 py-4 flex">
@@ -29,7 +112,7 @@ const LoginPage = () => {
         </div>
         <div className="w-1/2">
           <div className="flex items-center ml-1">
-            <a href="/" className="ml-1 cursor-pointer">
+            <Link to="/" className="ml-1 cursor-pointer">
               <svg
                 viewBox="0 0 188 28"
                 fill="none"
@@ -45,7 +128,7 @@ const LoginPage = () => {
                   fill="#3643BA"
                 ></path>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -58,6 +141,13 @@ const LoginPage = () => {
           />
         </div>
         <div className="md:w-1/2 ml-auto p-8">
+          {wrongCredential && (
+            <div className="fixed inset-0 flex items-center justify-center md:absolute md:inset-auto md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2">
+              <button className="text-[14px] px-5 py-3 rounded-sm bg-gray-900 text-white border">
+                User not found or wrong credentials
+              </button>
+            </div>
+          )}
           {!otpSend && (
             <>
               <div>
@@ -98,7 +188,29 @@ const LoginPage = () => {
                     <input
                       className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
                       placeholder="Email"
+                      ref={enteredEmailRef}
+                      onChange={(e) => {
+                        enteredEmailRef.current.value = e.target.value;
+                        // console.log(enteredPasswordRef.current.value);
+                      }}
                     />
+                    <p className="mt-3 w-full text-lg">Enter an password</p>
+                    <input
+                      type="password"
+                      className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
+                      placeholder="Enter Password"
+                      ref={enteredPasswordRef}
+                      onChange={(e) => {
+                        enteredPasswordRef.current.value = e.target.value;
+                        // console.log(enteredPasswordRef.current.value);
+                      }}
+                    />
+                    <button
+                      onClick={() => signInButtonClickHandler()}
+                      className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]"
+                    >
+                      Sign in
+                    </button>
                   </>
                 )}
                 {clickOnPhoneNumberOrEmail == "phoneNumber" && (
@@ -106,25 +218,25 @@ const LoginPage = () => {
                     <p className="mt-3 mb-2 w-full text-lg">
                       Enter a phone number
                     </p>
-                    <PhoneInput
-                      className="w-full border-gray-400 hover:shadow-blue-border"
-                      country="in"
-                      enableSearch
+                    <input
+                      className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
                       placeholder="Mobile phone number"
                     />
+                    <button
+                      onClick={() => nextButtonClickOtpHandler()}
+                      className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]"
+                    >
+                      NEXT
+                    </button>
                   </div>
                 )}
 
-                <button
-                  onClick={() => nextButtonClickOtpHandler()}
-                  className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]"
-                >
-                  NEXT
-                </button>
-
                 <p className="mt-5 w-full text-[17px] mb-2">Social Login</p>
                 <div className="flex gap-4">
-                  <div className="border align-center hover:bg-blue-100 px-2 pt-2">
+                  <div
+                    onClick={() => signupWithGoogle()}
+                    className="border align-center hover:bg-blue-100 px-2 pt-2"
+                  >
                     <button type="button" aria-label="GOOGLE">
                       <img
                         alt="google"
@@ -132,7 +244,10 @@ const LoginPage = () => {
                       />
                     </button>
                   </div>
-                  <div className="border align-center  hover:bg-blue-100 px-2 pt-2">
+                  <div
+                    onClick={() => signupWithFacebook()}
+                    className="border align-center  hover:bg-blue-100 px-2 pt-2"
+                  >
                     <button type="button" aria-label="FACEBOOK">
                       <img
                         alt="facebook"
@@ -140,7 +255,10 @@ const LoginPage = () => {
                       />
                     </button>
                   </div>
-                  <div className="border align-center  hover:bg-blue-100 px-2 pt-2">
+                  <div
+                    onClick={() => signupWithApple()}
+                    className="border align-center  hover:bg-blue-100 px-2 pt-2"
+                  >
                     <button type="button" id="IN0903APP" aria-label="APPLE">
                       <img
                         alt="apple"
@@ -151,7 +269,7 @@ const LoginPage = () => {
                 </div>
 
                 <p className="mt-5 w-full text-[17px] font-semibold">
-                  Already have an account ?
+                  No account ? Create one !
                 </p>
                 <p
                   onClick={() => navigate("/signup")}

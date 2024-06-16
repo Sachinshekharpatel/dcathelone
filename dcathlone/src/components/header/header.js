@@ -2,20 +2,28 @@ import React, { useState, useEffect, useRef } from "react";
 import "./header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 const Header = () => {
   const [transForm, setTransForm] = useState(false);
   const navigate = useNavigate();
   const itemInCart = useSelector(
     (state) => state.itemInDetailPage.cartTotalItemsArray
   );
+  const userEmail = localStorage.getItem("DcathelonUserEmail") || null;
+  const userAccessToken = localStorage.getItem("DcathelonAccessToken") || null;
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [accountBtnToggle, setAccountBtnToggle] = useState(false);
   const dropdownRef = useRef(null);
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
   };
+  const toggleAccountBtn = () => {
+    setAccountBtnToggle(!accountBtnToggle);
+  };
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setDropdownVisible(false);
+      setAccountBtnToggle(false);
     }
   };
 
@@ -77,25 +85,25 @@ const Header = () => {
                     className="absolute mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10"
                   >
                     <div className="py-1">
-                      <a
-                        href="/menpage"
+                      <Link
+                        to="/menpage"
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                       >
                         Men Page
-                      </a>
-                      <a
-                        href="/womenpage"
+                      </Link>
+                      <Link
+                        to="/womenpage"
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                       >
                         Women Page
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 )}
               </div>
 
               <div className="flex items-center ml-2">
-                <a href="/" className="ml-1 cursor-pointer">
+                <Link to="/" className="ml-1 cursor-pointer">
                   <svg
                     viewBox="0 0 188 28"
                     fill="none"
@@ -111,7 +119,7 @@ const Header = () => {
                       fill="#3643BA"
                     ></path>
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="cursor-pointer mt-1 relative flex-1 w-[300px] md:w-[440px] md:ml-[50px]">
@@ -147,13 +155,27 @@ const Header = () => {
           </div>
           <div className="md:flex items-center">
             <div className="flex items-center ">
-              <Link 
-              to={"/login"}
-                type="button"
-                className="md:hidden px-2.5 py-1.5 mr-2 border-1 border-black uppercase border text-[9px]  rounded-full text-10"
-              >
-                Signin
-              </Link>
+              {userAccessToken !== null && userEmail !== null ? (
+                <Link
+                  onClick={() => {
+                    localStorage.removeItem("DcathelonUserEmail");
+                    localStorage.removeItem("DcathelonAccessToken");
+                    navigate("/");
+                  }}
+                  type="button"
+                  className="md:hidden px-2.5 py-1.5 mr-2 border-1 border-black uppercase border text-[9px]  rounded-full text-10"
+                >
+                  Logout
+                </Link>
+              ) : (
+                <Link
+                  to={"/login"}
+                  type="button"
+                  className="md:hidden px-2.5 py-1.5 mr-2 border-1 border-black uppercase border text-[9px]  rounded-full text-10"
+                >
+                  SignIn
+                </Link>
+              )}
               <div className="md:mr-3 mb-2 md:mb-0">
                 <p className=" flex text-center ml-1 text-grey-900 font-semibold text-[12px] mr-1">
                   <span> Delivery </span>
@@ -174,26 +196,89 @@ const Header = () => {
               </div>
             </div>
             <div className="flex md:items-center  ">
-              <Link to="/login" className="hidden md:block mx-1" href="/">
-                <div className="relative flex flex-col group">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    stroke-width="1.5"
-                    className="mx-auto"
-                  >
-                    <path
-                      d="M5 22C5 16.1 8.1 12.3 12 12.2C15.9 12.1 19 16 19 21.9M12 2.79999C10.1 2.79999 8.5 4.39999 8.5 6.29999C8.5 8.19999 10.1 9.79999 12 9.79999C13.9 9.79999 15.5 8.19999 15.5 6.29999C15.5 4.39999 13.9 2.79999 12 2.79999Z"
-                      stroke="currentColor"
-                    ></path>
-                  </svg>
-                  <p className="text-center font-semibold text-[10px]">
-                    SignIn
-                  </p>
-                </div>
+              <Link
+                onClick={() => toggleAccountBtn()}
+                className="hidden md:block mx-1"
+                href="/"
+              >
+                {userEmail !== null && userAccessToken !== null && (
+                  <div className="relative flex flex-col group">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      stroke-width="1.5"
+                      className="mx-auto"
+                    >
+                      <path
+                        d="M5 22C5 16.1 8.1 12.3 12 12.2C15.9 12.1 19 16 19 21.9M12 2.79999C10.1 2.79999 8.5 4.39999 8.5 6.29999C8.5 8.19999 10.1 9.79999 12 9.79999C13.9 9.79999 15.5 8.19999 15.5 6.29999C15.5 4.39999 13.9 2.79999 12 2.79999Z"
+                        stroke="currentColor"
+                      ></path>
+                    </svg>
+                    <p className="text-center font-semibold text-[10px]">
+                      Account
+                    </p>
+                  </div>
+                )}
+                {userEmail === null && userAccessToken === null && (
+                  <Link to={"/login"} className="relative flex flex-col group">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      stroke-width="1.5"
+                      className="mx-auto"
+                    >
+                      <path
+                        d="M5 22C5 16.1 8.1 12.3 12 12.2C15.9 12.1 19 16 19 21.9M12 2.79999C10.1 2.79999 8.5 4.39999 8.5 6.29999C8.5 8.19999 10.1 9.79999 12 9.79999C13.9 9.79999 15.5 8.19999 15.5 6.29999C15.5 4.39999 13.9 2.79999 12 2.79999Z"
+                        stroke="currentColor"
+                      ></path>
+                    </svg>
+                    <p className="text-center font-semibold text-[10px]">
+                      Sign in
+                    </p>
+                  </Link>
+                )}
+                {userEmail !== null &&
+                  userAccessToken !== null &&
+                  accountBtnToggle && (
+                    <div
+                      ref={dropdownRef}
+                      className="absolute mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10"
+                    >
+                      <div className="py-1">
+                        <div className="block text-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                          My Profile
+                        </div>
+                        <div className="block text-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                          Order & Returns
+                        </div>
+
+                        <div className="block text-center  px-4 py-2 text-gray-700 hover:bg-gray-100">
+                          Wallet
+                        </div>
+
+                        <div className="block px-4 py-2 text-center text-gray-700 hover:bg-gray-100">
+                          My Addresses{" "}
+                        </div>
+
+                        <div
+                          onClick={() => {
+                            localStorage.removeItem("DcathelonUserEmail");
+                            localStorage.removeItem("DcathelonAccessToken");
+                            navigate("/");
+                          }}
+                          className="block px-4 py-2 text-center text-orange-700 hover:bg-gray-100"
+                        >
+                          Logout
+                        </div>
+                      </div>
+                    </div>
+                  )}
               </Link>
               <Link to="/store" className="mx-5">
                 <div className="relative flex flex-col group">
@@ -216,8 +301,8 @@ const Header = () => {
                   </p>
                 </div>
               </Link>
-              <Link  to="/wishlist">
-                <div >
+              <Link to="/wishlist">
+                <div>
                   <div className="relative ">
                     <svg
                       viewBox="0 0 24 24"
@@ -241,9 +326,11 @@ const Header = () => {
               </Link>
               <div className="mx-5" onClick={() => navigate("/cartpage")}>
                 <div className="relative">
-                  {itemInCart.length>0 && <div className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 pt- -mt-2 -mr-3 font-bold bg-[#3643BA] text-white rounded-full xl:w-5 xl:h-5 text-10 xl:text-12">
-                    {itemInCart.length ? <p>{itemInCart.length}</p> : null}
-                  </div>}
+                  {itemInCart.length > 0 && (
+                    <div className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 pt- -mt-2 -mr-3 font-bold bg-[#3643BA] text-white rounded-full xl:w-5 xl:h-5 text-10 xl:text-12">
+                      {itemInCart.length ? <p>{itemInCart.length}</p> : null}
+                    </div>
+                  )}
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"

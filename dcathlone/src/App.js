@@ -12,7 +12,6 @@ import WomenPage from "./components/womenpage/womenpage";
 import WishList from "./components/wishlist/wishlist";
 import LoginPage from "./components/loginpage/loginpage";
 import SignupPage from "./components/signuppage/signup";
-
 function App() {
   const dispatch = useDispatch();
 
@@ -54,7 +53,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-        <Route path="/signup" element={<SignupPage />}></Route>
+          <Route path="/signup" element={<SignupPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/cartpage" element={<CartPage />}></Route>
           <Route

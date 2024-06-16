@@ -18,6 +18,8 @@ const HomePage = () => {
   const [transForm, setTransForm] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
+  const userEmail = localStorage.getItem("DcathelonUserEmail") || null;
+  const userAccessToken = localStorage.getItem("DcathelonAccessToken") || null;
   const navigate = useNavigate();
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -26,6 +28,8 @@ const HomePage = () => {
 
     return () => clearTimeout(timer);
   }, [transForm]);
+
+ 
 
   useEffect(() => {
     const intervalId = setInterval(() => {

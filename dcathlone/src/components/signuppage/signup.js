@@ -1,20 +1,94 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import homeimgpng from "./homeimg.png";
 import loginpageImg from "./dcathlonlogin.png";
 import { Link, useNavigate } from "react-router-dom";
 import indiaFlag from "./indiaflag.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
+import OtpInput from "react-otp-input";
+import {
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "../firebase/firebase";
+import axios from "axios";
+// AIzaSyAllgfwKiZq4fpktO4NyfuZANG6weowTM4  [firebase project api , named of project = dcathelone]
 const SignupPage = () => {
   const navigate = useNavigate();
   const [clickOnPhoneNumberOrEmail, setClickOnPhoneNumberOrEmail] =
     useState("email");
+  const [wrongCredential, setWrongCredential] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [otpSend, setOtpSend] = useState(false);
+  const [otp, setOtp] = useState("");
+  const googleProvider = new GoogleAuthProvider();
+  const [userRegistered, setUserRegistered] = useState(false);
+  const enteredEmailOrPhoneNumber = useRef("");
+  const enteredPasswordRef = useRef("");
+  const enteredConfirmPasswordRef = useRef("");
 
-  const nextButtonClickOtpHandler = () => {
+  const nextButtonClickOtpSendHandler = async () => {
     setOtpSend(true);
   };
+
+  const signupWithGoogle = async () => {
+    try {
+      const response = await signInWithPopup(auth, googleProvider);
+      setUserRegistered(true);
+      setTimeout(() => {
+        navigate("/login");
+        setUserRegistered(false);
+      }, 2000);
+    } catch (error) {}
+  };
+
+  const signupWithFacebook = async () => {
+    alert("This feature is on progress...please try alterate way to signup.");
+  };
+
+  const signupWithApple = async () => {
+    alert("This feature is on progress...please try alterate way to signup.");
+  };
+
+  const signUpButtonClickHandler = () => {
+    if (
+      enteredPasswordRef.current.value ===
+      enteredConfirmPasswordRef.current.value
+    ) {
+      try {
+        axios
+          .post(
+            "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAllgfwKiZq4fpktO4NyfuZANG6weowTM4",
+            {
+              email: enteredEmailOrPhoneNumber.current.value,
+              password: enteredPasswordRef.current.value,
+              returnSecureToken: true,
+            }
+          )
+          .then((response) => {
+            // console.log("response while signing in with custom email", response);
+            setUserRegistered(true);
+            setTimeout(() => {
+              navigate("/login");
+              setUserRegistered(false);
+            }, 2000);
+          });
+      } catch (error) {
+        console.log("error while signing in with custom email", error);
+      }
+    } else {
+      setWrongCredential(true);
+      setTimeout(() => {
+        setWrongCredential(false);
+      }, 2000);
+      enteredConfirmPasswordRef.current.value = "";
+      enteredPasswordRef.current.value = "";
+    }
+  };
+
   return (
     <div>
       <div className="w-full px-6 py-4 sticky top-0 bg-slate-50 flex">
@@ -60,12 +134,27 @@ const SignupPage = () => {
         </div>
 
         <div className="md:w-1/2 ml-auto p-8">
+          {wrongCredential && (
+            <div className="fixed inset-0 flex items-center justify-center md:absolute md:inset-auto md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2">
+              <button className="text-[14px] px-5 py-3 rounded-sm bg-gray-900 text-white border">
+                Password & Confirm Password should be same
+              </button>
+            </div>
+          )}
+          {userRegistered && (
+            <div className="fixed inset-0 flex items-center justify-center">
+              <button className="text-[14px] px-5 py-3 rounded-sm bg-gray-900 text-white border">
+                User Registered Successfully
+              </button>
+            </div>
+          )}
           {!otpSend && (
             <>
               <div>
-                <p className="text-3xl font-semibold">Login</p>
+                <p className="text-3xl font-semibold">Lets,go</p>
                 <p className="mt-5 w-full text-sm font-semibold">
-                  Go to your DECATHLON account here.
+                  Create an account once and log all Decathlon sites and
+                  partners in one click!
                 </p>
 
                 <div className="flex mt-5 w-full ">
@@ -99,31 +188,81 @@ const SignupPage = () => {
                     </p>
                     <input
                       className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
-                      placeholder="Email"
+                      placeholder="Enter Email"
+                      ref={enteredEmailOrPhoneNumber}
+                      onChange={(e) => {
+                        enteredEmailOrPhoneNumber.current.value =
+                          e.target.value;
+                        // console.log(enteredEmailOrPhoneNumber.current.value);
+                      }}
                     />
+                    <p className="mt-3 w-full text-lg">Enter an password</p>
+                    <input
+                      type="password"
+                      className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
+                      placeholder="Enter Password"
+                      ref={enteredPasswordRef}
+                      onChange={(e) => {
+                        enteredPasswordRef.current.value = e.target.value;
+                        // console.log(enteredPasswordRef.current.value);
+                      }}
+                    />
+                    <p className="mt-3 w-full text-lg">Confirm password</p>
+                    <input
+                      type="password"
+                      className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
+                      placeholder="Confirm Password"
+                      ref={enteredConfirmPasswordRef}
+                      onChange={(e) => {
+                        enteredConfirmPasswordRef.current.value =
+                          e.target.value;
+                        // console.log(enteredConfirmPasswordRef.current.value);
+                      }}
+                    />
+                    <button
+                      onClick={() => signUpButtonClickHandler()}
+                      className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]"
+                    >
+                      Sign up
+                    </button>
                   </>
                 )}
                 {clickOnPhoneNumberOrEmail == "phoneNumber" && (
-                  <div className="items-center mt-3">
-                    <p className="mt-3 mb-2 w-full text-lg">
-                      Enter a phone number
-                    </p>
-                    <PhoneInput
-                      className="w-full border-gray-400 hover:shadow-blue-border"
-                      country="in"
-                      enableSearch
-                      placeholder="Mobile phone number"
-                    />
-                  </div>
+                  <>
+                    <div className="items-center mt-3">
+                      <p className="mt-3 mb-2 w-full text-lg">
+                        Enter a phone number
+                      </p>
+                      <input
+                        className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
+                        country="in"
+                        enableSearch
+                        type="number"
+                        placeholder="Mobile phone number"
+                        ref={enteredEmailOrPhoneNumber}
+                        onChange={(e) => {
+                          enteredEmailOrPhoneNumber.current.value =
+                            e.target.value;
+                          console.log(enteredEmailOrPhoneNumber.current.value);
+                        }}
+                      />
+                    </div>
+                    <div id="recaptcha-container"></div>
+                    <button
+                      onClick={() => nextButtonClickOtpSendHandler()}
+                      className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]"
+                    >
+                      NEXT
+                    </button>
+                  </>
                 )}
-
-                <button onClick={() => nextButtonClickOtpHandler()} className="w-full bg-[#3643BA] text-[15px] text-white mt-5 py-[12px]">
-                  NEXT
-                </button>
 
                 <p className="mt-5 w-full text-[17px] mb-2">Social Login</p>
                 <div className="flex gap-4">
-                  <div className="border align-center hover:bg-blue-100 px-2 pt-2">
+                  <div
+                    onClick={() => signupWithGoogle()}
+                    className="border align-center hover:bg-blue-100 px-2 pt-2"
+                  >
                     <button type="button" aria-label="GOOGLE">
                       <img
                         alt="google"
@@ -131,7 +270,10 @@ const SignupPage = () => {
                       />
                     </button>
                   </div>
-                  <div className="border align-center  hover:bg-blue-100 px-2 pt-2">
+                  <div
+                    onClick={() => signupWithFacebook()}
+                    className="border align-center  hover:bg-blue-100 px-2 pt-2"
+                  >
                     <button type="button" aria-label="FACEBOOK">
                       <img
                         alt="facebook"
@@ -139,7 +281,10 @@ const SignupPage = () => {
                       />
                     </button>
                   </div>
-                  <div className="border align-center  hover:bg-blue-100 px-2 pt-2">
+                  <div
+                    onClick={() => signupWithApple()}
+                    className="border align-center  hover:bg-blue-100 px-2 pt-2"
+                  >
                     <button type="button" id="IN0903APP" aria-label="APPLE">
                       <img
                         alt="apple"
@@ -169,7 +314,7 @@ const SignupPage = () => {
               </p>
               <div className="flex mt-9">
                 <p className="cursor-pointer font-bold text-center mt-9 w-full text-[16px]">
-                  (+91) 8518093478
+                  {enteredEmailOrPhoneNumber.current.value}
                 </p>
                 <p
                   onClick={() => setOtpSend(false)}
@@ -187,30 +332,13 @@ const SignupPage = () => {
                 </p>
               </div>
               <div className="flex mt-9 text-center justify-center mr-[25px] ">
-                <input
-                  className="border h-[40px] w-[40px]"
-                  type="number"
-                ></input>
-                <input
-                  className="border h-[40px] w-[40px]"
-                  type="number"
-                ></input>
-                <input
-                  className="border h-[40px] w-[40px]"
-                  type="number"
-                ></input>
-                <input
-                  className="border h-[40px] w-[40px]"
-                  type="number"
-                ></input>
-                <input
-                  className="border h-[40px] w-[40px]"
-                  type="number"
-                ></input>
-                <input
-                  className="border h-[40px] w-[40px]"
-                  type="number"
-                ></input>
+                <OtpInput
+                  value={otp}
+                  onChange={setOtp}
+                  numInputs={6}
+                  renderSeparator={<span>-</span>}
+                  renderInput={(props) => <input {...props} />}
+                />
               </div>
               <button
                 disabled
@@ -243,7 +371,9 @@ const SignupPage = () => {
               to="https://policies.google.com/terms"
               target="_blank cursor-pointer underline "
             >
-              <span className="cursor-pointer underline">their terms of service</span>
+              <span className="cursor-pointer underline">
+                their terms of service
+              </span>
             </Link>
           </p>
         </div>
