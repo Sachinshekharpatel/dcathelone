@@ -219,6 +219,7 @@ const LoginPage = () => {
                       Enter a phone number
                     </p>
                     <input
+                      type="number"
                       className="w-full border text-[20px] mt-3 border-gray-400 px-5 py-2 hover:shadow-blue-border "
                       placeholder="Mobile phone number"
                     />
