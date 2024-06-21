@@ -30,7 +30,7 @@ const ProductDetailPage = () => {
     productAddedWishlistButtonBoolean,
     setproductAddedWishListButtonBoolean,
   ] = useState(false);
-  const userEmail = localStorage.getItem("DcathelonUserEmail") || 'null';
+  const userEmail = localStorage.getItem("DcathelonUserEmail") || "null";
   useEffect(() => {
     console.log(productToDisplay);
   }, []);
@@ -90,6 +90,7 @@ const ProductDetailPage = () => {
             ...item,
             id: res.data.name,
             quantity: 1,
+            email: userEmail,
           };
           axios
             .put(
@@ -140,7 +141,7 @@ const ProductDetailPage = () => {
                 <img
                   src={productToDisplay.image}
                   alt="Image 1"
-                 className="w-full"
+                  className="w-full"
                 />
                 <img src={image4} alt="Image 4" className="w-full h-70" />
               </div>
@@ -214,14 +215,14 @@ const ProductDetailPage = () => {
                   onClick={() =>
                     productImageToDisplayHandlerOnColorChange(imagebelow1)
                   }
-                   className="cursor-pointer w-24 h-24 bg-[#F4F4F4"
+                  className="cursor-pointer w-24 h-24 bg-[#F4F4F4"
                   src={imagebelow1}
                 ></img>
                 <img
                   onClick={() =>
                     productImageToDisplayHandlerOnColorChange(imagebelow2)
                   }
-                   className="cursor-pointer w-24 h-24 bg-[#F4F4F4"
+                  className="cursor-pointer w-24 h-24 bg-[#F4F4F4"
                   src={imagebelow2}
                 ></img>
                 <img
@@ -500,6 +501,17 @@ const ProductDetailPage = () => {
           <h2 className="mb-2 text-32 font-semibold opacity-80 ">
             Please Select Item To View Details?
           </h2>
+          <button
+            onClick={() => navigate("/store")}
+            className="bg-white flex my-2 border hover:bg-gray-50 font-semibold py-2 px-[60px] rounded"
+          >
+            <span>Continue Shopping</span>
+            <img
+              src="https://cdncontent.decathlon.in/_next/static/chunks/src/assets/img/product/right-arrow.3290f90024272225.svg"
+              className=" img-fluid float-right ml-5 mt-[7px]"
+              alt="Arrow Icon"
+            ></img>
+          </button>
         </div>
       )}
 

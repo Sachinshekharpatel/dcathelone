@@ -46,10 +46,22 @@ function App() {
         )
         .then((res) => {
           if (res.data !== null) {
-            const dataArray = Object.values(res.data);
-            dispatch(
-              cartReduxActions.fetchFromDatabaseWishListFunction(dataArray)
-            );
+            const dataArray1 = Object.values(res.data);
+            if (userEmail !== "null") {
+              const dataArray = dataArray1.filter(
+                (item) => item.email === userEmail
+              );
+              dispatch(
+                cartReduxActions.fetchFromDatabaseWishListFunction(dataArray)
+              );
+            } else {
+              const dataArray = dataArray1.filter(
+                (item) => item.email === userEmail
+              );
+              dispatch(
+                cartReduxActions.fetchFromDatabaseWishListFunction(dataArray)
+              );
+            }
           } else {
             dispatch(cartReduxActions.fetchFromDatabaseWishListFunction([]));
           }
