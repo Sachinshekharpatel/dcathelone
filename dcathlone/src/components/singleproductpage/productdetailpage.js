@@ -30,6 +30,7 @@ const ProductDetailPage = () => {
     productAddedWishlistButtonBoolean,
     setproductAddedWishListButtonBoolean,
   ] = useState(false);
+  const userEmail = localStorage.getItem("DcathelonUserEmail") || 'null';
   useEffect(() => {
     console.log(productToDisplay);
   }, []);
@@ -55,6 +56,7 @@ const ProductDetailPage = () => {
               id: res.data.name,
               size: selectSize,
               quantity: 1,
+              email: userEmail,
             };
             axios
               .put(

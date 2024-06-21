@@ -16,6 +16,7 @@ const images = [imageoneSlide, imageTwoSlide, imageThreeSlide];
 const MenPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userEmail = localStorage.getItem("DcathelonUserEmail") || 'null';
   const [selectSize, setSelectedSize] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
@@ -43,7 +44,7 @@ const MenPage = () => {
     const data = {
       ...productItem,
       image: imageLink,
-    }
+    };
     setProductToAdd(data);
   };
   const toggleModalVisibility = (productItem) => {
@@ -149,7 +150,8 @@ const MenPage = () => {
               ...item,
               id: res.data.name,
               quantity: 1,
-              size: "M",
+              email: userEmail,
+              size: selectSize,
             };
             axios
               .put(
@@ -659,7 +661,10 @@ const MenPage = () => {
               <div className="flex h-[60px] mb-2 w-[100px]">
                 <img
                   onClick={() =>
-                    singleProductImageUpdateModal(productToAdd, productToAdd.image)
+                    singleProductImageUpdateModal(
+                      productToAdd,
+                      productToAdd.image
+                    )
                   }
                   className="cursor-pointer mr-2 border-[2px] p-1 border-blue-900"
                   src={productToAdd.image}

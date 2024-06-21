@@ -24,6 +24,7 @@ const CartPage = () => {
   const totalPrice = useSelector(
     (state) => state.itemInDetailPage.totalPrice || 0
   );
+  const userEmail = localStorage.getItem("DcathelonUserEmail") || "null";
   const discount = totalPrice - (totalPrice / 100) * 20;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const totalAmount = totalPrice - discount;
@@ -368,9 +369,15 @@ const CartPage = () => {
                   <p className="text-[#000000] md:text-[12px]">
                     Rewa, Madhyapradesh, 486001
                   </p>
-                  <button className="text-white text-[12px] md:text-[10px] border-r-emerald-100 mt-4 p-3 bg-[#3643BA]">
-                    LOGIN TO ADD DELIVERY ADDRESS
-                  </button>
+                  {userEmail !== "null" ? (
+                    <button className="text-white text-[12px] md:text-[10px] border-r-emerald-100 mt-4 p-3 bg-[#3643BA]">
+                      UPDATE DELIVERY ADDRESS
+                    </button>
+                  ) : (
+                    <button className="text-white text-[12px] md:text-[10px] border-r-emerald-100 mt-4 p-3 bg-[#3643BA]">
+                      LOGIN TO ADD DELIVERY ADDRESS
+                    </button>
+                  )}
                 </div>
                 <div className=" cursor-pointer w-1/2 ml-2 border-[2px] border-gray-300  p-4">
                   <div className="flex ">
@@ -485,7 +492,7 @@ const CartPage = () => {
                   {totalItemInCart.map((product) => (
                     <div className="flex md:justify-evenly justify-around my-2 border-b-[1px] py-3">
                       <img
-                        className="md:w-1/4 md:h-[170px] w-[100px] h-[100px]"
+                        className="md:w-1/4 md:h-[170px] w-[130px] h-[140px]"
                         src={product.image}
                       ></img>
                       <div className="ml-2">

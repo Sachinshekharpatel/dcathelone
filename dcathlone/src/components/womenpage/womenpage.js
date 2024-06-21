@@ -26,6 +26,7 @@ const WomenPage = () => {
   const [selectSize, setSelectedSize] = useState(null);
   const [productAddedButtonBoolean, setproductAddedButtonBoolean] =
     useState(false);
+  const userEmail = localStorage.getItem("DcathelonUserEmail") || 'null';
   const selectSizeHandlerFunction = (size) => {
     setSelectedSize(size);
   };
@@ -147,7 +148,8 @@ const WomenPage = () => {
               ...item,
               id: res.data.name,
               quantity: 1,
-              size: "M",
+              email: userEmail,
+              size: selectSize,
             };
             axios
               .put(

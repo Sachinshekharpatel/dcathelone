@@ -14,7 +14,7 @@ import LoginPage from "./components/loginpage/loginpage";
 import SignupPage from "./components/signuppage/signup";
 function App() {
   const dispatch = useDispatch();
-
+  const userEmail = localStorage.getItem("DcathelonUserEmail") || "null";
   useEffect(() => {
     try {
       axios
@@ -23,8 +23,18 @@ function App() {
         )
         .then((res) => {
           if (res.data !== null) {
-            const dataArray = Object.values(res.data);
-            dispatch(cartReduxActions.fetchFromDatabaseFunction(dataArray));
+            const dataArray1 = Object.values(res.data);
+            if (userEmail !== "null") {
+              const dataArray = dataArray1.filter(
+                (item) => item.email === userEmail
+              );
+              dispatch(cartReduxActions.fetchFromDatabaseFunction(dataArray));
+            } else {
+              const dataArray = dataArray1.filter(
+                (item) => item.email === userEmail
+              );
+              dispatch(cartReduxActions.fetchFromDatabaseFunction(dataArray));
+            }
           } else {
             dispatch(cartReduxActions.fetchFromDatabaseFunction([]));
           }

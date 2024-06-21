@@ -57,6 +57,7 @@ const LoginPage = () => {
 
   const signInButtonClickHandler = async () => {
     if (enteredEmailRef.current.value && enteredPasswordRef.current.value) {
+    
       try {
         const res = await axios.post(
           "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAllgfwKiZq4fpktO4NyfuZANG6weowTM4",
@@ -78,6 +79,7 @@ const LoginPage = () => {
             JSON.stringify(res.data.idToken)
           );
           navigate("/");
+          window.location.reload(); 
         } else {
           setWrongCredential(true);
           setTimeout(() => {

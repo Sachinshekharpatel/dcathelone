@@ -160,6 +160,7 @@ const Header = () => {
                   onClick={() => {
                     localStorage.removeItem("DcathelonUserEmail");
                     localStorage.removeItem("DcathelonAccessToken");
+                    window.location.reload();
                     navigate("/");
                   }}
                   type="button"
@@ -270,6 +271,7 @@ const Header = () => {
                           onClick={() => {
                             localStorage.removeItem("DcathelonUserEmail");
                             localStorage.removeItem("DcathelonAccessToken");
+                            window.location.reload();
                             navigate("/");
                           }}
                           className="block px-4 py-2 text-center text-orange-700 hover:bg-gray-100"
