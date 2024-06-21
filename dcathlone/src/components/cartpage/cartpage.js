@@ -374,7 +374,7 @@ const CartPage = () => {
                       UPDATE DELIVERY ADDRESS
                     </button>
                   ) : (
-                    <button className="text-white text-[12px] md:text-[10px] border-r-emerald-100 mt-4 p-3 bg-[#3643BA]">
+                    <button onClick={() => navigate("/login")} className="text-white text-[12px] md:text-[10px] border-r-emerald-100 mt-4 p-3 bg-[#3643BA]">
                       LOGIN TO ADD DELIVERY ADDRESS
                     </button>
                   )}
