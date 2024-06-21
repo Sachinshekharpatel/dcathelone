@@ -922,7 +922,7 @@ const CartPage = () => {
             Missing cart items ?
           </h2>
           <button
-            onClick={() => navigate("/menpage")}
+            onClick={() => navigate("/store")}
             className="bg-white flex my-2 border hover:bg-gray-50 font-semibold py-2 px-[60px] rounded"
           >
             <span>Continue Shopping</span>
