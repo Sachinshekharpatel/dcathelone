@@ -485,7 +485,7 @@ const CartPage = () => {
                   {totalItemInCart.map((product) => (
                     <div className="flex md:justify-evenly justify-around my-2 border-b-[1px] py-3">
                       <img
-                        className="md:w-1/4 md:h-auto w-[100px] h-[100px]"
+                        className="md:w-1/4 md:h-[170px] w-[100px] h-[100px]"
                         src={product.image}
                       ></img>
                       <div className="ml-2">
@@ -549,7 +549,7 @@ const CartPage = () => {
                           <h1 className="text-16 font-bold mr-3">
                             ₹ {product.price}
                           </h1>
-                          <span className=" relative text-16 mr-2 text-[#687787]  after:absolute after:h-[1px] after:w-full after:mt-[12px] after:left-0 after:bg-black">
+                          <span className="text-16 mr-3 text-[#687787] line-through">
                             MRP : ₹{" "}
                             {Math.floor(
                               product.price + (product.price * 20) / 100
