@@ -34,6 +34,11 @@ const Header = () => {
     };
   }, []);
 
+  const gotoProfilePageHandler = () => {
+    console.log('hello');
+    navigate("/profile");
+  };
+
   useEffect(() => {
     // console.log(itemInCart);
   }, [itemInCart]);
@@ -252,32 +257,117 @@ const Header = () => {
                       className="absolute mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10"
                     >
                       <div className="py-1">
-                        <div className="block text-center px-4 py-2 text-gray-700 hover:bg-gray-100">
-                          My Profile
-                        </div>
-                        <div className="block text-center px-4 py-2 text-gray-700 hover:bg-gray-100">
-                          Order & Returns
-                        </div>
+                        <Link to={"/profile"} className="flex hover:bg-gray-100">
+                          <svg
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            height="1em"
+                            width="1em"
+                            className="mt-[13px] ml-3"
+                          >
+                            <path
+                              fill="currentColor"
+                              fillRule="evenodd"
+                              d="M16 9a4 4 0 11-8 0 4 4 0 018 0zm-2 0a2 2 0 11-4 0 2 2 0 014 0z"
+                              clipRule="evenodd"
+                            />
+                            <path
+                              fill="currentColor"
+                              fillRule="evenodd"
+                              d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM3 12c0 2.09.713 4.014 1.908 5.542A8.986 8.986 0 0112.065 14a8.984 8.984 0 017.092 3.458A9 9 0 103 12zm9 9a8.963 8.963 0 01-5.672-2.012A6.992 6.992 0 0112.065 16a6.991 6.991 0 015.689 2.92A8.964 8.964 0 0112 21z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <div className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            My Profile
+                          </div>
+                        </Link>
+                        <Link to={"/order"} className="flex hover:bg-gray-100">
+                          <svg
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                            height="1em"
+                            width="1em"
+                            className="mt-[13px] ml-3"
+                          >
+                            <path d="M0 1.5A.5.5 0 01.5 1H2a.5.5 0 01.485.379L2.89 3H14.5a.5.5 0 01.491.592l-1.5 8A.5.5 0 0113 12H4a.5.5 0 01-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 01-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 100 4 2 2 0 000-4zm7 0a2 2 0 100 4 2 2 0 000-4zm-7 1a1 1 0 110 2 1 1 0 010-2zm7 0a1 1 0 110 2 1 1 0 010-2z" />
+                          </svg>
+                          <div className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            Order & returns
+                          </div>
+                        </Link>
 
-                        <div className="block text-center  px-4 py-2 text-gray-700 hover:bg-gray-100">
-                          Wallet
-                        </div>
+                        <Link className="flex hover:bg-gray-100">
+                          <svg
+                            viewBox="0 0 21 21"
+                            fill="currentColor"
+                            height="1em"
+                            width="1em"
+                            className="mt-[13px] ml-3"
+                          >
+                            <g
+                              fill="none"
+                              fillRule="evenodd"
+                              transform="translate(3 4)"
+                            >
+                              <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M.5 2.5h12a2 2 0 012 2v6a2 2 0 01-2 2h-10a2 2 0 01-2-2zm1-2h9a1 1 0 011 1v1H.5v-1a1 1 0 011-1z"
+                              />
+                              <path
+                                fill="currentColor"
+                                d="M12.5 7.5 A1 1 0 0 1 11.5 8.5 A1 1 0 0 1 10.5 7.5 A1 1 0 0 1 12.5 7.5 z"
+                              />
+                            </g>
+                          </svg>
+                          <div className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            Wallet
+                          </div>
+                        </Link>
 
-                        <div className="block px-4 py-2 text-center text-gray-700 hover:bg-gray-100">
-                          My Addresses{" "}
-                        </div>
+                        <Link to={"/address"} className="flex hover:bg-gray-100">
+                          <svg
+                            viewBox="0 0 1024 1024"
+                            fill="currentColor"
+                            height="1em"
+                            width="1em"
+                            className="mt-[13px] ml-3"
+                          >
+                            <path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0068.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" />
+                          </svg>
+                          <div className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            My Addresses
+                          </div>
+                        </Link>
 
-                        <div
+                        <Link
                           onClick={() => {
                             localStorage.removeItem("DcathelonUserEmail");
                             localStorage.removeItem("DcathelonAccessToken");
                             window.location.reload();
                             navigate("/");
                           }}
-                          className="block px-4 py-2 text-center text-orange-700 hover:bg-gray-100"
+                          className="flex hover:bg-gray-100"
                         >
-                          Logout
-                        </div>
+                          <svg
+                            viewBox="0 0 16 16"
+                            fill="#c05621"
+                            height="1em"
+                            width="1em"
+                            className="mt-[13px] ml-3"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M0 7.75A.75.75 0 01.75 7h14.5a.75.75 0 010 1.5H.75A.75.75 0 010 7.75z"
+                            />
+                          </svg>
+
+                          <div className="block px-4 py-2  text-orange-700 hover:bg-gray-100">
+                            Logout
+                          </div>
+                        </Link>
                       </div>
                     </div>
                   )}

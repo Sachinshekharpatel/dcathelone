@@ -12,6 +12,9 @@ import WomenPage from "./components/womenpage/womenpage";
 import WishList from "./components/wishlist/wishlist";
 import LoginPage from "./components/loginpage/loginpage";
 import SignupPage from "./components/signuppage/signup";
+import ProfilePage from "./components/myprofile/profile";
+import OrderPage from "./components/order/order";
+import Addresses from "./components/addresspage/address";
 function App() {
   const dispatch = useDispatch();
   const userEmail = localStorage.getItem("DcathelonUserEmail") || "null";
@@ -75,6 +78,9 @@ function App() {
     <div>
       <Router>
         <Routes>
+        <Route path="/address" element={<Addresses />}></Route>
+          <Route path="/order" element={<OrderPage />}></Route>
+          <Route path="/profile" element={<ProfilePage />}></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/cartpage" element={<CartPage />}></Route>
