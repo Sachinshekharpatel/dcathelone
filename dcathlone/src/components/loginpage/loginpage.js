@@ -3,7 +3,6 @@ import homeimgpng from "./homeimg.png";
 import loginpageImg from "./dcathlonlogin.png";
 import { Link, useNavigate } from "react-router-dom";
 import indiaFlag from "./indiaflag.png";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 import {
@@ -57,7 +56,6 @@ const LoginPage = () => {
 
   const signInButtonClickHandler = async () => {
     if (enteredEmailRef.current.value && enteredPasswordRef.current.value) {
-    
       try {
         const res = await axios.post(
           "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAllgfwKiZq4fpktO4NyfuZANG6weowTM4",
@@ -79,7 +77,7 @@ const LoginPage = () => {
             JSON.stringify(res.data.idToken)
           );
           navigate("/");
-          window.location.reload(); 
+          window.location.reload();
         } else {
           setWrongCredential(true);
           setTimeout(() => {
@@ -237,7 +235,7 @@ const LoginPage = () => {
                 <p className="mt-5 w-full text-[17px] mb-2">Social Login</p>
                 <div className="flex gap-4">
                   <div
-                    onClick={() => signupWithGoogle()}
+                    onClick={() => signupWithFacebook()}
                     className="border align-center hover:bg-blue-100 px-2 pt-2"
                   >
                     <button type="button" aria-label="GOOGLE">
@@ -291,7 +289,7 @@ const LoginPage = () => {
               </p>
               <div className="flex mt-9">
                 <p className="cursor-pointer font-bold text-center mt-9 w-full text-[16px]">
-                  (+91) 8518093478
+                  (+91) 9876543210
                 </p>
                 <p
                   onClick={() => setOtpSend(false)}

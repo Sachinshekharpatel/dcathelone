@@ -18,61 +18,36 @@ import Addresses from "./components/addresspage/address";
 function App() {
   const dispatch = useDispatch();
   const userEmail = localStorage.getItem("DcathelonUserEmail") || "null";
-  useEffect(() => {
-    try {
-      axios
-        .get(
-          `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart.json`
-        )
-        .then((res) => {
-          if (res.data !== null) {
-            const dataArray1 = Object.values(res.data);
-            if (userEmail !== "null") {
-              const dataArray = dataArray1.filter(
-                (item) => item.email === userEmail
-              );
-              dispatch(cartReduxActions.fetchFromDatabaseFunction(dataArray));
-            } else {
-              const dataArray = dataArray1.filter(
-                (item) => item.email === userEmail
-              );
-              dispatch(cartReduxActions.fetchFromDatabaseFunction(dataArray));
-            }
-          } else {
-            dispatch(cartReduxActions.fetchFromDatabaseFunction([]));
-          }
-        });
 
-      axios
-        .get(
-          `https://dcathelone-default-rtdb.firebaseio.com/dcatheloneWishlist.json`
-        )
-        .then((res) => {
-          if (res.data !== null) {
-            const dataArray1 = Object.values(res.data);
-            if (userEmail !== "null") {
-              const dataArray = dataArray1.filter(
-                (item) => item.email === userEmail
-              );
-              dispatch(
-                cartReduxActions.fetchFromDatabaseWishListFunction(dataArray)
-              );
-            } else {
-              const dataArray = dataArray1.filter(
-                (item) => item.email === userEmail
-              );
-              dispatch(
-                cartReduxActions.fetchFromDatabaseWishListFunction(dataArray)
-              );
-            }
-          } else {
-            dispatch(cartReduxActions.fetchFromDatabaseWishListFunction([]));
-          }
-        });
-    } catch (error) {
-      console.log("error menpage data not fetched");
-    }
-  }, []);
+  useEffect(() => {
+    const fetchData = async (url, actionCreator) => {
+      try {
+        const response = await axios.get(url);
+        if (response.data) {
+          const dataArray = Object.values(response.data);
+          const filteredArray = userEmail !== "null" 
+            ? dataArray.filter(item => item.email === userEmail)
+            : [];
+          dispatch(actionCreator(filteredArray));
+        } else {
+          dispatch(actionCreator([]));
+        }
+      } catch (error) {
+        console.error(`Error fetching data from ${url}:`, error);
+        dispatch(actionCreator([]));
+      }
+    };
+
+    fetchData(
+      'https://dcathelone-default-rtdb.firebaseio.com/dcatheloneCart.json',
+      cartReduxActions.fetchFromDatabaseFunction
+    );
+
+    fetchData(
+      'https://dcathelone-default-rtdb.firebaseio.com/dcatheloneWishlist.json',
+      cartReduxActions.fetchFromDatabaseWishListFunction
+    );
+  }, [dispatch, userEmail]);
 
   return (
     <div>

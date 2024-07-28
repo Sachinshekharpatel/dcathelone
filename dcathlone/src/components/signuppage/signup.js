@@ -260,7 +260,7 @@ const SignupPage = () => {
                 <p className="mt-5 w-full text-[17px] mb-2">Social Login</p>
                 <div className="flex gap-4">
                   <div
-                    onClick={() => signupWithGoogle()}
+                     onClick={() => signupWithFacebook()}
                     className="border align-center hover:bg-blue-100 px-2 pt-2"
                   >
                     <button type="button" aria-label="GOOGLE">
